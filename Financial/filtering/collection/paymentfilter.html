@@ -1,0 +1,103 @@
+<!-- 
+
+  <div class="card">
+ 
+    <div class="card-header">
+      <h2>Filters ⚙️</h2>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="search-box">
+          <input type="text" placeholder="🔍 Search..." id="myInput" onkeyup="applyFilters()">
+        </div>
+      <button class="btn btn-sort" id="sortBtn" type="button" onclick="toggleSort()">⇅ Sort Asc</button>
+
+        <button class="btn btn-filter">⬇ Download</button>
+        
+       
+       
+      </div>
+    </div>
+
+  
+    <div class="filters">
+
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select id="plantypefilter" onchange="applyFilters()"">
+          <option>All</option>
+          <option>Cash</option>
+          <option>Bank Transfer</option>
+          <option>Check</option>
+          <option>Online Payment</option>
+       
+        </select>
+
+      </div>
+     </div>
+    <div class="form-group">
+    <label>Amount Range</label>
+    <div class="date-range">
+      <input type="number" id="minAmount" placeholder="Min" onkeyup="applyFilters()">
+      <span>–</span>
+      <input type="number" id="maxAmount" placeholder="Max" onkeyup="applyFilters()">
+    </div>
+  </div>
+
+  <!-- 📅 Date Range -->
+  <div class="form-group">
+    <label>Date Range</label>
+    <div class="date-range">
+      <input type="date" id="startDate" onchange="applyFilters() ">
+      <span>–</span>
+      <input type="date" id="endDate" onchange="applyFilters() ">
+    </div>
+
+</div>
+
+  
+
+    <!-- Reset -->
+    <div style="margin-top:15px;">
+      <button class="btn-reset" onclick="resetFilters()">⟳ Reset Filters</button>
+    </div>
+  </div>
+
+  <script>
+    function applyFilters() {
+    const searchInput = document.getElementById("myInput").value.toUpperCase();
+    const planTypeFilter = document.getElementById("plantypefilter").value.toUpperCase();
+    const min = parseFloat(document.getElementById("minAmount").value) || 0;
+    const max = parseFloat(document.getElementById("maxAmount").value) || Infinity;
+    const minDate = new Date(document.getElementById("startDate").value);
+    const maxDate = new Date(document.getElementById("endDate").value);
+
+    const table = document.getElementById("employeesTable");
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+
+        const amountCell = parseFloat(cells[2].textContent.replace(/[^0-9.-]+/g, "")) || 0;
+        const dateCell = new Date(cells[3].textContent);
+
+        const searchMatch = cells.some(td =>
+            (td.textContent || td.innerText || "").toUpperCase().includes(searchInput)
+        );
+
+        const plantypeCell = cells[2].textContent.toUpperCase();
+        const planMatch = planTypeFilter === "ALL" || plantypeCell === planTypeFilter;
+
+
+        const amountMatch = (amountCell >= min && amountCell <= max);
+        const dateMatch = (
+            (isNaN(minDate) || dateCell >= minDate) &&
+            (isNaN(maxDate) || dateCell <= maxDate)
+        );
+
+        // ✅ only show row if ALL conditions match
+        const show = searchMatch && planMatch  && amountMatch && dateMatch;
+        row.style.display = show ? "" : "none";
+    });
+}
+
+  </script> -->

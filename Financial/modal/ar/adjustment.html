@@ -1,0 +1,78 @@
+
+
+<div class="modal-overlay" id="modalOverlay">
+<div class="form-collection" id="collectionform">
+    <legend>Find Custumer</legend>
+    <form action="">
+        <input type="hidden" id="RequestId">
+        <fieldset>
+
+            <div class="form-group">
+                <label for="Data">Custumer ID</label>
+                <input type="number" id="Data">
+            </div>
+            <div class="form-group">
+                <label for="data">Custumer Name </label>
+                <input type="number" id="data">
+            </div>
+            <div class="form-group">
+                <label for="reas">Contact Person</label>
+                <input type="text" id="reas">
+            </div>
+            <div class="form-group">
+                <label for="Adjustment DAte">Contact Number
+                </label>
+                <input type="date" id="AdjustmentDate">
+            </div>
+            <div class="form-group
+">
+                <label for="Adjustment DAte">Email
+                </label>
+                <input type="date" id="AdjustmentDate"> 
+            </div>
+            <div class="form-group">
+                <label for="Adjustment DAte">Address
+                </label>
+                <input type="date" id="AdjustmentDate">
+            </div>
+            <div class="form-group">
+                <label for="Adjustment DAte">Terms
+                </label>
+                <input type="date" id="AdjustmentDate">
+            </div>
+            <div class="form-group">
+                <label for="Adjustment DAte">Status
+                </label>
+                <input type="date" id="AdjustmentDate">
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+</div>
+
+<script>
+    const toggleFormBtn = document.getElementById('toggleFormBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    toggleFormBtn.addEventListener('click',()=>{
+        modalOverlay.style.display='flex';
+    });
+    cancelBtn.addEventListener('click',()=>{
+        modalOverlay.style.display="none";
+
+    });
+
+    modalOverlay.addEventListener('click',(e)=>{
+        if(e.target === modalOverlay){
+              modalOverlay.style.display='none';
+        }
+    })
+
+</script>

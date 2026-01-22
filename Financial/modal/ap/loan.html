@@ -1,0 +1,142 @@
+<div class="modal-overlay" id="modalOverlay">
+  <div class="form-collection" id="collectionform">
+    <legend>Add Loan</legend>
+    <form action="" method="post" class="form-group">
+      <input type="hidden" id="RequestId" name="RequestId">
+
+      <!-- Loan Info -->
+      <div class="grid-container">
+        <div class="form-group">
+          <label for="loanTitle">Loan Title</label>
+          <input type="text" id="loanTitle" name="loanTitle" required>
+        </div>
+
+        <div class="form-group">
+          <label for="vendorName">Vendor Name</label>
+          <select id="vendorName" name="vendorId" required>
+            <option value="">--SELECT VENDOR--</option>
+            <?php
+              try {
+                $sql = "SELECT vendor_id, vendor_name FROM vendor WHERE Status = 'Active' AND Archive='NO' ORDER BY vendor_name ASC";
+                $stmt = $pdo->query($sql);
+                $vendors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($vendors as $vendor) {
+                  echo "<option value='" . htmlspecialchars($vendor['vendor_id'], ENT_QUOTES) . "'>" . htmlspecialchars($vendor['vendor_name'], ENT_QUOTES) . "</option>";
+                }
+              } catch (PDOException $e) {
+                echo "<option value=''>Error loading vendors</option>";
+              }
+            ?>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="loanAmount">Loan Amount</label>
+          <input type="number" id="loanAmount" name="loanAmount" required>
+        </div>
+      </div>
+
+      <!-- Rates -->
+      <div class="grid-container rates">
+        <div class="form-group">
+          <label for="interestRate">Interest Rate</label>
+          <input type="number" id="interestRate" name="interestRate" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+          <label for="PenaltyRate">Penalty Interest Rate</label>
+          <input type="number" id="PenaltyRate" name="PenaltyRate" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+          <label for="Disbursement">Loan Disbursement Date</label>
+          <input type="date" id="Disbursement" name="Disbursement" required>
+        </div>
+
+        <div class="form-group">
+          <label for="day">Payment Due Day</label>
+          <input type="number" id="day" name="day" required>
+        </div>
+      </div>
+
+      <!-- Installment & Collateral -->
+      <div class="grid-container">
+        <div class="form-group">
+          <label for="Installment">Installment</label>
+          <input type="number" id="Installment" name="Installment" required>
+        </div>
+
+        <div class="form-group">
+          <label for="Collateral">Collateral</label>
+          <input type="text" id="Collateral" name="Collateral">
+        </div>
+
+        <div class="form-group">
+          <label for="Penalty">Penalty Details</label>
+          <input type="text" id="Penalty" name="Penalty">
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="form-group">
+        <label for="Received">Received Via</label>
+        <select id="Received" name="Received">
+          <option value="">--Select Method</option>
+          <option value="Cash">Cash</option>
+          <option value="Check">Check</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+        </select>
+      </div>
+
+      <!-- Purpose -->
+      <div class="form-group">
+        <label for="Purpose">Purpose</label>
+        <input type="text" id="Purpose" name="Purpose">
+      </div>
+
+      <!-- Actions -->
+      <div class="form-actions">
+        <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+        <button type="submit" name="create" class="btn btn-primary">Create Loan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const toggleFormBtn = document.getElementById('toggleFormBtn');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const cancelBtn = document.getElementById("cancelBtn");
+
+  toggleFormBtn.addEventListener('click', () => {
+    modalOverlay.classList.remove('hidden');
+    modalOverlay.classList.add('flex');
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    modalOverlay.classList.add('hidden');
+    modalOverlay.classList.remove('flex');
+  });
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.classList.add('hidden');
+      modalOverlay.classList.remove('flex');
+    }
+  });
+
+  // Prevent scrolling on body when modal is open
+  toggleFormBtn.addEventListener('click', () => {
+    document.body.style.overflow = 'hidden';
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    document.body.style.overflow = 'auto';
+  });
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      document.body.style.overflow = 'auto';
+    }
+  });
+</script>

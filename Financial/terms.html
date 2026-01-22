@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinancePro | Budget Allocation & Expense Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.5; }
+
+        /* Layout */
+        .app-container { display: flex; min-height: 100vh; }
+        
+        .sidebar { width: 260px; background: #0f172a; color: white; padding: 2rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 2.5rem; color: #fff; }
+        .logo span { color: var(--primary); }
+        .nav-item { display: block; color: #94a3b8; text-decoration: none; padding: 0.75rem 0; font-size: 0.95rem; transition: 0.2s; }
+        .nav-item.active { color: white; font-weight: 600; }
+
+        .main-content { flex: 1; padding: 2.5rem; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+
+        /* Stats Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+        .card { background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .card-label { font-size: 0.875rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.5rem; display: block; }
+        .card-value { font-size: 1.5rem; font-weight: 700; }
+        
+        /* Status Badges */
+        .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 700; margin-top: 0.5rem; }
+        .badge-ok { background: #dcfce7; color: #166534; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+
+        /* Table Design */
+        .table-container { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { background: #f8fafc; padding: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+        td { padding: 1.25rem 1rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        
+        input[type="number"] {
+            width: 120px; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-weight: 500; transition: border 0.2s;
+        }
+        input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+
+        /* Progress Bars */
+        .progress-wrapper { width: 100%; max-width: 200px; }
+        .progress-bg { background: #e2e8f0; border-radius: 10px; height: 8px; margin-bottom: 0.4rem; overflow: hidden; }
+        .progress-fill { height: 100%; transition: width 0.5s ease-out; }
+
+        /* Utilities */
+        .btn { padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: 0.2s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .text-danger { color: var(--danger); font-weight: 600; cursor: pointer; background: none; border: none; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="logo">Finance<span>Pro</span></div>
+        <nav>
+            <a href="#" class="nav-item active">Expense Tracker</a>
+            <a href="#" class="nav-item">Allocations</a>
+            <a href="#" class="nav-item">Department Audit</a>
+            <a href="#" class="nav-item">Configuration</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <div>
+                <h1>Budget Monitoring</h1>
+                <p style="color: var(--text-muted)">Manage department limits and real-time spending</p>
+            </div>
+            <button class="btn btn-primary" onclick="addDepartment()">+ New Department</button>
+        </header>
+
+        <section class="stats-grid">
+            <div class="card">
+                <span class="card-label">Total Allocated Budget</span>
+                <div class="card-value" id="totalBudgetDisplay">$0.00</div>
+            </div>
+            <div class="card">
+                <span class="card-label">Actual Total Spending</span>
+                <div class="card-value" id="totalExpenseDisplay">$0.00</div>
+            </div>
+            <div class="card">
+                <span class="card-label">Portfolio Status</span>
+                <div id="portfolioStatus">--</div>
+            </div>
+        </section>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Budget Limit ($)</th>
+                        <th>Actual Expense ($)</th>
+                        <th>Utilization (%)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Initial Data
+    let departments = [
+        { name: 'R&D Engineering', limit: 450000, expense: 380000 },
+        { name: 'Global Marketing', limit: 150000, expense: 120000 },
+        { name: 'Human Resources', limit: 80000, expense: 85000 },
+        { name: 'IT Infrastructure', limit: 250000, expense: 140000 }
+    ];
+
+    function render() {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+
+        let totalLimit = 0;
+        let totalExpense = 0;
+        let anyOverBudget = false;
+
+        departments.forEach((dept, index) => {
+            const utilization = ((dept.expense / dept.limit) * 100).toFixed(1);
+            totalLimit += dept.limit;
+            totalExpense += dept.expense;
+
+            // Determine UI colors
+            let statusColor = 'var(--success)';
+            if (utilization >= 100) {
+                statusColor = 'var(--danger)';
+                anyOverBudget = true;
+            } else if (utilization >= 85) {
+                statusColor = 'var(--warning)';
+            }
+
+            const row = `
+                <tr>
+                    <td><strong>${dept.name}</strong></td>
+                    <td><input type="number" value="${dept.limit}" onchange="updateData(${index}, 'limit', this.value)"></td>
+                    <td><input type="number" value="${dept.expense}" onchange="updateData(${index}, 'expense', this.value)"></td>
+                    <td>
+                        <div class="progress-wrapper">
+                            <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 2px; color: ${statusColor}">
+                                ${utilization}%
+                            </div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: ${Math.min(utilization, 100)}%; background: ${statusColor}"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="text-danger" onclick="deleteDept(${index})">Remove</button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+
+        // Update Summary Cards
+        document.getElementById('totalBudgetDisplay').innerText = `$${totalLimit.toLocaleString()}`;
+        document.getElementById('totalExpenseDisplay').innerText = `$${totalExpense.toLocaleString()}`;
+        
+        const statusBadge = document.getElementById('portfolioStatus');
+        if (anyOverBudget) {
+            statusBadge.innerHTML = `<span class="badge badge-danger">CRITICAL OVERSPEND</span>`;
+        } else if ((totalExpense / totalLimit) > 0.9) {
+            statusBadge.innerHTML = `<span class="badge badge-warning">APPROACHING LIMIT</span>`;
+        } else {
+            statusBadge.innerHTML = `<span class="badge badge-ok">HEALTHY BALANCE</span>`;
+        }
+    }
+
+    function updateData(index, field, value) {
+        const newVal = parseFloat(value) || 0;
+        departments[index][field] = newVal;
+        render();
+    }
+
+    function addDepartment() {
+        const name = prompt("Enter Department Name:");
+        if (name) {
+            departments.push({ name: name, limit: 10000, expense: 0 });
+            render();
+        }
+    }
+
+    function deleteDept(index) {
+        if (confirm("Delete this department records?")) {
+            departments.splice(index, 1);
+            render();
+        }
+    }
+
+    // Initialize
+    render();
+</script>
+
+</body>
+</html>

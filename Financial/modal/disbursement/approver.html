@@ -1,0 +1,38 @@
+<div class="modal-overlay" id="modalOverlay">
+    <div class="form-collection" id="collectionform">
+        <legend>Add New Approver</legend>
+        <form action="">
+            <input type="hidden" id="approverId">
+            <fieldset>
+                <div class="form-group">
+                    <label for="approverName">Approver Name</label>
+                    <input type="text" id="approverName">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<script>
+    const toggleFormBtn = document.getElementById('toggleFormBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    toggleFormBtn.addEventListener('click', () => {
+        modalOverlay.style.display = 'flex';
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        modalOverlay.style.display = "none";
+    });
+
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.style.display = 'none';
+        }
+    });
+</script>

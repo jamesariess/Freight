@@ -1,0 +1,75 @@
+<button id="toggleFormBtn" class="btn toggle-form-btn">Add Payments</button>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="form-collection" id="collectionform">
+    <legend>Payments</legend>
+    <form>
+      <input type="hidden" id="RequestId">
+      <fieldset>
+  
+
+       
+          <div class="form-group">
+          <label for="dam">Account ID</label>
+          <input type="number" id="dam">
+        </div>
+
+      <div class="form-group">
+          <label for="dam">Period</label>
+          <input type="number" id="dam">
+        </div>
+
+   
+      <div class="form-group">
+          <label for="dam">Opening Balance</label>
+          <input type="number" id="dam">
+        </div>
+
+           
+      <div class="form-group">
+          <label for="dam">Debit Total</label>
+          <input type="number" id="dam">
+        </div>
+
+           
+      <div class="form-group">
+          <label for="dam">Credit Total</label>
+          <input type="number" id="dam">
+        </div>
+   
+      <div class="form-group">
+          <label for="dam">Closing Balance</label>
+          <input type="number" id="dam">
+        </div>
+     
+
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Request</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<script>
+  const toggleFormBtn = document.getElementById('toggleFormBtn');
+const modalOverlay = document.getElementById('modalOverlay');
+const cancelBtn = document.getElementById('cancelBtn');
+
+toggleFormBtn.addEventListener('click', () => {
+  modalOverlay.style.display = 'flex';
+});
+
+cancelBtn.addEventListener('click', () => {
+  modalOverlay.style.display = 'none';
+});
+
+// Optional: Close modal when clicking outside
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) {
+    modalOverlay.style.display = 'none';
+  }
+});
+
+</script>

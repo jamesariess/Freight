@@ -1,0 +1,300 @@
+<style>
+        .min-w-full th, .min-w-full td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+        .min-w-full th {
+            background-color: #f8fafc;
+        }
+        .min-w-full tr:hover {
+            background-color: #f1f5f9;
+        }
+        #ledgerModal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        #ledgerModal.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        #ledgerModal .modal-content {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: scale(0.95);
+        }
+        #ledgerModal:not(.hidden) .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .report-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #666;
+        }
+    </style>
+
+    <div >
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold  tracking-tight">📘 General Ledger</h1>
+            <div class="flex gap-3">
+                <button id="exportCsvBtn" class="bg-white text-gray-600 px-4 py-2 rounded-lg border hover:bg-gray-100 transition">Export CSV</button>
+                <button id="printPdfBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">Print PDF</button>
+            </div>
+        </div>
+
+        <div class=" rounded-2xl shadow-lg overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b form-group card">
+                <input type="text" id="searchBox" placeholder="Search account..." class="w-1/3 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 " >
+                <span class="text-sm text-gray-500">All account balances as of today</span>
+            </div>
+
+            <table >
+                <thead >
+                    <tr>
+                        <th class="px-4 py-3 text-left">Account Name</th>
+                        <th class="px-4 py-3 text-left">Type</th>
+                        <th class="px-4 py-3 text-right">Debit</th>
+                        <th class="px-4 py-3 text-right">Credit</th>
+                        <th class="px-4 py-3 text-right">Balance</th>
+                        <th class="px-4 py-3 text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ledgerBody" class="divide-y divide-gray-100"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="ledgerModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden flex items-center justify-center z-50" onclick="closeLedgerModal(event)">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl w-11/12 max-w-4xl p-6 relative max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <button onclick="closeLedgerModal()" class="absolute top-3 right-3 text-gray-400 hover:text-red-600">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+            <h2 id="ledgerTitle" class="text-2xl font-semibold  mb-4">Account Ledger</h2>
+            
+            <div class="overflow-x-auto">
+                <table >
+                    <thead >
+                        <tr>
+                            <th class="">Date</th>
+                          
+                            <th class="">Description</th>
+                            <th class=" text-right">Debit</th>
+                            <th class=" text-right">Credit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ledgerDetails" class="text-sm text-gray-600"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ledgerData = []; // Store ledger data globally for export
+  function formatDate(date) {
+    return date ? new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+  }
+
+  function formatDateTime(datetime) {
+    if (!datetime) return null;
+    const d = new Date(datetime);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
+           d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+        async function loadLedger() {
+            try {
+                const res = await fetch('../../crud/legder/general_ledger.php');
+                const data = await res.json();
+
+                if (!Array.isArray(data)) {
+                    console.error('Invalid response:', data);
+                    return;
+                }
+
+                ledgerData = data; // Store data for export
+                const body = document.getElementById('ledgerBody');
+                body.innerHTML = '';
+
+                data.forEach(a => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-gray-50 transition';
+                    const balanceClass = a.balance >= 0 ? 'text-green-600' : 'text-red-600';
+                    tr.innerHTML = `
+                        <td class="px-4 py-3 font-medium">${a.accountName}</td>
+                        <td class="px-4 py-3">${a.accountType || a.accounType}</td>
+                        <td class="px-4 py-3 text-right">${a.totalDebit}</td>
+                        <td class="px-4 py-3 text-right">${a.totalCredit}</td>
+                        <td class="px-4 py-3 text-right font-semibold ${balanceClass}">
+                            ${Number(a.balance).toLocaleString()}
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                            <div class="flex justify-center space-x-2">
+                                <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-blue-600 hover:border-blue-600 hover:bg-blue-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-0 group"
+                                    onclick="openLedgerModal(${a.accountID}, '${a.accountName.replace(/'/g, "\\'")}')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                    <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">View Ledger</span>
+                                </button>
+                            </div>
+                        </td>`;
+                    body.appendChild(tr);
+                });
+
+                document.getElementById('searchBox').addEventListener('input', e => {
+                    const term = e.target.value.toLowerCase();
+                    Array.from(body.children).forEach(row => {
+                        const name = row.children[0].textContent.toLowerCase();
+                        row.style.display = name.includes(term) ? '' : 'none';
+                    });
+                });
+            } catch (err) {
+                console.error('Error loading ledger:', err);
+            }
+        }
+
+        function openLedgerModal(accountID, accountName) {
+            const modal = document.getElementById('ledgerModal');
+            modal.classList.remove('hidden');
+            document.getElementById('ledgerTitle').innerText = `Account Ledger - ${accountName}`;
+            
+            const tbody = document.getElementById('ledgerDetails');
+            tbody.innerHTML = `<tr><td colspan="5" class="text-center p-4 text-gray-400">Loading...</td></tr>`;
+
+            fetch(`../../crud/legder/accountledger.php?accountID=${accountID}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (Array.isArray(data) && data.length > 0) {
+                        tbody.innerHTML = '';
+                        data.forEach(row => {
+                            tbody.innerHTML += `
+                                <tr>
+                                    <td class="">${formatDateTime(row.date)}</td>
+                                    
+                                    <td class="">${row.description}</td>
+                                    <td class=" text-right text-green-800">${row.debit}</td>
+                                    <td class=" text-right text-red-800">${row.credit}</td>
+                                </tr>`;
+                        });
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="5" class="text-center p-4 text-gray-400">No transactions found.</td></tr>`;
+                    }
+                })
+                .catch(err => {
+                    console.error('Ledger modal error:', err);
+                    tbody.innerHTML = `<tr><td colspan="5" class="text-center p-4 text-red-500">Error loading data.</td></tr>`;
+                });
+        }
+
+        function closeLedgerModal(event) {
+            const modal = document.getElementById('ledgerModal');
+           if (!event || event.target === modal || event.target.closest('button[onclick="closeLedgerModal()"]')) {
+        modal.classList.add('hidden');
+    }
+        }
+
+        // Export CSV functionality
+        document.getElementById('exportCsvBtn').addEventListener('click', () => {
+            if (!ledgerData.length) {
+                alert('No data available to export.');
+                return;
+            }
+
+            const currentDate = new Date().toLocaleString('en-US', {
+                timeZone: 'America/Los_Angeles',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            const csvContent = [
+                `General Ledger Report - As of ${currentDate}`,
+                'Account Name,Type,Debit,Credit,Balance',
+                ...ledgerData.map(row => [
+                    row.accountName,
+                    row.accountType || row.accounType,
+                    row.totalDebit,
+                    row.totalCredit,
+                    row.balance
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `general_ledger_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // Print PDF functionality
+        document.getElementById('printPdfBtn').addEventListener('click', () => {
+            const currentDate = new Date().toLocaleString('en-US', {
+                timeZone: 'America/Los_Angeles',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            const element = document.createElement('div');
+            element.innerHTML = `
+                <div class="report-header">
+                    <h1 class="text-3xl font-bold ">General Ledger Report</h1>
+                    <p class="text-lg text-gray-600">As of ${currentDate}</p>
+                </div>
+                <table class="min-w-full text-sm text-gray-700 mt-4">
+                    <thead class="bg-blue-50 text-blue-700 uppercase text-xs font-semibold">
+                        <tr>
+                            <th class="px-4 py-3 text-left">Account Name</th>
+                            <th class="px-4 py-3 text-left">Type</th>
+                            <th class="px-4 py-3 text-right">Debit</th>
+                            <th class="px-4 py-3 text-right">Credit</th>
+                            <th class="px-4 py-3 text-right">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        ${ledgerData.map(a => `
+                            <tr>
+                                <td class="px-4 py-3 font-medium">${a.accountName}</td>
+                                <td class="px-4 py-3">${a.accountType || a.accounType}</td>
+                                <td class="px-4 py-3 text-right">${a.totalDebit}</td>
+                                <td class="px-4 py-3 text-right">${a.totalCredit}</td>
+                                <td class="px-4 py-3 text-right font-semibold ${a.balance >= 0 ? 'text-green-600' : 'text-red-600'}">
+                                    ${Number(a.balance).toLocaleString()}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <div class="report-footer">
+                    <p>Generated on ${currentDate}</p>
+                </div>
+            `;
+
+            const opt = {
+                margin: 0.5,
+                filename: `general_ledger_${new Date().toISOString().split('T')[0]}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().catch(err => {
+                console.error('PDF generation error:', err);
+                alert('Error generating PDF. Please try again.');
+            });
+        });
+
+        loadLedger();
+    </script>

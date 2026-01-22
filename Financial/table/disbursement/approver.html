@@ -1,0 +1,119 @@
+<div class="table-section" id="approverTableSection">
+    <h3>Approver Report</h3>
+    <table id="meowtable">
+        <thead>
+            <tr>
+                <th>Approved ID</th>
+                <th>Disbursement Request ID</th>
+                <th>Finance Team</th>
+                <th>Manager</th>
+                <th>Department Head</th>
+                <th>Ceo</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="meowtableBody">
+            <?php if(!empty($approverReports)):
+            foreach($approverReports as $row): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($row['approver_id']);?></td>
+                <td><?php echo htmlspecialchars($row['approver_name']);?></td>
+                <td>
+                    <a href="#"
+                       onclick="openViewModal(
+                           '<?php echo $row['approver_id'];?>',
+                           '<?php echo htmlspecialchars($row['approver_name'], ENT_QUOTES);?>');
+                       return false;">
+                       👁️ View
+                    </a>
+                    <a href="#"
+                       onclick="openUpdateModal(
+                           '<?php echo $row['approver_id'];?>',
+                           '<?php echo htmlspecialchars($row['approver_name'], ENT_QUOTES);?>');
+                       return false;">
+                       ✏️ Update
+                    </a>
+                    <a href="#"
+                       onclick="openArchiveModal('<?php echo $row['approver_id']?>'); return false;">
+                       🗄️ Archive
+                    </a>
+                </td>
+            </tr>
+            <?php endforeach; else:?>
+            <tr><td colspan="3" class="text-center p-4">NO Records Found.</td></tr>
+            <?php endif;?>
+        </tbody>
+    </table>
+</div>
+
+<div id="viewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center" onclick="outsideClick(event, 'viewModal')">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
+        <h2 class="text-lg font-bold mb-4">View Approver</h2>
+        <div class="space-y-2">
+            <p><strong>Approver ID:</strong> <span id="viewApproverId"></span></p>
+            <p><strong>Approver Name:</strong> <span id="viewApproverName"></span></p>
+        </div>
+        <button class="mt-4 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400" onclick="closeModal('viewModal')">Close</button>
+    </div>
+</div>
+
+<div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center" onclick="outsideClick(event, 'updateModal')">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
+        <button class="absolute top-2 right-2 text-gray-500 hover:text-black" onclick="closeModal('updateModal')">&times;</button>
+        <h2 class="text-lg font-bold mb-4">Update Approver</h2>
+        <form method="post">
+            <input type="hidden" name="update_approver_id" id="updateApproverId">
+            <div class="space-y-4">
+                <div>
+                    <label for="updateApproverName" class="block text-gray-700">Approver Name:</label>
+                    <input type="text" name="update_approver_name" id="updateApproverName" class="w-full p-2 border rounded" required>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-4">
+                <button type="button" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400" onclick="closeModal('updateModal')">Cancel</button>
+                <button type="submit" name="update" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="archiveModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center" onclick="outsideClick(event, 'archiveModal')">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
+        <button class="absolute top-2 right-2 text-gray-500 hover:text-black" onclick="closeModal('archiveModal')">&times;</button>
+        <h2 class="text-lg font-bold mb-4">Archive Approver</h2>
+        <p>Are you sure you want to archive this approver?</p>
+        <form method="post">
+            <div class="flex justify-end space-x-3 mt-4">
+                <input type="hidden" name="archive_approver_id" id="archiveApproverId">
+                <button type="submit" name="archive" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Archive</button>
+                <button type="button" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400" onclick="closeModal('archiveModal')">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openViewModal(approverId, approverName) {
+    document.getElementById('viewApproverId').innerText = approverId;
+    document.getElementById('viewApproverName').innerText = approverName;
+    document.getElementById('viewModal').classList.remove('hidden');
+}
+function openUpdateModal(approverId, approverName) {
+    document.getElementById('updateApproverId').value = approverId;
+    document.getElementById('updateApproverName').value = approverName;
+    document.getElementById('updateModal').classList.remove('hidden');
+}
+function openArchiveModal(approverId) {
+    document.getElementById('archiveApproverId').value = approverId;
+    document.getElementById('archiveModal').classList.remove('hidden');
+}
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+}
+function outsideClick(event, modalId) {
+    if (event.target.id === modalId) {
+        closeModal(modalId);
+    }
+}
+</script>

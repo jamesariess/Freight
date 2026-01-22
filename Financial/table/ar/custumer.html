@@ -1,0 +1,109 @@
+<div class="table-section" id="invoiceTableSection">
+    <h3>Custumer Report</h3>
+    <table id="employeesTable">
+        <thead>
+            <tr>
+    <th>custumer ID</th>
+    <th>custumer Name</th>
+    <th>Contact Person</th>
+    <th>Contact Number</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>Terms</th>
+    <th>Status</th>
+    <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="employeesTableBody">
+            <?php if(!empty($custumerReports)):
+            foreach($custumerReports as $row): ?>
+            <tr>
+    <td><?php echo htmlspecialchars($row['customer_id']);?></td>
+    <td><?php echo htmlspecialchars($row['name']);?></td>
+    <td><?php echo htmlspecialchars($row['contact_person']);?></td>
+    <td><?php echo htmlspecialchars($row['phone']);?></td>
+    <td><?php echo htmlspecialchars($row['email']);?></td>
+    <td><?php echo htmlspecialchars($row['address_line']);?></td>
+    <td><?php echo htmlspecialchars($row['payment_terms']);?></td>
+    <td><?php echo htmlspecialchars($row['is_active']);?></td>
+     <td>
+        
+    <div class="flex justify-center">
+        <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-blue-600 hover:border-blue-600 hover:bg-blue-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-0 group"
+            onclick="openViewModal(
+                '<?php echo $row['customer_id'];?>',
+                '<?php echo htmlspecialchars($row['name'],ENT_QUOTES);?>',
+                '<?php echo htmlspecialchars($row['contact_person'],ENT_QUOTES);?>',
+                '<?php echo htmlspecialchars($row['phone'],ENT_QUOTES);?>',
+                '<?php echo htmlspecialchars($row['email'],ENT_QUOTES);?>',
+                '<?php echo htmlspecialchars($row['address_line'],ENT_QUOTES);?>',
+                '<?php echo htmlspecialchars($row['payment_terms'],ENT_QUOTES);?>',
+                '<?php echo htmlspecialchars($row['is_active'],ENT_QUOTES);?>');
+            return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">View</span>
+        </button>
+    </div>
+</td>
+         
+            </tr>
+            <?php endforeach; else:?>
+            <tr><Td colspan="8" class="text-center p-4">NO Records Found.</Td></tr>
+            <?php endif;?>
+        </tbody>
+    </table>
+</div>
+
+<div id="viewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'viewModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">👤 View Customer Details</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('viewModal')">&times;</button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-base text-gray-700">
+      <p class="font-semibold text-gray-600">Customer ID:</p><p><span id="viewAdjustID"></span></p>
+      <p class="font-semibold text-gray-600">Customer Name:</p><p><span id="viewBudgetID"></span></p>
+      <p class="font-semibold text-gray-600">Contact Person:</p><p><span id="viewAdjustedBy"></span></p>
+      <p class="font-semibold text-gray-600">Contact Number:</p><p><span id="viewAdjustmentDate"></span></p>
+      <p class="font-semibold text-gray-600">Email:</p><p><span id="viewReason"></span></p>
+      <p class="font-semibold text-gray-600">Terms:</p><p><span id="viewStatus"></span></p>
+
+      <p class="font-semibold text-gray-600 col-span-2 mt-2">Address:</p>
+      <p class="col-span-2 pl-4 break-words"><span id="viewNewAmount"></span></p>
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700" onclick="closeModal('viewModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+function openViewModal(custumerID, custumerName, contactPerson, contactNumber, email, address, paymentTerms, status) {
+    document.getElementById('viewAdjustID').innerText = custumerID;
+    document.getElementById('viewBudgetID').innerText = custumerName;
+    document.getElementById('viewAdjustedBy').innerText = contactPerson;
+    document.getElementById('viewAdjustmentDate').innerText = contactNumber;
+    document.getElementById('viewReason').innerText = email;
+    document.getElementById('viewNewAmount').innerText = address;
+    document.getElementById('viewStatus').innerText = paymentTerms;
+    document.getElementById('viewStatus').innerText = status;
+    document.getElementById('viewModal').classList.remove('hidden');
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+}
+function outsideClick(event, modalId) {
+    if (event.target.id === modalId) {
+        closeModal(modalId);
+    }
+}
+</script>

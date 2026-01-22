@@ -1,0 +1,89 @@
+[2025-11-14 23:25:51] Script STARTED
+[2025-11-14 23:25:51] Config loaded. From: 
+[2025-11-14 23:27:08] Script STARTED
+[2025-11-14 23:27:08] Config loaded. From: slatetransportsystem@gmail.com
+[2025-11-14 23:27:08] Found 0 reminder(s) to send.
+[2025-11-14 23:27:08] No reminders today. Script END.
+[2025-11-15 21:19:16] SCRIPT STARTED
+[2025-11-15 21:19:17] BEFORE-DUE reminders found: 0
+[2025-11-15 21:27:08] === Script START ===
+[2025-11-15 21:27:08] Before-due reminders found: 0
+[2025-11-15 21:27:08] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-15 21:27:08] No negative plans found — skipping overdue logic.
+[2025-11-15 21:27:08] No chosen plan for customer 1 — skipping.
+[2025-11-15 21:27:08] === Script END ===
+[2025-11-15 21:29:23] === Script START ===
+[2025-11-15 21:29:23] Before-due reminders found: 0
+[2025-11-15 21:29:23] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-15 21:29:23] Negative plans found: 1
+[2025-11-15 21:29:23] Email FAILED to jamesconcepcion122@gmail.com. Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server Additional SMTP info: php_network_getaddresses: getaddrinfo for smtp.example.com failed: No such host is known. 
+[2025-11-15 21:29:23] === Script END ===
+[2025-11-15 21:32:14] === Script START ===
+[2025-11-15 21:32:14] Before-due reminders found: 0
+[2025-11-15 21:32:14] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-15 21:32:14] Negative plans found: 1
+[2025-11-15 21:32:14] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-15 21:32:14] === Script END ===
+[2025-11-15 21:36:47] === Script START ===
+[2025-11-15 21:36:47] Before-due reminders found: 0
+[2025-11-15 21:36:47] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-15 21:36:47] Negative plans found: 1
+[2025-11-15 21:36:47] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-15 21:36:47] === Script END ===
+[2025-11-15 21:48:28] === Script START ===
+[2025-11-15 21:48:28] Before-due reminders found: 0
+[2025-11-15 21:48:28] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-15 21:48:28] Negative plans found: 1
+[2025-11-15 21:48:28] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-15 21:48:28] === Script END ===
+[2025-11-15 21:48:39] === Script START ===
+[2025-11-15 21:48:39] Before-due reminders found: 0
+[2025-11-15 21:48:39] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-15 21:48:39] Negative plans found: 1
+[2025-11-15 21:48:39] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-15 21:48:39] === Script END ===
+[2025-11-15 21:48:50] === Script START ===
+[2025-11-15 21:48:50] Before-due reminders found: 0
+[2025-11-15 21:48:50] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-15 21:48:50] Negative plans found: 1
+[2025-11-15 21:48:50] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-15 21:48:50] === Script END ===
+[2025-11-16 00:58:57] === Script START ===
+[2025-11-16 00:58:58] Before-due reminders found: 1
+[2025-11-16 00:59:05] Email SENT to ABC Logistics <jamesconcepcion122@gmail.com> (subject: Friendly Reminder)
+[2025-11-16 00:59:05] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-16 00:59:05] Negative plans found: 1
+[2025-11-16 00:59:05] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-16 00:59:05] === Script END ===
+[2025-11-16 15:18:06] === Script START ===
+[2025-11-16 15:18:06] Marked overdue invoices (rows affected: 0)
+[2025-11-16 15:18:49] === Script START ===
+[2025-11-16 15:18:49] Marked overdue invoices (rows affected: 0)
+[2025-11-16 15:18:49] Found 1 follow-row(s) for today (before-due).
+[2025-11-16 15:18:49] Email FAILED to jamesconcepcion122@gmail.com. Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server Additional SMTP info: php_network_getaddresses: getaddrinfo for smtp.example.com failed: No such host is known. 
+[2025-11-16 15:18:49] Loaded negative plans: 1
+[2025-11-16 17:30:12] === Script START ===
+[2025-11-16 17:30:13] Before-due reminders found: 1
+[2025-11-16 17:30:13] SKIP before-due: already sent today for customer 1 plan Automated
+[2025-11-16 17:30:13] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-16 17:30:13] Negative plans found: 1
+[2025-11-16 17:30:13] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-16 17:30:13] === Script END ===
+[2025-11-17 15:07:14] === Script START ===
+[2025-11-17 15:07:14] Before-due reminders found: 0
+[2025-11-17 15:07:14] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-17 15:07:14] Negative plans found: 1
+[2025-11-17 15:07:19] Email SENT to ABC Logistics <jamesconcepcion122@gmail.com> (subject: Friendly Reminderf)
+[2025-11-17 15:07:19] === Script END ===
+[2025-11-17 15:10:23] === Script START ===
+[2025-11-17 15:10:23] Before-due reminders found: 0
+[2025-11-17 15:10:23] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-17 15:10:23] Negative plans found: 1
+[2025-11-17 15:10:23] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-17 15:10:23] === Script END ===
+[2025-11-17 15:10:26] === Script START ===
+[2025-11-17 15:10:26] Before-due reminders found: 0
+[2025-11-17 15:10:26] Marked invoices as Overdue where due_date < CURDATE() and stat was Pending.
+[2025-11-17 15:10:26] Negative plans found: 1
+[2025-11-17 15:10:26] SKIP overdue send: already sent today for customer 1 plan Automated
+[2025-11-17 15:10:26] === Script END ===

@@ -1,0 +1,97 @@
+<!-- <div class="card">
+    <div class="card-header">
+        <h2>Filters ⚙️</h2>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <div class="search-box">
+                <input type="text" placeholder="🔍 Search Disbursement..." id="myInput" onkeyup="applyFilters()">
+            </div>
+            <button class="btn btn-sort" id="sortBtn" type="button" onclick="toggleSort()">⇅ Sort Asc</button>
+            <button class="btn btn-filter" onclick=" openDownloadModal()">⬇ Download</button>
+
+        </div>
+    </div>
+    
+    <div class="filters">
+        <div class="form-group">
+            <label>Status</label>
+            <select id="statusFilter" onchange="applyFilters()">
+                <option>All</option>
+                <option>Verified</option>
+                <option>Rejected</option>
+                <option>Approved</option>
+                <option>Paid</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Amount Range</label>
+            <div class="date-range">
+                <input type="number" id="minAmount" placeholder="Min" onkeyup="applyFilters()">
+                <span>–</span>
+                <input type="number" id="maxAmount" placeholder="Max" onkeyup="applyFilters()">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Request Date Range</label>
+            <div class="date-range">
+                <input type="date" id="startDate" onchange="applyFilters()">
+                <span>–</span>
+                <input type="date" id="endDate" onchange="applyFilters()">
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top:15px;">
+        <button class="btn-reset" onclick="resetFilters()">⟳ Reset Filters</button>
+    </div>
+</div>
+
+<script>
+   function applyFilters() {
+    const searchInput = document.getElementById("myInput").value.toUpperCase();
+    const statusFilter = document.getElementById("statusFilter").value.toUpperCase();
+    const minAmount = parseFloat(document.getElementById("minAmount").value) || 0;
+    const maxAmount = parseFloat(document.getElementById("maxAmount").value) || Infinity;
+    const startDate = new Date(document.getElementById("startDate").value);
+    const endDate = new Date(document.getElementById("endDate").value);
+
+    const table = document.getElementById("employeesTable"); 
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+
+        const amountCell = parseFloat(cells[3].textContent.replace(/[^0-9.-]+/g, "")) || 0; 
+        const dateCell = new Date(cells[8].textContent);
+
+        // Fix: trim spaces
+        const statusCell = (cells[7].innerText || cells[7].textContent).trim().toUpperCase();
+
+        const searchMatch = cells.some(td =>
+            (td.textContent || td.innerText || "").toUpperCase().includes(searchInput)
+        );
+
+        const statusMatch = statusFilter === "ALL" || statusCell === statusFilter;
+        const amountMatch = (amountCell >= minAmount && amountCell <= maxAmount);
+        const dateMatch = (
+            (isNaN(startDate) || dateCell >= startDate) &&
+            (isNaN(endDate) || dateCell <= endDate)
+        );
+
+        const show = searchMatch && statusMatch && amountMatch && dateMatch;
+        row.style.display = show ? "" : "none";
+    });
+}
+
+
+    function resetFilters() {
+        document.getElementById("myInput").value = "";
+        document.getElementById("statusFilter").value = "All";
+        document.getElementById("minAmount").value = "";
+        document.getElementById("maxAmount").value = "";
+        document.getElementById("startDate").value = "";
+        document.getElementById("endDate").value = "";
+        applyFilters();
+    }
+</script> -->

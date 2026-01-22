@@ -1,0 +1,314 @@
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <!-- Deposit Modal -->
+            <div id="depositModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center form-group">
+                <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+                    <h2 class="text-xl font-semibold mb-4">Deposit Funds</h2>
+                    <form method="POST" id="depositForm">
+                        <input type="hidden" name="depositType" id="depositType">
+                        <div id="bankSelectWrapper">
+                            <label class="block text-sm">Select Bank</label>
+                            <select name="bankID" id="bankID" class="w-full border rounded px-3 py-2 mb-2">
+                                <option value="">-- Choose Bank --</option>
+                                <?php foreach ($banks as $bank): ?>
+                                    <option value="<?php echo $bank['bankID']; ?>"><?php echo htmlspecialchars($bank['bankName']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <a href="#" id="bankSelectAdd" class="text-blue-600 text-sm">+ Add New</a>
+                        </div>
+                        <div id="newBankWrapper" class="hidden">
+                            <label class="block text-sm">Enter Bank Name</label>
+                            <input type="text" name="newBankName" class="w-full border rounded px-3 py-2 mb-2" required>
+                            <label class="block text-sm">Enter Account Number</label>
+                            <input type="text" name="accountNo" class="w-full border rounded px-3 py-2 mb-2" required>
+                            <label class="block text-sm">Enter Account Name</label>
+                            <input type="text" name="accountname" class="w-full border rounded px-3 py-2 mb-2" required>
+                            <a href="#" id="bankSelectBack" class="text-blue-600 text-sm">← Back to Select</a>
+                        </div>
+                        <label class="block text-sm">Transfer Amount</label>
+                        <input type="number" name="amount" id="depositAmount" step="0.01" class="w-full border rounded px-3 py-2 mb-3" required>
+                        <input type="text" name="noCashMessage" id="noCashMessage" class="w-full border rounded px-3 py-2 mb-3 hidden" value="No money on hand" readonly>
+                        <label class="block text-sm">Reference Number</label>
+                        <input type="text" name="reference" class="w-full border rounded px-3 py-2 mb-3">
+                        <div class="flex justify-end space-x-2">
+                            <button type="button" data-close-modal class="bg-gray-400 text-white px-4 py-2 rounded">Cancel</button>
+                            <button type="submit" name="saveDeposit" class="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Withdraw Modal -->
+            <div id="withdrawModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center form-group">
+                <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 mx-4">
+                    <h2 class="text-xl font-bold mb-4">Withdraw Funds</h2>
+                    <form id="withdrawForm" method="POST">
+                        <input type="hidden" name="action" value="withdraw">
+                        <label class="block text-sm mb-1">Select Fund (Bank)</label>
+                        <select name="fundID" id="withdrawFundID" class="w-full border rounded px-3 py-2 mb-3" required>
+                            <option value="">-- Choose Bank --</option>
+                            <?php foreach ($banksForWithdraw as $bank): ?>
+                                <option value="<?php echo $bank['bankID']; ?>">
+                                    <?php echo htmlspecialchars($bank['bankName']); ?> (₱<?php echo number_format($bank['useAmount'], 2); ?>)
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <label class="block text-sm mb-1">Withdraw Amount</label>
+                        <input type="number" name="amount" step="0.01" min="0.01" class="w-full border rounded px-3 py-2 mb-3" required>
+                        <div class="flex justify-end gap-3">
+                            <button type="button" data-close-modal class="px-4 py-2 bg-gray-200 rounded-lg">Cancel</button>
+                            <button type="submit" name="saveWithdraw" class="px-4 py-2 bg-red-500 text-white rounded-lg">Withdraw</button>
+                        </div>
+                    </form>
+                </div>
+            </div> 
+
+            <!-- Bank Modal -->
+            <div id="bankModal" class="fixed inset-0 hidden bg-black bg-opacity-40 flex items-center justify-center z-50 form-group">
+                <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
+                    <h2 class="text-lg font-bold mb-4">Bank Details</h2>
+                    <form method="POST" id="bankForm">
+                        <input type="hidden" id="bankId" name="bankId">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium">Bank Name</label>
+                            <input type="text" id="bankName" name="bankName" class="w-full p-2 border rounded-lg" readonly>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium">Status</label>
+                            <select id="status" name="status" class="w-full p-2 border rounded-lg">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-end gap-3">
+                            <button type="submit" name="editBank" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Save Changes</button>
+                            <button type="submit" name="archiveBank" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Archive</button>
+                            <button type="button" onclick="closeBankModal()" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <script>
+        function openBankModal(id, name, status) {
+            document.getElementById("bankId").value = id;
+            document.getElementById("bankName").value = name;
+            document.getElementById("status").value = status;
+            document.getElementById("bankModal").classList.remove("hidden");
+        }
+
+        function closeBankModal() {
+            document.getElementById("bankModal").classList.add("hidden");
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const depositModal = document.getElementById('depositModal');
+            const withdrawModal = document.getElementById('withdrawModal');
+            const depositAmount = document.getElementById('depositAmount');
+            const noCashMessage = document.getElementById('noCashMessage');
+
+            function showModal(modal) { modal.classList.remove('hidden'); }
+            function hideModal(modal) { modal.classList.add('hidden'); }
+
+            let cashOnHand = <?php echo $cashOnHand; ?>;
+
+            document.querySelectorAll('.open-deposit').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    const type = btn.dataset.type || 'Bank';
+                    document.getElementById('depositType').value = type;
+
+                    if (type !== 'Bank' && type !== 'Owner') {
+                        document.getElementById('bankSelectWrapper').classList.add('hidden');
+                        document.getElementById('newBankWrapper').classList.add('hidden');
+                        document.querySelector("[name='newBankName']").removeAttribute('required');
+                        document.querySelector("[name='accountNo']").removeAttribute('required');
+                        document.querySelector("[name='accountname']").removeAttribute('required');
+                        document.getElementById('bankID').removeAttribute('required');
+                    } else {
+                        document.getElementById('bankSelectWrapper').classList.remove('hidden');
+                        document.getElementById('newBankWrapper').classList.add('hidden');
+                        document.querySelector("[name='newBankName']").removeAttribute('required');
+                        document.querySelector("[name='accountNo']").removeAttribute('required');
+                        document.querySelector("[name='accountname']").removeAttribute('required');
+                        document.getElementById('bankID').setAttribute('required', 'true');
+                    }
+
+                    if (type === 'Bank') {
+                        if (cashOnHand <= 0) {
+                            depositAmount.classList.add('hidden');
+                            noCashMessage.classList.remove('hidden');
+                            document.querySelector("[name='amount']").removeAttribute('required');
+                        } else {
+                            noCashMessage.classList.add('hidden');
+                            depositAmount.classList.remove('hidden');
+                            depositAmount.value = cashOnHand.toFixed(2);
+                            depositAmount.setAttribute('required', 'true');
+                            depositAmount.setAttribute('max', cashOnHand);
+                            depositAmount.addEventListener('input', function(e) {
+                                if (parseFloat(e.target.value) > cashOnHand) {
+                                    e.target.value = cashOnHand.toFixed(2);
+                                }
+                            });
+                        }
+                    } else {
+                        depositAmount.classList.remove('hidden');
+                        noCashMessage.classList.add('hidden');
+                        depositAmount.value = '';
+                        depositAmount.removeAttribute('max');
+                        depositAmount.setAttribute('required', 'true');
+                    }
+
+                    showModal(depositModal);
+                });
+            });
+
+            const openWithdrawBtn = document.getElementById('open-withdraw');
+            if (openWithdrawBtn) openWithdrawBtn.addEventListener('click', () => showModal(withdrawModal));
+
+            document.querySelectorAll('[data-close-modal]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const modalEl = btn.closest('.fixed');
+                    if (modalEl) hideModal(modalEl);
+                });
+            });
+
+            [depositModal, withdrawModal].forEach(modal => {
+                if (!modal) return;
+                modal.addEventListener('click', function (e) {
+                    if (e.target === modal) hideModal(modal);
+                });
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    hideModal(depositModal);
+                    hideModal(withdrawModal);
+                }
+            });
+
+            const addLink = document.getElementById('bankSelectAdd');
+            const backLink = document.getElementById('bankSelectBack');
+            if (addLink) addLink.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                document.getElementById('bankSelectWrapper').classList.add('hidden');
+                document.getElementById('newBankWrapper').classList.remove('hidden');
+                document.querySelector("[name='newBankName']").setAttribute('required', 'true');
+                document.querySelector("[name='accountNo']").setAttribute('required', 'true');
+                document.querySelector("[name='accountname']").setAttribute('required', 'true');
+                document.getElementById('bankID').removeAttribute('required');
+            });
+            if (backLink) backLink.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                document.getElementById('bankSelectWrapper').classList.remove('hidden');
+                document.getElementById('newBankWrapper').classList.add('hidden');
+                document.querySelector("[name='newBankName']").removeAttribute('required');
+                document.querySelector("[name='accountNo']").removeAttribute('required');
+                document.querySelector("[name='accountname']").removeAttribute('required');
+                document.getElementById('bankID').setAttribute('required', 'true');
+            });
+
+            window.openDepositModal = function(type) { 
+                const btn = document.querySelector('.open-deposit[data-type="'+type+'"]'); 
+                if (btn) btn.click(); 
+            };
+            window.openWithdrawModal = function() { openWithdrawBtn && openWithdrawBtn.click(); };
+
+            function fetchData() {
+                fetch('../../api/gl/add.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateBankBalances(data.data.bankBalances);
+                            updateBankDetails(data.data.banks);
+                            updateFundDetails(data.data.fundDetails);
+                            updateWithdrawOptions(data.data.banksForWithdraw);
+                            cashOnHand = data.data.cashOnHand;
+                            updateCashOnHand();
+                        } else {
+                            console.error('Error fetching data:', data.error);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            function updateBankBalances(bankBalances) {
+                const balanceList = document.getElementById('bankBalancesList');
+                balanceList.innerHTML = '';
+                if (bankBalances.length > 0) {
+                    bankBalances.forEach(bank => {
+                        const li = document.createElement('li');
+                        li.className = 'flex justify-between items-center py-3 hover:bg-gray-100 text-blue-700 rounded-lg px-2 transition';
+                        li.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-semibold">
+                                    ${bank.bankName.charAt(0).toUpperCase()}
+                                </div>
+                                <span class="font-medium">${bank.bankName}</span>
+                            </div>
+                     <span class="font-bold text-green-600">₱${parseFloat(bank.availableBalance).toFixed(2)}</span>
+                        `;
+                        balanceList.appendChild(li);
+                    });
+                } else {
+                    balanceList.innerHTML = '<li class="text-center py-4">No bank balances available.</li>';
+                }
+                document.getElementById('balanceUpdateTime').textContent = `Updated ${new Date().toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}`;
+            }
+
+            function updateBankDetails(banks) {
+                const tbody = document.querySelector('#bankDetailsTable tbody');
+                tbody.innerHTML = '';
+                if (banks.length > 0) {
+                    banks.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'cursor-pointer hover:bg-gray-100 transition';
+                        tr.onclick = () => openBankModal(row.bankID, row.bankName, row.status);
+                        tr.innerHTML = `
+                            <td class="py-2 px-3">${row.bankName}</td>
+                            <td class="py-2 px-3">${row.accountNo || 'N/A'}</td>
+                            <td class="py-2 px-3">${row.accountName || 'N/A'}</td>
+                            <td class="py-2 px-3">${row.status}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="4" class="text-center p-4">No Records Found.</td></tr>';
+                }
+            }
+
+
+            function updateWithdrawOptions(banksForWithdraw) {
+                const select = document.getElementById('withdrawFundID');
+                select.innerHTML = '<option value="">-- Choose Bank --</option>';
+                banksForWithdraw.forEach(bank => {
+                    const option = document.createElement('option');
+                    option.value = bank.bankID;
+                    option.textContent = `${bank.bankName} (₱${parseFloat(bank.useAmount).toFixed(2)})`;
+                    select.appendChild(option);
+                });
+            }
+
+            function updateCashOnHand() {
+               
+                const depositAmount = document.getElementById('depositAmount');
+                const noCashMessage = document.getElementById('noCashMessage');
+                const depositType = document.getElementById('depositType').value;
+                if (depositType === 'Bank') {
+                    if (cashOnHand <= 0) {
+                        depositAmount.classList.add('hidden');
+                        noCashMessage.classList.remove('hidden');
+                        document.querySelector("[name='amount']").removeAttribute('required');
+                    } else {
+                        noCashMessage.classList.add('hidden');
+                        depositAmount.classList.remove('hidden');
+                        depositAmount.setAttribute('required', 'true');
+                        depositAmount.setAttribute('max', cashOnHand);
+                    }
+                }
+            }
+
+            // Poll for updates every 5 seconds
+            setInterval(fetchData, 5000);
+
+            // Initial fetch
+            fetchData();
+        });
+    </script>

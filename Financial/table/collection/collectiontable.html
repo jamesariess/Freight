@@ -1,0 +1,350 @@
+<style>
+      .status-badge {
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: inline-block;
+    }
+     .status-paid {
+        background-color: #dcfce7;
+        color: #166534;
+        border: 1px solid #86efac;
+    }
+    .status-reject {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+    }
+
+
+    .status-default {
+        background-color: #e5e7eb;
+        color: #374151;
+        border: 1px solid #d1d5db;
+    }
+     /* ===== NEW ACTION BUTTON DESIGN COPIED FROM disbursement.html ===== */
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    .action-button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border-radius: 0.25rem;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .action-button-view svg { color: #2563eb; }
+    .action-button-view:hover {
+        border-color: #2563eb;
+        background-color: #eff6ff;
+        box-shadow: 0 0 0 2px #bfdbfe;
+    }
+
+    .action-button-update svg { color: #15803d; }
+    .action-button-update:hover {
+        border-color: #15803d;
+        background-color: #f0fdf4;
+        box-shadow: 0 0 0 2px #dcfce7;
+    }
+
+    /* Archive Icon Color is now Gray */
+    .action-button-archive-new svg { color: #6b7280; }
+    .action-button-archive-new:hover {
+        border-color: #6b7280;
+        background-color: #f3f4f6;
+        box-shadow: 0 0 0 2px #e5e7eb;
+    }
+
+    /* Tooltip style */
+    .tooltip {
+        position: absolute;
+        bottom: 100%;
+        margin-bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #374151;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 400;
+        border-radius: 0.375rem;
+        padding: 0.3rem 0.6rem;
+        opacity: 0;
+        white-space: nowrap;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        pointer-events: none;
+        z-index: 10;
+    }
+    .tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #374151 transparent transparent transparent;
+    }
+    .action-button:hover .tooltip {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+</style>
+
+
+<!-- Table -->
+<div class="table-section" id="disbursementTableSection">
+    <h3 class="text-xl font-semibold  mb-4">Plan Report</h3>
+    <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center space-x-2">
+            <label for="rowsPerPage" class="text-sm ">Rows per page:</label>
+            <select id="rowsPerPage" onchange="window.location.href='?<?= http_build_query(array_merge($_GET, ['limit'=>''])) ?>'+this.value" class="border p-1 rounded text-sm">
+                <option value="5" <?= $limit==5?'selected':'' ?>>5</option>
+                <option value="10" <?= $limit==10?'selected':'' ?>>10</option>
+                <option value="25" <?= $limit==25?'selected':'' ?>>25</option>
+                <option value="50" <?= $limit==50?'selected':'' ?>>50</option>
+            </select>
+        </div>
+        <div class="text-sm ">
+            Showing <?= ($offset+1) ?> to <?= min($offset+$limit, $totalRows) ?> of <?= $totalRows ?> entries
+        </div>
+    </div>
+
+    <table id="employeesTable">
+        <thead>
+            <tr>
+                <th>Plan Title</th>
+                <th>Remaining Days</th>
+                <th>Plan Type</th>
+                <!-- <th>Notes</th> -->
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(!empty($plans)):
+                foreach($plans as $row):
+                    $date = date('F j, Y \a\t g:i A', strtotime($row['Date']));
+                    $statusClass = strtolower($row['status']) === 'active' ? 'status-paid' : 'status-reject';
+            ?>
+            <tr>
+                <td><?= htmlspecialchars($row['plan']); ?></td>
+                <td><?= htmlspecialchars($row['remaining_days']); ?></td>
+                <td><?= htmlspecialchars($row['plan_type']); ?></td>
+                <!-- <td><?= htmlspecialchars($row['details']); ?></td> -->
+                <td><span class="status-badge <?= $statusClass ?>"><?= htmlspecialchars($row['status']); ?></span></td>
+                <td><?= $date; ?></td>
+              <td> <div class="action-buttons">
+                 <button class="action-button action-button-view"
+                  onclick="openViewModal( '<?php echo $row['planID']; ?>',
+                   '<?php echo htmlspecialchars($row['plan'], ENT_QUOTES); ?>',
+                    '<?php echo htmlspecialchars($row['remaining_days'], ENT_QUOTES); ?>', 
+                    '<?php echo htmlspecialchars($row['plan_type'], ENT_QUOTES); ?>', 
+                    '<?php echo htmlspecialchars($row['status'], ENT_QUOTES); ?>',
+                     '<?php echo htmlspecialchars($row['Date'], ENT_QUOTES); ?>' ); return false;">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /> 
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                         </svg> <span class="tooltip">View</span> </button>
+                          <button class="action-button action-button-update" onclick="openUpdateModal( '<?php echo $row['planID']; ?>',
+                           '<?php echo htmlspecialchars($row['plan'], ENT_QUOTES); ?>',
+                            '<?php echo htmlspecialchars($row['remaining_days'], ENT_QUOTES); ?>',
+                             '<?php echo htmlspecialchars($row['plan_type'], ENT_QUOTES); ?>',
+                              '<?php echo htmlspecialchars($row['status'], ENT_QUOTES); ?>', 
+                              '<?php echo htmlspecialchars($row['Date'], ENT_QUOTES); ?>' ); return false;">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 20l-4 1 1-4 9.586-9.586z" />
+                  </svg> <span class="tooltip">Update</span> </button> 
+                  <button class="action-button action-button-archive-new" onclick="openArchiveModal( '<?php echo $row['planID']; ?>', 
+                  '<?php echo htmlspecialchars($row['plan'], ENT_QUOTES); ?>' ); return false;"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7H4m16 0a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2m16 0V5a2 2 0 00-2-2H6a2 2 0 00-2 2v2m6 8h4" /> </svg> 
+                     <span class="tooltip">Archive</span> </button> </div> </td>
+            </tr>
+            <?php endforeach; else: ?>
+                <tr><td colspan="6" class="text-center">No collection plans found.</td></tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="flex justify-between items-center mt-4">
+        <div class="text-sm ">Page <?= $page ?> of <?= $totalPages ?></div>
+        <div class="flex space-x-1">
+            <?php if($page>1): ?>
+                <a href="<?= buildPaginatedUrl($page-1) ?>" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">« Previous</a>
+            <?php else: ?>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">« Previous</span>
+            <?php endif; ?>
+
+            <?php 
+            $startPage = max(1, $page-2);
+            $endPage = min($totalPages, $startPage+4);
+            for($i=$startPage;$i<=$endPage;$i++):
+            ?>
+                <?php if($i==$page): ?>
+                    <span class="px-3 py-1 bg-blue-500 text-white rounded text-sm"><?= $i ?></span>
+                <?php else: ?>
+                    <a href="<?= buildPaginatedUrl($i) ?>" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if($page<$totalPages): ?>
+                <a href="<?= buildPaginatedUrl($page+1) ?>" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">Next »</a>
+            <?php else: ?>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">Next »</span>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+
+<div id="viewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'viewModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">📋 Plan Details</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('viewModal')">&times;</button>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-base text-gray-700">
+      <p class="font-semibold text-gray-600">ID:</p><p><span id="modalPlanID"></span></p>
+      <p class="font-semibold text-gray-600">Plan Title:</p><p><span id="modalPlanTitle"></span></p>
+      <p class="font-semibold text-gray-600">Remaining Days:</p><p><span id="modalRemaining"></span></p>
+      <p class="font-semibold text-gray-600">Plan Type:</p><p><span id="modalPlanType"></span></p>
+      <p class="font-semibold text-gray-600">Status:</p><p><span id="modalStatus"></span></p>
+      <p class="font-semibold text-gray-600">Created At:</p><p><span id="modalDate"></span></p>
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700" onclick="closeModal('viewModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="updateModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'updateModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">✏️ Update Plan</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('updateModal')">&times;</button>
+    </div>
+
+    <form method="POST" class="space-y-4">
+      <input type="hidden" name="planID" id="updatePlanID">
+      
+      <div>
+        <label class="block text-sm mb-1">Plan Title</label>
+        <input type="text" name="plan" id="updatePlanTitle" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500">
+      </div>
+      
+      <div>
+        <label class="block text-sm mb-1">Remaining Days</label>
+        <input type="number" name="remaining" id="updateRemaining" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500">
+      </div>
+      
+      <div>
+        <label class="block text-sm mb-1">Plan Type</label>
+        <select name="type" id="updatePlanType" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="Automated">Automated</option>
+          <option value="Manual">Manual</option>
+          <option value="Mixed / Hybrid">Mixed / Hybrid</option>
+        </select>
+      </div>
+      
+      <div>
+        <label class="block text-sm mb-1">Status</label>
+        <select name="status" id="updateStatus" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+
+      <div class="flex justify-end space-x-3 pt-4">
+        <button type="button" onclick="closeModal('updateModal')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700" name="update">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="archiveModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'archiveModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">🗃️ Archive Plan</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('archiveModal')">&times;</button>
+    </div>
+
+    <div class="text-center mb-6">
+      <svg class="mx-auto mb-4 text-red-500 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      </svg>
+      <p class="text-lg text-gray-700">Are you sure you want to archive <span class="font-semibold text-gray-800" id="archivePlanTitle"></span> (ID: <span id="archivePlanID"></span>)?</p>
+      <p class="text-red-600 font-semibold mt-1">This action cannot be undone.</p>
+    </div>
+
+    <form method="POST">
+      <input type="hidden" name="planID" id="archiveHiddenID">
+      <div class="flex justify-end space-x-3 pt-4">
+        <button type="button" onclick="closeModal('archiveModal')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700" name="archive">Yes, Archive</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function openViewModal(id, title, remaining, type, status, date) {
+  document.getElementById("modalPlanID").innerText = id;
+  document.getElementById("modalPlanTitle").innerText = title;
+  document.getElementById("modalRemaining").innerText = remaining;
+  document.getElementById("modalPlanType").innerText = type;
+  document.getElementById("modalStatus").innerText = status;
+  const formattedDate = new Date(date).toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
+  document.getElementById("modalDate").innerText = formattedDate;
+  document.getElementById("viewModal").classList.remove("hidden");
+}
+
+function openUpdateModal(id, title, remaining, type, status, date) {
+  document.getElementById("updatePlanID").value = id;
+  document.getElementById("updatePlanTitle").value = title;
+  document.getElementById("updateRemaining").value = remaining;
+  document.getElementById("updatePlanType").value = type;
+  document.getElementById("updateStatus").value = status;
+
+  document.getElementById("updateModal").classList.remove("hidden");
+}
+
+function openArchiveModal(id, title) {
+  document.getElementById("archivePlanID").innerText = id;
+  document.getElementById("archivePlanTitle").innerText = title;
+  document.getElementById("archiveHiddenID").value = id;
+  document.getElementById("archiveModal").classList.remove("hidden");
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.add("hidden");
+}
+function outsideclick(event, modalId) {
+  if (event.target.id === modalId) {
+    closeModal(modalId);
+  }
+}
+</script>

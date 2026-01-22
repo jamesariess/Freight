@@ -1,0 +1,173 @@
+ <div class="table-section" id="invoiceTableSection">
+      <h3>Invoice</h3>
+      <table id="employeesTable">
+        <thead>
+          <tr>
+            <th>Payment ID</th>
+            <th>Reference</th>
+            <th>Amount</th>
+            <th>Payment MEthod</th>
+            <th>Payment Date</th>
+            
+            
+            <th>Remarks</th>
+     
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="employeesTableBody">
+          <?php if (!empty($payments)):
+            foreach($payments as $row):
+            $date = date('F j, Y \a\t g:i A', strtotime($row['paymentDate']));
+            ?>
+          
+        <tr>
+          
+       
+            <td><?php echo htmlspecialchars($row['paymentID']);?></td>
+            <td><?php echo htmlspecialchars($row['Invoice']);?></td>
+            <td><?php echo htmlspecialchars($row['amount']);?></td>
+            <td><?php echo htmlspecialchars($row['paymethod']);?></td>
+            <td><?php echo htmlspecialchars($date);?></td>
+            <td><?php echo htmlspecialchars($row['remarks']);?></td>
+            
+           <td>
+  
+  <td>
+    <div class="action-buttons">
+        <button class="action-button action-button-view"
+            onclick="openViewModal(
+                '<?php echo $row['paymentID']; ?>',
+                '<?php echo htmlspecialchars($row['Invoice'], ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars($row['amount'], ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars($row['paymethod'], ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars($row['paymentDate'], ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars($row['remarks'], ENT_QUOTES); ?>'
+            ); return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <span class="tooltip">View</span>
+        </button>
+
+        <button class="action-button action-button-update"
+            onclick="openUpdateModal(
+                '<?php echo $row['paymentID']; ?>',
+                '<?php echo htmlspecialchars($row['remarks'], ENT_QUOTES); ?>'
+            ); return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 20l-4 1 1-4 9.586-9.586z" />
+            </svg>
+            <span class="tooltip">Update</span>
+        </button>
+
+        <button class="action-button action-button-archive-new"
+            onclick="openArchiveModal(
+                '<?php echo $row['paymentID']; ?>',
+                '<?php echo htmlspecialchars($row['Invoice'], ENT_QUOTES); ?>'
+            ); return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M20 7H4m16 0a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2m16 0V5a2 2 0 00-2-2H6a2 2 0 00-2 2v2m6 8h4" />
+            </svg>
+            <span class="tooltip">Archive</span>
+        </button>
+    </div>
+</td>
+        </tr>
+        <?php endforeach;
+         else:?>
+          <tr>
+            <td colspan="7">NO PAYMENTS FOUND.</td>
+          </tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="viewModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" onclick="outsideclick(event, 'viewModal')">
+      <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm relative">
+        <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl font-bold" onclick="closeModal('viewModal')">&times;</button>
+        <h2 class="text-lg font-semibold mb-4">View Payment</h2>
+        <p><strong>Payment ID:</strong> <span id="viewPaymentID"></span></p>
+        <p><strong>Reference:</strong> <span id="viewReference"></span></p>
+        <p><strong>Amount:</strong> <span id="viewAmount"></span></p>
+        <p><strong>Payment Method:</strong> <span id="viewPayMethod"></span></p>
+        <p><strong>Payment Date:</strong> <span id="viewPaymentDate"></span></p>
+        <p><strong>Remarks:</strong> <span id="viewRemarks"></span></p>
+      </div>
+    </div>
+
+
+
+
+    <div id="updateModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" onclick="outsideclick(event, 'updateModal')">
+      <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm relative">
+        <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl font-bold" onclick="closeModal('updateModal')">&times;</button>
+        <h2 class="text-lg font-semibold mb-4">Update Payment</h2>
+        <form method="POST" action="">
+          <input type="hidden" name="paymentID" id="updateHiddenID">
+          <div class="mb-4">
+            <label for="updateRemarks" class="block text-sm font-medium text-gray-700">Remarks</label>
+            <input type="text" id="updateRemarks" name="remarks" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          </div>
+          <div class="flex justify-end space-x-3">
+        <button type="button" onclick="closeModal('updateModal')" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" name="update">Save Changes</button>
+      </div>
+    </form>
+  </div> 
+</div>
+
+
+<div id="archiveModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" onclick="outsideclick(event, 'archiveModal')">
+  <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm relative">
+    <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl font-bold" onclick="closeModal('archiveModal')">&times;</button>
+    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                </svg>
+    <p class="mb-4">Are you sure you want to archive <span class="font-medium" id="archivePaymentTitle"></span> (ID: <span id="archivePaymentID"></span>)?</p>
+    <form method="POST"  class="flex justify-end space-x-3">
+      <input type="hidden" name="paymentID" id="archiveHiddenID">
+      <button type="button" onclick="closeModal('archiveModal')" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
+      <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700" name="archive">Yes, Archive</button>
+    </form>
+  </div>
+</div>
+
+
+    <script>
+      function openViewModal(paymentID, Invoice, amount, payMethod, paymentDate, remarks) {
+        document.getElementById('viewPaymentID').innerText = paymentID;
+        document.getElementById('viewReference').innerText = Invoice;
+        document.getElementById('viewAmount').innerText = amount;
+        document.getElementById('viewPayMethod').innerText = payMethod;
+        document.getElementById('viewPaymentDate').innerText = paymentDate;
+        document.getElementById('viewRemarks').innerText = remarks;
+        document.getElementById('viewModal').classList.remove('hidden');
+      }
+      function openUpdateModal(paymentID, remarks) {
+        document.getElementById('updateHiddenID').value = paymentID;
+        document.getElementById('updateRemarks').value = remarks;
+        document.getElementById('updateModal').classList.remove('hidden');
+      }
+      function openArchiveModal(paymentID, Invoice) {
+        document.getElementById('archivePaymentID').innerText = paymentID;
+        document.getElementById('archivePaymentTitle').innerText = Invoice;
+        document.getElementById('archiveHiddenID').value = paymentID;
+        document.getElementById('archiveModal').classList.remove('hidden');
+      }
+
+      function closeModal(modalId){
+        document.getElementById(modalId).classList.add('hidden');
+      }
+      function outsideclick(event,modalId){
+        if(event.target.id === modalId){
+          closeModal(modalId);
+        }
+      }
+    </script>

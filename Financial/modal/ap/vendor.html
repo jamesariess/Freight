@@ -1,0 +1,134 @@
+<div class="modal-overlay" id="modalOverlay">
+    <div class="form-collection" id="collectionform">
+        <legend>Add Vendor</legend>
+        <form action="" method="post">
+            <input type="hidden" id="RequestId">
+            <fieldset class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         
+                <div class="form-group">
+                    <label for="vendorName" class="block text-sm font-medium text-gray-700">Vendor Name</label>
+                    <input type="text" id="vendorName" name="vendorName" class="w-full p-2 border border-gray-300 rounded">
+                </div>              
+                <div class="form-group">
+                    <label for="contactPerson" class="block text-sm font-medium text-gray-700">Contact Person</label>
+                    <input type="text" id="contactPerson" name="contactPerson" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div class="form-group">
+                    <label for="contactInfo" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                    <input type="text" id="contactInfo" name="contactInfo" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div class="form-group">
+                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                    <input type="text" id="address" name="address" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+  
+      
+                <div class="form-actions md:col-span-2 mt-4">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary px-4 py-2">Cancel</button>
+                    <button type="submit" name="create" class="btn btn-primary px-4 py-2">Submit Request</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script>
+    const toggleFormBtn = document.getElementById('toggleFormBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    toggleFormBtn.addEventListener('click',()=>{
+        modalOverlay.style.display='flex';
+    });
+    cancelBtn.addEventListener('click',()=>{
+        modalOverlay.style.display="none";
+
+    });
+
+    modalOverlay.addEventListener('click',(e)=>{
+        if(e.target === modalOverlay){
+              modalOverlay.style.display='none';
+        }
+    })
+
+</script>
+<style>
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .form-collection {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 600px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-actions {
+        text-align: right;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        margin-right: 10px;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    @media (min-width: 768px) {
+        .form-collection {
+            width: 600px;
+        }
+    }
+</style>

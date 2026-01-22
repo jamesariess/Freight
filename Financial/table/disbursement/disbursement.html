@@ -1,0 +1,562 @@
+<style>
+    /* ===== STATUS BADGES (UNCHANGED) ===== */
+    .status-badge {
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: inline-block;
+    }
+    /* Status badge colors are generally fine, as they are strong and stand out */
+    .status-paid { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
+    .status-approved { background-color: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+    .status-reject { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .status-verified { background-color: #ffedd5; color: #9a3412; border: 1px solid #fdba74; }
+    .status-default { background-color: #e5e7eb; color: #374151; border: 1px solid #d1d5db; }
+
+    /* ===== ACTION BUTTON DESIGN (UNCHANGED) ===== */
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    .action-button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border-radius: 0.25rem;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background-color: white; /* Will need a dark mode fix */
+        border: 1px solid #e5e7eb; /* Will need a dark mode fix */
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05); /* Will need a dark mode fix */
+    }
+    
+    .action-button-view svg { color: #2563eb; }
+    .action-button-view:hover {
+        border-color: #2563eb;
+        background-color: #eff6ff;
+        box-shadow: 0 0 0 2px #bfdbfe;
+    }
+
+    .action-button-update svg { color: #15803d; }
+    .action-button-update:hover {
+        border-color: #15803d;
+        background-color: #f0fdf4;
+        box-shadow: 0 0 0 2px #dcfce7;
+    }
+
+    /* Archive Icon Color is now Gray */
+    .action-button-archive-new svg { color: #6b7280; }
+    .action-button-archive-new:hover {
+        border-color: #6b7280;
+        background-color: #f3f4f6;
+        box-shadow: 0 0 0 2px #e5e7eb;
+    }
+
+    /* Tooltip style (UNCHANGED) */
+    .tooltip {
+        position: absolute;
+        bottom: 100%;
+        margin-bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #374151;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 400;
+        border-radius: 0.375rem;
+        padding: 0.3rem 0.6rem;
+        opacity: 0;
+        white-space: nowrap;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        pointer-events: none;
+        z-index: 10;
+    }
+    .tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #374151 transparent transparent transparent;
+    }
+    .action-button:hover .tooltip {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== PROFESSIONAL TABLE DESIGN (HEADER COLOR: #2c3e50) ===== */
+    #employeesTable {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* Will need a dark mode fix */
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background-color: white; /* Will need a dark mode fix */
+    }
+
+    #employeesTable th, #employeesTable td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb; /* Will need a dark mode fix */
+        vertical-align: middle;
+        color: #374151; /* Default Text Color added for dark mode override */
+    }
+
+    /* Table Header Styling - COLOR: #2c3e50 (This is a dark color, so it's fine) */
+    #employeesTable thead {
+        background-color: #2c3e50; 
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    #employeesTable thead th {
+    color: white; /* Ensure th text is white in both modes */
+    }
+    
+    #employeesTable th:last-child, #employeesTable td:last-child {
+        text-align: center;
+    }
+    
+    /* Table Body Styling */
+    #employeesTable tbody tr:nth-child(even) {
+        background-color: #f9fafb; /* Will need a dark mode fix */
+    }
+    #employeesTable tbody tr:hover {
+        background-color: #f3f4f6; /* Will need a dark mode fix */
+    }
+    /* Specific text alignment for numeric/short columns */
+    #employeesTable td:nth-child(3) { /* Amount */
+        text-align: right;
+        font-weight: 500;
+    }
+    #employeesTable td:nth-child(5) { /* Due Date */
+        white-space: nowrap;
+    }
+    #employeesTable td:nth-child(8) { /* Date */
+        white-space: nowrap;
+        font-size: 0.8rem;
+    }
+    #employeesTable td:nth-child(7) { /* Status */
+        text-align: center;
+    }
+
+    /* ===== ARCHIVE MODAL BUTTON COLOR (GRAY) ===== */
+    .archive-confirm-button {
+        background-color: #6b7280;
+        color: white;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        transition: background-color 0.2s;
+    }
+    .archive-confirm-button:hover {
+        background-color: #4b5563;
+    }
+
+    
+    .dark-mode .table-section h3 {
+        color: #f3f4f6; /* Lighter text for the header */
+    }
+
+    .dark-mode #employeesTable {
+        background-color: #1f2937; /* Dark background for the table */
+        box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -2px rgba(255, 255, 255, 0.05);
+    }
+    
+    .dark-mode #employeesTable th, 
+    .dark-mode #employeesTable td {
+        border-bottom: 1px solid #374151; /* Darker border */
+        color: #f3f4f6; /* Light text color for table body */
+    }
+
+    .dark-mode #employeesTable thead th {
+    color: white; 
+    } 
+
+    .dark-mode #employeesTable tbody tr:nth-child(even) {
+        background-color: #111827; /* Very dark background for even rows */
+    }
+    
+    .dark-mode #employeesTable tbody tr:hover {
+        background-color: #374151; /* Slightly lighter dark color on hover */
+    }
+
+    /* Action Buttons in Dark Mode */
+    .dark-mode .action-button {
+        background-color: #374151; /* Darker button background */
+        border: 1px solid #4b5563; /* Darker border */
+        box-shadow: none; /* Remove light shadow */
+    }
+    .dark-mode .action-button:hover {
+        background-color: #4b5563;
+    }
+
+    /* Modal Dark Mode Styles */
+    .dark-mode .fixed > div { /* Targets the inner modal content for view/archive */
+        background-color: #1f2937; /* Dark background for modals */
+        color: #f3f4f6; /* Light text color for modals */
+    }
+    
+    /* View Modal Specifics */
+    .dark-mode #viewModal strong {
+        color: #d1d5db; /* A slightly distinct color for bold labels */
+    }
+    .dark-mode #viewModal .mt-4.px-4.py-2.bg-red-500 {
+        background-color: #dc2626; /* Ensure button contrast */
+    }
+
+    /* Archive Modal Specifics */
+    .dark-mode #archiveModal p {
+        color: #d1d5db;
+    }
+    .dark-mode #archiveModal svg {
+        color: #9ca3af; /* Lighten the info icon */
+    }
+    .dark-mode #archiveModal .px-4.py-2.bg-blue-200 {
+        background-color: #60a5fa; /* Blue cancel button */
+        color: #1f2937; /* Dark text for cancel button */
+    }
+    .dark-mode .archive-confirm-button {
+        background-color: #4b5563; /* Darker gray for archive confirm */
+    }
+    .dark-mode .archive-confirm-button:hover {
+        background-color: #6b7280;
+    }
+
+</style>
+<div class="card rounded-xl shadow-sm p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-4">Filter Requests</h3>
+
+    <form method="GET" class="space-y-5">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 form-group">
+            <div>
+                <label class="block text-sm font-medium  mb-1">Account Code</label>
+                <input type="text" name="account_code"
+                       placeholder="Search account code..."
+                       value="<?= htmlspecialchars($_GET['account_code'] ?? '') ?>"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium  mb-1">Account Name</label>
+                <input type="text" name="account_name"
+                       placeholder="Search account name..."
+                       value="<?= htmlspecialchars($_GET['account_name'] ?? '') ?>"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium  mb-1">Status</label>
+                <select name="status"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="">-- All Statuses --</option>
+                    <option value="Pending"  <?= ($_GET['status'] ?? '') === 'Pending'  ? 'selected' : '' ?>>Pending</option>
+                    <option value="Approved" <?= ($_GET['status'] ?? '') === 'Approved' ? 'selected' : '' ?>>Approved</option>
+                    <option value="Paid"     <?= ($_GET['status'] ?? '') === 'Paid'     ? 'selected' : '' ?>>Paid</option>
+                    <option value="Rejected" <?= ($_GET['status'] ?? '') === 'Rejected' ? 'selected' : '' ?>>Rejected</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 form-group">
+            <div>
+                <label class="block text-sm font-medium  mb-1">Created From</label>
+                <input type="date" name="created_from"
+                       value="<?= htmlspecialchars($_GET['created_from'] ?? '') ?>"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium  mb-1">Created To</label>
+                <input type="date" name="created_to"
+                       value="<?= htmlspecialchars($_GET['created_to'] ?? '') ?>"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-4">
+            <div class="flex gap-2">
+                <button type="button" onclick="window.location.href='?'" class="px-4 py-2 bg-gray-200  rounded-md hover:bg-gray-300">Clear All</button>
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Apply Filters</button>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mt-2 sm:mt-0">
+                <?php
+                $tags = [];
+                if (!empty($_GET['account_code'])) $tags[] = ['label' => 'Code: ' . htmlspecialchars($_GET['account_code']), 'name' => 'account_code'];
+                if (!empty($_GET['account_name'])) $tags[] = ['label' => 'Name: ' . htmlspecialchars($_GET['account_name']), 'name' => 'account_name'];
+                if (!empty($_GET['status']))       $tags[] = ['label' => 'Status: ' . htmlspecialchars($_GET['status']), 'name' => 'status'];
+                if (!empty($_GET['created_from'])) $tags[] = ['label' => 'From: ' . htmlspecialchars($_GET['created_from']), 'name' => 'created_from'];
+                if (!empty($_GET['created_to']))   $tags[] = ['label' => 'To: ' . htmlspecialchars($_GET['created_to']), 'name' => 'created_to'];
+
+                foreach ($tags as $tag):
+                    $url = http_build_query(array_diff_key($_GET, [$tag['name'] => '']));
+                    $url = $url ? "?$url" : '?';
+                ?>
+                    <a href="<?= $url ?>" class="inline-flex items-center px-3 py-1 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-full hover:bg-indigo-200">
+                        <?= $tag['label'] ?>
+                        <svg class="w-4 h-4 ml-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+            <!-- Applied Filters Tags -->
+        
+<div class="table-section" id="disbursementTableSection">
+    <h3 class="text-xl font-semibold text-gray-800 mb-4">Request Report</h3>
+        <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center space-x-2">
+            <label for="rowsPerPage" class="text-sm ">Rows per page:</label>
+            <select id="rowsPerPage" onchange="changeLimit(this.value)" class="border border-gray-300 p-1 rounded text-sm">
+                <option value="5" <?= $limit == 5 ? 'selected' : '' ?>>5</option>
+                <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
+                <option value="25" <?= $limit == 25 ? 'selected' : '' ?>>25</option>
+                <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
+            </select>
+        </div>
+        <div class="text-sm ">
+            Showing <?= ($offset + 1) ?> to <?= min($offset + $limit, $totalRows) ?> of <?= $totalRows ?> entries
+        </div>
+    </div>
+
+    <table id="employeesTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Account Name</th>
+                <th>Amount</th>
+                <th>Request By</th>
+                <th>Due Date</th>
+                <th>Purpose</th>
+                <th>Documents</th>
+                <th>Receipts</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="employeesTableBody">
+            <?php if(!empty($disbursementReports)):
+            foreach($disbursementReports as $row): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($row['requestTiTle']);?></td>
+                <td><?php echo htmlspecialchars($row['accountName']);?></td>
+                <td>₱ <?php echo !empty($row['Amount']) ? number_format($row['Amount'], 0, ".", ",") : "0"; ?></td>
+                <td><?php echo htmlspecialchars($row['Requested_by']);?></td>
+                <td><?php echo !empty($row['Due']) ? date("F j, Y", strtotime($row['Due'])) : "-";?></td>
+                <td><?php echo htmlspecialchars($row['Purpuse']);?></td>
+<td>
+    <?php 
+    $documents = !empty($row['documents']) ? json_decode($row['documents'], true) : [];
+    if (!empty($documents)):
+        foreach ($documents as $docUrl): ?>
+            <a href="<?= htmlspecialchars($docUrl) ?>" target="_blank">
+                <img src="<?= htmlspecialchars($docUrl) ?>" alt="Document" class="w-16 h-16 object-cover rounded border mr-1 mb-1">
+            </a>
+        <?php endforeach; 
+    else: ?>
+        <span class="text-gray-400 text-sm">No document</span>
+    <?php endif; ?>
+</td>
+
+
+<td>
+    <?php if (!empty($row['receipt'])): ?>
+        <a href="<?= htmlspecialchars($row['receipt']) ?>" target="_blank">
+            <img src="<?= htmlspecialchars($row['receipt']) ?>" alt="Receipt" class="w-16 h-16 object-cover rounded border">
+        </a>
+    <?php else: ?>
+        <span class="text-gray-400 text-sm">No receipt</span>
+    <?php endif; ?>
+</td>
+
+                <td>
+                    <?php 
+                        $status = strtolower($row['status']);
+                        $statusClass = "status-default";
+                        switch ($status) {
+                            case "paid": $statusClass = "status-paid"; break;
+                            case "approved": $statusClass = "status-approved"; break;
+                            case "reject":
+                            case "rejected": $statusClass = "status-reject"; break;
+                            case "pending": $statusClass = "status-verified"; break;
+                        }
+                    ?>
+                    <span class="status-badge <?php echo $statusClass; ?>">
+                        <?php echo htmlspecialchars($row['status']); ?>
+                    </span>
+                </td>
+                <td><?php echo !empty($row['date']) ? date("F j, Y g:i A", strtotime($row['date'])) : "-"; ?></td>
+
+                <td>
+                    <div class="action-buttons">
+                        <button class="action-button action-button-view" 
+                            onclick="openViewModal(
+                                '<?php echo $row['requestID'];?>',
+                                '<?php echo htmlspecialchars($row['requestTiTle'], ENT_QUOTES);?>',
+                                '<?php echo htmlspecialchars($row['accountName'], ENT_QUOTES);?>',
+                                '<?php echo htmlspecialchars($row['Amount'], ENT_QUOTES);?>',
+                                '<?php echo htmlspecialchars($row['Requested_by'], ENT_QUOTES);?>',
+                                '<?php echo htmlspecialchars($row['Due'], ENT_QUOTES);?>',
+                                '<?php echo htmlspecialchars($row['status'], ENT_QUOTES);?>',
+                                '<?php echo htmlspecialchars($row['Purpuse'], ENT_QUOTES);?>'); return false;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <span class="tooltip">View</span>
+                        </button>
+
+                     
+
+                        <button class="action-button action-button-archive-new" 
+                            onclick="openArchiveModal('<?php echo $row['requestID']?>'); return false;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20 7H4m16 0a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2m16 0V5a2 2 0 00-2-2H6a2 2 0 00-2 2v2m6 8h4" />
+                            </svg>
+                            <span class="tooltip">Archive</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <?php endforeach; else:?>
+            <tr class="text-center-placeholder"><td colspan="9" class="p-4 text-center-content">NO Records Found.</td></tr>
+            <?php endif;?>
+        </tbody>
+    </table>
+</div>
+ <!-- Pagination Controls Bottom -->
+    <div class="flex justify-between items-center mt-4">
+        <div class="text-sm ">
+            Page <?= $page ?> of <?= $totalPages ?>
+        </div>
+        <div class="flex space-x-1">
+            <?php if ($page > 1): ?>
+                <a href="<?= buildPaginatedUrl($page - 1) ?>" class="px-3 py-1 bg-gray-200  rounded hover:bg-gray-300 text-sm">« Previous</a>
+            <?php else: ?>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">« Previous</span>
+            <?php endif; ?>
+
+            <?php 
+            $startPage = max(1, $page - 2);
+            $endPage = min($totalPages, $startPage + 4);
+            for ($i = $startPage; $i <= $endPage; $i++): 
+            ?>
+                <?php if ($i == $page): ?>
+                    <span class="px-3 py-1 bg-blue-500 text-white rounded text-sm"><?= $i ?></span>
+                <?php else: ?>
+                    <a href="<?= buildPaginatedUrl($i) ?>" class="px-3 py-1 bg-gray-200  rounded hover:bg-gray-300 text-sm"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <a href="<?= buildPaginatedUrl($page + 1) ?>" class="px-3 py-1 bg-gray-200  rounded hover:bg-gray-300 text-sm">Next »</a>
+            <?php else: ?>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">Next »</span>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<div id="viewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'viewModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">👀 View Request</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('viewModal')">&times;</button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-base text-gray-700">
+      <p class="font-semibold text-gray-600">Request ID:</p><p><span id="viewRequestId"></span></p>
+      <p class="font-semibold text-gray-600">Request Type:</p><p><span id="viewModules"></span></p>
+      <p class="font-semibold text-gray-600">Amount:</p><p><span id="viewAmount"></span></p>
+      <p class="font-semibold text-gray-600">Requested By:</p><p><span id="viewRequestedBy"></span></p>
+      <p class="font-semibold text-gray-600">Due Date:</p><p><span id="viewDue"></span></p>
+      <p class="font-semibold text-gray-600">Status:</p><p><span id="viewStatus"></span></p>
+
+      <p class="font-semibold text-gray-600 col-span-2 mt-2">Title:</p>
+      <p class="col-span-2 pl-4 break-words"><span id="viewTitle"></span></p>
+
+      <p class="font-semibold text-gray-600 col-span-2 mt-2">Purpose:</p>
+      <p class="col-span-2 pl-4 break-words"><span id="viewPurpuse"></span></p>
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700" onclick="closeModal('viewModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="archiveModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'archiveModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">🗃️ Archive Request</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('archiveModal')">&times;</button>
+    </div>
+
+    <div class="text-center mb-6">
+      <svg class="mx-auto mb-4 text-red-500 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      </svg>
+      <p class="text-lg text-gray-700">Are you sure you want to archive this Request record?</p>
+      <p class="text-red-600 font-semibold mt-1">This action cannot be undone.</p>
+    </div>
+
+    <form method="post">
+        <input type="hidden" name="archive_disbursement_id" id="archiveDisbursementId">
+        <div class="flex justify-end space-x-3 pt-4">
+            <button type="button" onclick="closeModal('archiveModal')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700" name="archive">Yes, Archive</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function openViewModal(requestID, title, modules, amount, requestedBy, due, status, Purpuse) {
+    document.getElementById('viewRequestId').innerText = requestID;
+    document.getElementById('viewTitle').innerText = title;
+    document.getElementById('viewModules').innerText = modules;
+    document.getElementById('viewAmount').innerText = amount;
+    document.getElementById('viewRequestedBy').innerText = requestedBy;
+    document.getElementById('viewDue').innerText = due;
+    document.getElementById('viewStatus').innerText = status;
+    document.getElementById('viewPurpuse').innerText = Purpuse;
+    document.getElementById('viewModal').classList.remove('hidden');
+}
+
+function openUpdateModal(requestID) {
+    alert("Open Update Modal for Request ID: " + requestID);
+}
+
+function openArchiveModal(disbursementId) {
+    document.getElementById('archiveDisbursementId').value = disbursementId;
+    document.getElementById('archiveModal').classList.remove('hidden');
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+}
+
+function outsideClick(event, modalId) {
+    if (event.target.id === modalId) closeModal(modalId);
+}
+</script>

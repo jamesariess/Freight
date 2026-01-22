@@ -1,0 +1,84 @@
+<div class="rounded-xl shadow-sm p-6 mb-6 card">
+    <h3 class="text-lg font-semibold mb-4">Filter Invoices</h3>
+    <form method="GET" class="space-y-5 form-group">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Search (ID / Ref / Customer)</label>
+                <input type="text" name="search" placeholder="e.g. 1001 or INV-001"
+                       value="<?=htmlspecialchars($_GET['search'] ?? '')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Status</label>
+                <select name="status" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">-- All --</option>
+                    <option value="Paid" <?=($_GET['status']??'')==='Paid'?'selected':''?>>Paid</option>
+                    <option value="Unpaid" <?=($_GET['status']??'')==='Unpaid'?'selected':''?>>Unpaid</option>
+                    <option value="Overdue" <?=($_GET['status']??'')==='Overdue'?'selected':''?>>Overdue</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Invoice Date From</label>
+                <input type="date" name="date_from" value="<?=htmlspecialchars($_GET['date_from']??'')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Invoice Date To</label>
+                <input type="date" name="date_to" value="<?=htmlspecialchars($_GET['date_to']??'')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Amount From</label>
+                <input type="number" step="0.01" name="amount_min" placeholder="0.00"
+                       value="<?=htmlspecialchars($_GET['amount_min']??'')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Amount To</label>
+                <input type="number" step="0.01" name="amount_max" placeholder="999999.99"
+                       value="<?=htmlspecialchars($_GET['amount_max']??'')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <div class="flex gap-2">
+                <button type="button" onclick="window.location.href='?'"
+                        class="px-4 py-2 bg-gray-200 rounded">Clear All</button>
+                <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded">Apply Filters</button>
+            </div>
+
+            <!-- Filter Tags -->
+            <div class="flex flex-wrap gap-2 mt-2">
+                <?php
+                $tags = [];
+                if (!empty($_GET['search']))       $tags[] = ['label'=>'Search: '.htmlspecialchars($_GET['search']),       'name'=>'search'];
+                if (!empty($_GET['status']))       $tags[] = ['label'=>'Status: '.htmlspecialchars($_GET['status']),       'name'=>'status'];
+                if (!empty($_GET['date_from']))    $tags[] = ['label'=>'From: '.htmlspecialchars($_GET['date_from']),    'name'=>'date_from'];
+                if (!empty($_GET['date_to']))      $tags[] = ['label'=>'To: '.htmlspecialchars($_GET['date_to']),        'name'=>'date_to'];
+                if (!empty($_GET['amount_min']))   $tags[] = ['label'=>'Min: ₱'.htmlspecialchars($_GET['amount_min']),   'name'=>'amount_min'];
+                if (!empty($_GET['amount_max']))   $tags[] = ['label'=>'Max: ₱'.htmlspecialchars($_GET['amount_max']),   'name'=>'amount_max'];
+
+                foreach ($tags as $t):
+                    $url = http_build_query(array_diff_key($_GET, [$t['name']=>'']));
+                    $url = $url ? "?$url" : '?';
+                ?>
+                    <a href="<?= $url ?>" class="inline-flex items-center px-3 py-1 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-full">
+                        <?= $t['label'] ?>
+                        <svg class="w-4 h-4 ml-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </form>
+</div>

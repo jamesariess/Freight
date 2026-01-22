@@ -1,0 +1,93 @@
+<div class="modal-overlay" id="modalOverlay">
+    <div class="form-collection" id="collectionform">
+        <legend>Generate Receipts</legend>
+        <form method="POST" action="">
+            <input type="hidden" id="RequestId">
+            <fieldset>
+                <div class="form-group">
+                    <label for="invoice" class="block text-sm font-medium text-gray-700">SELECT INVOICE</label>
+                    <select name="Invoice" id="InvoiceID" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="">Select Invoice</option>
+                        <?php 
+                        try {
+                            $sql = "SELECT i.invoice_id, i.reference_no, i.amount FROM ar_invoices i WHERE i.Archive = 'NO' AND i.stat != 'Paid' ORDER BY i.created_at DESC;";
+                            
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute();
+                            $invoices = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            if ($invoices) {
+                                foreach ($invoices as $invoice) {
+                                    echo '<option value="' . htmlspecialchars($invoice['invoice_id']) . '" data-amount="' . htmlspecialchars($invoice['amount']) . '">' .
+                                         htmlspecialchars($invoice['reference_no']) .
+                                         '</option>';
+                                }
+                            } else {
+                                echo '<option value="">No invoices available</option>';
+                            }
+                        } catch (PDOException $e) {
+                            echo '<option value="">Error loading invoices: ' . $e->getMessage() . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="payment">Payment Method</label>
+                    <select name="paymethod" id="paymethod">
+                        <option value="Cash">Cash</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Check">Check</option>
+                        <option value="Mobile Payment">Mobile Payment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Amount"> Amount</label>
+                    <input type="number" id="Amount" name="Amount" placeholder="Enter Amount" readonly required>
+                </div>
+             
+                
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" name="create" class="btn btn-primary">Submit Request</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<script>
+    const toggleFormBtn = document.getElementById('toggleFormBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const cancelBtn = document.getElementById("cancelBtn");
+    const invoiceSelect = document.getElementById('InvoiceID');
+    const amountInput = document.getElementById('Amount');
+
+    toggleFormBtn.addEventListener('click',()=>{
+        modalOverlay.style.display='flex';
+    });
+    cancelBtn.addEventListener('click',()=>{
+        modalOverlay.style.display="none";
+    });
+
+    modalOverlay.addEventListener('click',(e)=>{
+        if(e.target === modalOverlay){
+            modalOverlay.style.display='none';
+        }
+    });
+
+    // Event listener for the invoice dropdown
+    invoiceSelect.addEventListener('change', () => {
+        const selectedOption = invoiceSelect.options[invoiceSelect.selectedIndex];
+        const selectedAmount = selectedOption.getAttribute('data-amount');
+        
+        if (selectedAmount) {
+            amountInput.value = selectedAmount;
+        } else {
+            amountInput.value = '';
+        }
+    });
+</script>

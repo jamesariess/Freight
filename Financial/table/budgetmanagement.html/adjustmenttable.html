@@ -1,0 +1,152 @@
+<style>
+    .status-badge {
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 0.875rem;  
+        font-weight: 500;
+        display: inline-block;
+    }
+    .status-paid {
+        background-color: #dcfce7; 
+        color: #166534;          
+        border: 1px solid #86efac;
+    }
+    .status-reject {
+        background-color: #fee2e2; 
+        color: #991b1b;            
+        border: 1px solid #fca5a5;
+    }
+    .status-default {
+        background-color: #e5e7eb; 
+        color: #374151;
+        border: 1px solid #d1d5db;
+    }
+</style>
+<div class="table-section" id="allocationAdjustmentTableSection">
+    <h3>Allocation Adjustment Report</h3>
+    <table id="allocationAdjustmentTable">
+        <thead>
+            <tr>
+                
+                <th>Title</th>
+                <th>New Percentage</th>
+                <th>Old Percentage</th> 
+                <th>New Amount</th>
+                <th>Old Amount</th>
+                <th>Reason</th>
+                <th>Change Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($allocationAdjustments)): ?>
+                <?php foreach ($allocationAdjustments as $row): 
+                    $date = date('F j, Y \a\t g:i A', strtotime($row['ChaneDate'] ?? 'now')); 
+                ?>
+                    <tr>
+                        
+                        <td><?php echo htmlspecialchars($row['Title']); ?></td>
+                        <td><?php echo htmlspecialchars($row['newpercent']); ?>%</td>
+                        <td><?php echo htmlspecialchars($row['oldpercent']); ?>%</td> 
+                        <td><?php echo htmlspecialchars(number_format($row['newamount'], 2)); ?></td>
+                        <td><?php echo htmlspecialchars(number_format($row['oldamount'], 2)); ?></td>
+                        <td><?php echo htmlspecialchars($row['Reason']); ?></td>
+                        <td><?php echo htmlspecialchars($date); ?></td>
+                        <td>
+                          
+    <div class="flex justify-center">
+        <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-blue-600 hover:border-blue-600 hover:bg-blue-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-0 group"
+            onclick="openViewModal(
+                '<?php echo $row['allocateadjustmentID']; ?>',
+                '<?php echo htmlspecialchars($row['Title'], ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars($row['newpercent'], ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars($row['oldpercent'], ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars(number_format($row['newamount'], 2), ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars(number_format($row['oldamount'], 2), ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars($row['Reason'], ENT_QUOTES); ?>',
+                '<?php echo htmlspecialchars($row['ChaneDate'], ENT_QUOTES); ?>'
+            ); return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">View</span>
+        </button>
+    </div>
+</td>
+
+                         
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="9">No allocation adjustments found.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
+<div id="viewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'viewModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">📋 View Budget Adjustment</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('viewModal')">&times;</button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-base text-gray-700">
+      
+      <p class="font-semibold text-gray-600 col-span-2">Adjustment ID:</p>
+      <p class="col-span-2 pl-4"><span id="viewAdjustID"></span></p>
+
+      <p class="font-semibold text-gray-600 col-span-2">Title:</p>
+      <p class="col-span-2 pl-4"><span id="viewTitle"></span></p>
+      
+      <p class="font-semibold text-gray-600">New Percentage:</p><p><span id="viewNewPercent"></span>%</p>
+      <p class="font-semibold text-gray-600">Old Percentage:</p><p><span id="viewOldPercent"></span>%</p>
+      
+      <p class="font-semibold text-gray-600">New Amount:</p><p><span id="viewNewAmount"></span></p>
+      <p class="font-semibold text-gray-600">Old Amount:</p><p><span id="viewOldAmount"></span></p>
+      
+      <p class="font-semibold text-gray-600 col-span-2">Reason:</p>
+      <p class="col-span-2 pl-4 break-words"><span id="viewReason"></span></p>
+      
+      <p class="font-semibold text-gray-600 col-span-2">Change Date:</p>
+      <p class="col-span-2 pl-4"><span id="viewChangeDate"></span></p>
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700" onclick="closeModal('viewModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+function openViewModal(adjustID, title, newPercent, oldPercent, newAmount, oldAmount, reason, changeDate) {
+    document.getElementById('viewAdjustID').innerText = adjustID;
+    document.getElementById('viewTitle').innerText = title;
+    document.getElementById('viewNewPercent').innerText = newPercent;
+    document.getElementById('viewOldPercent').innerText = oldPercent;
+    document.getElementById('viewNewAmount').innerText = newAmount;
+    document.getElementById('viewOldAmount').innerText = oldAmount;
+    document.getElementById('viewReason').innerText = reason;
+    document.getElementById('viewChangeDate').innerText = changeDate;
+    document.getElementById('viewModal').classList.remove('hidden');
+}
+
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+}
+
+function outsideClick(event, modalId) {
+    if (event.target.id === modalId) {
+        closeModal(modalId);
+    }
+}
+</script>

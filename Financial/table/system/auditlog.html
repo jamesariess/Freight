@@ -1,0 +1,261 @@
+<!-- === Audit Log Report Section === -->
+<div class="table-section" id="auditLogSection">
+  <h3 class="section-title">Audit Log Report</h3>
+
+  <!-- Filter Form -->
+  <div class="rounded-xl shadow-sm p-6 mb-6 card">
+    <h3 class="text-lg font-semibold mb-4">Filter Audit Logs</h3>
+    <form id="auditFilterForm" method="GET" class="space-y-5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 form-group">
+        <div>
+          <label class="block text-sm font-medium mb-1">User Name</label>
+          <input type="text" name="user_name" placeholder="Search user..." value=""
+                 class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Role</label>
+          <select name="role" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">-- All Roles --</option>
+            <option value="Admin">Admin</option>
+            <option value="Manager">Manager</option>
+              <option value="Finance Officer">Finance Officer</option>
+                <option value="Staff">Staff</option>
+           
+          </select>
+        </div>
+       <div>
+          <label class="block text-sm font-medium mb-1">Module</label>
+          <input type="text" name="module" placeholder="Search module..." value=""
+                 class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 form-group">
+        
+        <div>
+          <label class="block text-sm font-medium mb-1">IP Address</label>
+          <input type="text" name="ip_address" placeholder="Search IP..." value=""
+                 class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Date From</label>
+          <input type="date" name="date_from" value=""
+                 class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Date To</label>
+          <input type="date" name="date_to" value=""
+                 class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 form-group">
+        
+      </div>
+      <div class="flex justify-between items-center mt-4">
+        <div class="flex gap-2">
+          <button type="button" onclick="resetFilters()" class="px-4 py-2 bg-gray-200 rounded">Clear All</button>
+          <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded">Apply Filters</button>
+        </div>
+        <div id="appliedTags" class="flex flex-wrap gap-2 mt-2"></div>
+      </div>
+    </form>
+  </div>
+  
+
+  <!-- Pagination Controls Top -->
+  <div class="flex justify-between items-center mb-4 form-group">
+    <div class="flex items-center space-x-2">
+      <label for="rowsPerPage" class="text-sm">Rows per page:</label>
+      <select id="rowsPerPage" onchange="changeLimit(this.value)" class="border border-gray-300 p-1 rounded text-sm">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
+    </div>
+    <div id="paginationInfo" class="text-sm"></div>
+  </div>
+
+  <!-- Audit Log Table -->
+  <div class="table-container">
+    <table id="auditLogTable" class="audit-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>User</th>
+          <th>Role</th>
+          <th>Action</th>
+          <th>Module</th>
+          <th>IP Address</th>
+          <th>Date & Time</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody id="auditLogBody">
+        <tr>
+          <td colspan="8" class="text-center p-4">Loading audit logs...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls Bottom -->
+  <div class="flex justify-between items-center mt-4">
+    <div id="pageInfo" class="text-sm"></div>
+    <div id="paginationLinks" class="flex space-x-1"></div>
+  </div>
+</div>
+
+<script>
+let currentPage = 1;
+let currentLimit = 10;
+
+function escapeHTML(str) {
+  if (typeof str !== 'string') return str;
+  return str.replace(/[&<>"']/g, (m) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[m]));
+}
+
+function buildQueryParams() {
+  const form = document.getElementById('auditFilterForm');
+  const formData = new FormData(form);
+  formData.append('page', currentPage);
+  formData.append('limit', currentLimit);
+  const params = new URLSearchParams(formData);
+  return params.toString();
+}
+
+async function loadAuditLogs() {
+  const tbody = document.getElementById('auditLogBody');
+  const paginationInfo = document.getElementById('paginationInfo');
+  const pageInfo = document.getElementById('pageInfo');
+  const paginationLinks = document.getElementById('paginationLinks');
+  const appliedTags = document.getElementById('appliedTags');
+
+  tbody.innerHTML = '<tr><td colspan="8" class="text-center p-4">Loading audit logs...</td></tr>';
+
+  try {
+    const res = await fetch(`../../crud/system/auditlog.php?${buildQueryParams()}`);
+    const data = await res.json();
+
+    if (data.error) {
+      tbody.innerHTML = `<tr><td colspan="8" class="text-center p-4 text-red-500">Error: ${data.error}</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = '';
+    if (!data.logs || data.logs.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" class="text-center p-4">No audit records found.</td></tr>`;
+      paginationInfo.innerHTML = 'Showing 0 to 0 of 0 entries';
+      pageInfo.innerHTML = 'Page 0 of 0';
+      paginationLinks.innerHTML = '';
+      appliedTags.innerHTML = '';
+      return;
+    }
+
+    // Render logs
+    data.logs.forEach((log, index) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${(data.currentPage - 1) * data.limit + index + 1}</td>
+        <td>${escapeHTML(log.user_name)}</td>
+        <td>${escapeHTML(log.role || 'N/A')}</td>
+        <td><span class="action-type ${log.action.toLowerCase()}">${escapeHTML(log.action)}</span></td>
+        <td>${escapeHTML(log.module)}</td>
+        <td>${escapeHTML(log.ip_address)}</td>
+        <td>${new Date(log.timestamp).toLocaleString()}</td>
+        <td>${escapeHTML(log.details)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Update pagination info
+    const start = (data.currentPage - 1) * data.limit + 1;
+    const end = Math.min(start + data.limit - 1, data.totalRows);
+    paginationInfo.innerHTML = `Showing ${start} to ${end} of ${data.totalRows} entries`;
+    pageInfo.innerHTML = `Page ${data.currentPage} of ${data.totalPages}`;
+
+    // Render pagination links
+    paginationLinks.innerHTML = '';
+    if (data.currentPage > 1) {
+      paginationLinks.innerHTML += `<a href="#" onclick="changePage(${data.currentPage - 1})" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">« Previous</a>`;
+    } else {
+      paginationLinks.innerHTML += `<span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">« Previous</span>`;
+    }
+
+    const startPage = Math.max(1, data.currentPage - 2);
+    const endPage = Math.min(data.totalPages, startPage + 4);
+    for (let i = startPage; i <= endPage; i++) {
+      if (i === data.currentPage) {
+        paginationLinks.innerHTML += `<span class="px-3 py-1 bg-blue-500 text-white rounded text-sm">${i}</span>`;
+      } else {
+        paginationLinks.innerHTML += `<a href="#" onclick="changePage(${i})" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">${i}</a>`;
+      }
+    }
+
+    if (data.currentPage < data.totalPages) {
+      paginationLinks.innerHTML += `<a href="#" onclick="changePage(${data.currentPage + 1})" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">Next »</a>`;
+    } else {
+      paginationLinks.innerHTML += `<span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">Next »</span>`;
+    }
+
+    // Render applied filter tags
+    appliedTags.innerHTML = '';
+    const formData = new FormData(document.getElementById('auditFilterForm'));
+    const tags = [];
+    if (formData.get('user_name')) tags.push({ label: `User: ${formData.get('user_name')}`, name: 'user_name' });
+    if (formData.get('role')) tags.push({ label: `Role: ${formData.get('role')}`, name: 'role' });
+    if (formData.get('action')) tags.push({ label: `Action: ${formData.get('action')}`, name: 'action' });
+    if (formData.get('module')) tags.push({ label: `Module: ${formData.get('module')}`, name: 'module' });
+    if (formData.get('ip_address')) tags.push({ label: `IP: ${formData.get('ip_address')}`, name: 'ip_address' });
+    if (formData.get('date_from')) tags.push({ label: `From: ${formData.get('date_from')}`, name: 'date_from' });
+    if (formData.get('date_to')) tags.push({ label: `To: ${formData.get('date_to')}`, name: 'date_to' });
+
+    tags.forEach(tag => {
+      const url = new URLSearchParams(formData);
+      url.delete(tag.name);
+      url.set('page', 1); // Reset to first page when removing a filter
+      const tagElement = document.createElement('a');
+      tagElement.href = `#`;
+      tagElement.className = 'inline-flex items-center px-3 py-1 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-full';
+      tagElement.innerHTML = `${tag.label}<svg class="w-4 h-4 ml-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>`;
+      tagElement.onclick = () => {
+        currentPage = 1;
+        document.getElementsByName(tag.name)[0].value = '';
+        loadAuditLogs();
+      };
+      appliedTags.appendChild(tagElement);
+    });
+
+  } catch (error) {
+    console.error('Error loading audit logs:', error);
+    tbody.innerHTML = `<tr><td colspan="8" class="text-center p-4 text-red-500">Error loading logs.</td></tr>`;
+  }
+}
+
+function changePage(page) {
+  currentPage = page;
+  loadAuditLogs();
+}
+
+function changeLimit(limit) {
+  currentLimit = limit;
+  currentPage = 1; // Reset to first page
+  loadAuditLogs();
+}
+
+function resetFilters() {
+  document.getElementById('auditFilterForm').reset();
+  currentPage = 1;
+  loadAuditLogs();
+}
+
+document.getElementById('auditFilterForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  currentPage = 1;
+  loadAuditLogs();
+});
+
+loadAuditLogs();
+setInterval(loadAuditLogs, 30000);
+</script>

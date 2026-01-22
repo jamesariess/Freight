@@ -1,0 +1,397 @@
+
+<div class="card rounded-xl shadow-sm p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-4">Filter Accounts</h3>
+
+    <form method="GET" class="space-y-5 form-group">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+       
+            <div>
+                <label class="block text-sm font-medium  mb-1">Account Code</label>
+                <input type="text" name="account_code"
+                       placeholder="Search code..."
+                       value="<?= htmlspecialchars($_GET['account_code'] ?? '') ?>"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium  mb-1">Account Name</label>
+                <input type="text" name="account_name"
+                       placeholder="Search name..."
+                       value="<?= htmlspecialchars($_GET['account_name'] ?? '') ?>"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium  mb-1">Account Type</label>
+                <select name="account_type"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="">-- All Types --</option>
+                    <option value="Assets"      <?= ($_GET['account_type'] ?? '') === 'Assets'      ? 'selected' : '' ?>>Assets</option>
+                    <option value="Liabilities"<?= ($_GET['account_type'] ?? '') === 'Liabilities'? 'selected' : '' ?>>Liabilities</option>
+                    <option value="Equity"     <?= ($_GET['account_type'] ?? '') === 'Equity'     ? 'selected' : '' ?>>Equity</option>
+                    <option value="Revenue"    <?= ($_GET['account_type'] ?? '') === 'Revenue'    ? 'selected' : '' ?>>Revenue</option>
+                    <option value="Expenses"   <?= ($_GET['account_type'] ?? '') === 'Expenses'   ? 'selected' : '' ?>>Expenses</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Row 2 – 3 columns -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Status -->
+            <div>
+                <label class="block text-sm font-medium  mb-1">Status</label>
+                <select name="status"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="">-- All Statuses --</option>
+                    <option value="Active"   <?= ($_GET['status'] ?? '') === 'Active'   ? 'selected' : '' ?>>Active</option>
+                    <option value="Inactive" <?= ($_GET['status'] ?? '') === 'Inactive' ? 'selected' : '' ?>>Inactive</option>
+                </select>
+            </div>
+
+            <!-- Created From -->
+            <div>
+                <label class="block text-sm font-medium  mb-1">Created From</label>
+                <div class="relative">
+                    <input type="date" name="created_from"
+                           value="<?= htmlspecialchars($_GET['created_from'] ?? '') ?>"
+                           class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg class="w-5 h-placeholder text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Created To -->
+            <div>
+                <label class="block text-sm font-medium  mb-1">Created To</label>
+                <div class="relative">
+                    <input type="date" name="created_to"
+                           value="<?= htmlspecialchars($_GET['created_to'] ?? '') ?>"
+                           class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg class="w-5 h-placeholder text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons + Applied Tags -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <!-- Buttons -->
+            <div class="flex gap-2">
+                <button type="button"
+                        onclick="window.location.href='?'"
+                        class="px-4 py-2 bg-gray-200  rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                    Clear All
+                </button>
+                <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    Apply Filters
+                </button>
+             
+            </div>
+
+            <!-- Applied Filters Tags -->
+            <div class="flex flex-wrap gap-2 mt-2 sm:mt-0">
+                <?php
+                $tags = [];
+                if (!empty($_GET['account_code'])) $tags[] = ['label' => 'Code: ' . htmlspecialchars($_GET['account_code']), 'name' => 'account_code'];
+                if (!empty($_GET['account_name'])) $tags[] = ['label' => 'Name: ' . htmlspecialchars($_GET['account_name']), 'name' => 'account_name'];
+                if (!empty($_GET['account_type'])) $tags[] = ['label' => 'Type: ' . htmlspecialchars($_GET['account_type']), 'name' => 'account_type'];
+                if (!empty($_GET['status']))       $tags[] = ['label' => 'Status: ' . htmlspecialchars($_GET['status']), 'name' => 'status'];
+                if (!empty($_GET['created_from'])) $tags[] = ['label' => 'From: ' . htmlspecialchars($_GET['created_from']), 'name' => 'created_from'];
+                if (!empty($_GET['created_to']))   $tags[] = ['label' => 'To: ' . htmlspecialchars($_GET['created_to']), 'name' => 'created_to'];
+
+                foreach ($tags as $tag):
+                    $url = http_build_query(array_diff_key($_GET, [$tag['name'] => '']));
+                    $url = $url ? "?$url" : '?';
+                ?>
+                    <a href="<?= $url ?>"
+                       class="inline-flex items-center px-3 py-1 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-full hover:bg-indigo-200">
+                        <?= $tag['label'] ?>
+                        <svg class="w-4 h-4 ml-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </form>
+</div>
+
+ <button id="toggleFormBtn" class="btn btn-add">+ Add New</button>
+<div class="table-section" id="invoiceTableSection">
+    <h3>Chart Of Accounts</h3>
+
+    <!-- Pagination Controls Top -->
+    <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center space-x-2 form-group">
+            <label for="rowsPerPage" class="text-sm ">Rows per page:</label>
+            <select id="rowsPerPage" onchange="changeLimit(this.value)" class="border border-gray-300 p-1 rounded text-sm">
+                <option value="5" <?= $limit == 5 ? 'selected' : '' ?>>5</option>
+                <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
+                <option value="25" <?= $limit == 25 ? 'selected' : '' ?>>25</option>
+                <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
+            </select>
+        </div>
+        <div class="text-sm ">
+            Showing <?= ($offset + 1) ?> to <?= min($offset + $limit, $totalRows) ?> of <?= $totalRows ?> entries
+        </div>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table id="employeesTable" class="min-w-full text-sm text-gray-900 border-collapse">
+            <thead>
+                <tr>
+                    <th class="p-3 text-left">Account Code</th>
+                    <th class="p-3 text-left">Account Name</th>
+                    <th class="p-3 text-left">Account Type</th>
+                    <th class="p-3 text-left">Created At</th>
+                    <th class="p-3 text-left">Status</th>
+                    <th class="p-3 text-left">Action</th>
+                </tr>
+            </thead>
+            <tbody id="employeesTableBody">
+                <?php if (!empty($accounts)): ?>
+                    <?php foreach ($accounts as $row): ?>
+                        <tr class="hover:bg-gray-100 transition">
+                            <td class="p-3 border-t border-gray-300"><?= htmlspecialchars($row['accountCode']); ?></td>
+                            <td class="p-3 border-t border-gray-300"><?= htmlspecialchars($row['accountName']); ?></td>
+                            <td class="p-3 border-t border-gray-300"><?= htmlspecialchars($row['accounType']); ?></td>
+                          <td class="p-3 border-t border-gray-300">
+                            <?= date('F d, Y h:i A', strtotime($row['created'])); ?>
+                                    </td>
+
+                            <td class="p-3 border-t border-gray-300">
+                                <?php
+                                $status = strtolower($row['status']);
+                                $statusClasses = "bg-gray-200  border border-gray-300"; // Default style
+                                switch ($status) {
+                                    case "active":
+                                        $statusClasses = "bg-green-100 text-green-800 border border-green-300";
+                                        break;
+                                    case "inactive":
+                                        $statusClasses = "bg-red-100 text-red-800 border border-red-300";
+                                        break;
+                                }
+                                ?>
+                                <span class="px-3 py-1 text-xs font-medium rounded-full <?= $statusClasses; ?>">
+                                    <?= htmlspecialchars($row['status']); ?>
+                                </span>
+                            </td>
+                            <td class="p-3 border-t border-gray-300">
+                                <div class="flex justify-center space-x-2">
+                                    <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-blue-600 hover:border-blue-600 hover:bg-blue-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-0 group"
+                                        onclick="openViewModal(
+                                            '<?= $row['accountID']; ?>',
+                                            '<?= htmlspecialchars($row['accountCode'], ENT_QUOTES); ?>',
+                                            '<?= htmlspecialchars($row['accountName'], ENT_QUOTES); ?>',
+                                            '<?= htmlspecialchars($row['accounType'], ENT_QUOTES); ?>',
+                                            '<?= htmlspecialchars($row['status'], ENT_QUOTES); ?>'
+                                        ); return false;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                        <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">View</span>
+                                    </button>
+
+                                    <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-green-700 hover:border-green-700 hover:bg-green-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-0 group"
+                                        onclick="openUpdateModal(
+                                            '<?= $row['accountID']; ?>',
+                                            '<?= htmlspecialchars($row['accountCode'], ENT_QUOTES); ?>',
+                                            '<?= htmlspecialchars($row['accountName'], ENT_QUOTES); ?>',
+                                            '<?= htmlspecialchars($row['accounType'], ENT_QUOTES); ?>',
+                                            '<?= htmlspecialchars($row['status'], ENT_QUOTES); ?>'
+                                        ); return false;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 20l-4 1 1-4 9.586-9.586z" />
+                                        </svg>
+                                        <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">Update</span>
+                                    </button>
+
+                                    <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-gray-600 hover:border-gray-600 hover:bg-gray-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-0 group"
+                                        onclick="openArchiveModal(
+                                            '<?= $row['accountID']; ?>',
+                                            '<?= htmlspecialchars($row['accountCode'], ENT_QUOTES); ?>'
+                                        ); return false;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7H4m16 0a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2m16 0V5a2 2 0 00-2-2H6a2 2 0 00-2 2v2m6 8h4" />
+                                        </svg>
+                                        <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">Archive</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr><td colspan="6" class="p-4 text-center text-gray-500">No accounts found.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+ 
+    <!-- Pagination Controls Bottom -->
+    <div class="flex justify-between items-center mt-4">
+        <div class="text-sm ">
+            Page <?= $page ?> of <?= $totalPages ?>
+        </div>
+        <div class="flex space-x-1">
+            <?php if ($page > 1): ?>
+                <a href="<?= buildPaginatedUrl($page - 1) ?>" class="px-3 py-1 bg-gray-200  rounded hover:bg-gray-300 text-sm">« Previous</a>
+            <?php else: ?>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">« Previous</span>
+            <?php endif; ?>
+
+            <?php 
+            $startPage = max(1, $page - 2);
+            $endPage = min($totalPages, $startPage + 4);
+            for ($i = $startPage; $i <= $endPage; $i++): 
+            ?>
+                <?php if ($i == $page): ?>
+                    <span class="px-3 py-1 bg-blue-500 text-white rounded text-sm"><?= $i ?></span>
+                <?php else: ?>
+                    <a href="<?= buildPaginatedUrl($i) ?>" class="px-3 py-1 bg-gray-200  rounded hover:bg-gray-300 text-sm"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <a href="<?= buildPaginatedUrl($page + 1) ?>" class="px-3 py-1 bg-gray-200  rounded hover:bg-gray-300 text-sm">Next »</a>
+            <?php else: ?>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">Next »</span>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<div id="viewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'viewModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold" style="color: #2c3e50;">📊 View Account</h2>
+      <button class="text-gray-400 hover:text-gray-700 text-2xl font-bold" onclick="closeModal('viewModal')">&times;</button>
+    </div>
+    <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-gray-700">
+      <p class="font-semibold text-gray-600"><strong>Account ID:</strong></p><p> <span id="viewAccountID"></span></p>
+      <p class="font-semibold text-gray-600"><strong>Account Code:</strong></p><p> <span id="viewAccountCode"></span></p>
+      <p class="font-semibold text-gray-600"><strong>Account Name:</strong></p><p> <span id="viewAccountName"></span></p>
+      <p class="font-semibold text-gray-600"><strong>Account Type:</strong></p><p> <span id="viewAccountType"></span></p>
+      <p class="font-semibold text-gray-600"><strong>Status:</strong></p><p><span id="viewStatus"></span></p>
+    </div>
+    <div class="mt-6 flex justify-end">
+      <button class="px-4 py-2 text-white rounded-lg shadow" style="background-color: #2c3e50; hover:background-color: #1a252f;" onmouseover="this.style.backgroundColor='#1a252f'" onmouseout="this.style.backgroundColor='#2c3e50'" onclick="closeModal('viewModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="updateModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'updateModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">✍️ Update Account</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('updateModal')">&times;</button>
+    </div>
+
+    <form method="POST" class="space-y-4">
+      <input type="hidden" name="accountID" id="updateAccountID">
+
+      <div>
+        <label for="accountCode" class="block text-sm mb-1">Account Code</label>
+        <input type="text" name="accountCode" id="updateAccountCode" readonly class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500 bg-gray-50" required>
+      </div>
+
+      <div>
+        <label for="accountName" class="block text-sm mb-1">Account Name</label>
+        <input type="text" name="accountName" id="updateAccountName" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+      </div>
+
+      <div>
+        <label for="updateAccountType" class="block text-sm mb-1">Account Type</label>
+        <select name="accountType" id="updateAccountType" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+          <option value="">-- Select Account Type --</option>
+          <option value="Assets">Assets</option>
+          <option value="Liabilities">Liabilities</option>
+          <option value="Equity">Equity</option>
+          <option value="Revenue">Revenue</option>
+          <option value="Expenses">Expenses</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="status" class="block text-sm mb-1">Status</label>
+        <select name="status" id="updateStatus" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+
+      <div class="flex justify-end space-x-3 pt-4">
+        <button type="button" onclick="closeModal('updateModal')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+        <button type="submit" name="update" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="archiveModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'archiveModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">🗃️ Archive Account</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('archiveModal')">&times;</button>
+    </div>
+
+    <p class="mb-6 text-gray-700">
+      Are you sure you want to archive the account with ID: <span id="archiveAccountID" class="font-semibold text-gray-800"></span> and Code: <span id="archiveAccountCode" class="font-semibold text-gray-800"></span>?
+      <br>
+      <span class="text-red-600 font-semibold">This action cannot be undone.</span>
+    </p>
+
+    <form method="POST" class="flex justify-end space-x-3">
+      <input type="hidden" name="accountID" id="archiveHiddenID">
+      <button type="button" onclick="closeModal('archiveModal')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+      <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700" name="archive">Yes, Archive</button>
+    </form>
+  </div>
+</div>
+
+<script>
+    function openViewModal(accountID, accountCode, accountName, accountType, status) {
+        document.getElementById('viewAccountID').textContent = accountID;
+        document.getElementById('viewAccountCode').textContent = accountCode;
+        document.getElementById('viewAccountName').textContent = accountName;
+        document.getElementById('viewAccountType').textContent = accountType;
+        document.getElementById('viewStatus').textContent = status;
+        document.getElementById('viewModal').classList.remove('hidden');
+    }
+
+    function openUpdateModal(accountID, accountCode, accountName, accountType, status) {
+        document.getElementById('updateAccountID').value = accountID;
+        document.getElementById('updateAccountCode').value = accountCode;
+        document.getElementById('updateAccountName').value = accountName;
+        document.getElementById('updateAccountType').value = accountType;
+        document.getElementById('updateStatus').value = status;
+        document.getElementById('updateModal').classList.remove('hidden');
+    }
+
+    function openArchiveModal(accountID, accountCode) {
+        document.getElementById('archiveAccountID').textContent = accountID;
+        document.getElementById('archiveAccountCode').textContent = accountCode;
+        document.getElementById('archiveHiddenID').value = accountID;
+        document.getElementById('archiveModal').classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+    }
+
+    function outsideclick(event, modalId) {
+        if (event.target.id === modalId) {
+            closeModal(modalId);
+        }
+    }
+</script>

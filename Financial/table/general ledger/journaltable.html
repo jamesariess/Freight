@@ -1,0 +1,507 @@
+<style>
+    .status-draft { @apply bg-yellow-100 text-yellow-800; }
+    .status-posted { @apply bg-green-100 text-green-800; }
+    .btn-icon {
+      @apply relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-0 group;
+    }
+    .tooltip {
+      @apply absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100;
+    }
+</style>
+
+<div class="p-3">
+  <div>
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold">Journal Entries</h1>
+      <button id="btnNew" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition flex items-center gap-2">
+        <i class="fas fa-plus"></i> New Journal
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Date</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Description</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Created By</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="journalList" class="divide-y divide-gray-200">
+            <tr><td colspan="7" class="text-center py-8 text-gray-500">Loading journals...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="journalModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+  <div class="bg-white w-11/12 max-w-4xl rounded shadow p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 id="modalTitle" class="text-lg font-semibold">New Journal</h2>
+      <button onclick="closeJournalModal()" class="text-gray-500">&times;</button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 mb-4 form-group">
+      <div>
+        <label class="text-sm">Date</label>
+        <input id="jDate" type="text" class="w-full border rounded p-2" placeholder="YYYY-MM-DD" readonly/>
+      </div>
+      <div>
+        <label class="text-sm">Reference</label>
+        <input id="jRef" type="text" class="w-full border rounded p-2" readonly/>
+      </div>
+      <div class="col-span-2">
+        <label class="text-sm">Description</label>
+        <input id="jDesc" type="text" class="w-full border rounded p-2" readonly/>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div class="flex justify-between items-center mb-2">
+        <div class="text-sm font-medium">Details</div>
+        <button id="addLine" class="text-sm bg-blue-600 text-white px-3 py-1 rounded" style="display: none;">Add Line</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="p-2">Account Name</th>
+              <th class="p-2">Debit</th>
+              <th class="p-2">Credit</th>
+              <th class="p-2">Action</th>
+            </tr>
+          </thead>
+          <tbody id="detailsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-2">
+      <button id="btnSave" class="bg-indigo-600 text-white px-4 py-2 rounded" style="display: none;">Save</button>
+      <button onclick="closeJournalModal()" class="bg-gray-200 px-3 py-2 rounded">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Post Confirmation Modal -->
+<div id="postModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+  <div class="bg-white w-11/12 max-w-md rounded shadow p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold">Confirm Post</h2>
+      <button onclick="closeModal('postModal')" class="text-gray-500">&times;</button>
+    </div>
+    <p>Are you sure you want to post this journal? This will lock the entry.</p>
+    <div class="flex justify-end gap-2 mt-4">
+      <button onclick="confirmPost()" class="bg-yellow-500 text-white px-4 py-2 rounded">Yes</button>
+      <button onclick="closeModal('postModal')" class="bg-gray-200 px-3 py-2 rounded">No</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="archiveModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+  <div class="bg-white w-11/12 max-w-md rounded shadow p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold">Confirm Action</h2>
+      <button onclick="closeModal('archiveModal')" class="text-gray-500">&times;</button>
+    </div>
+    <p id="archiveMessage"></p>
+    <div class="flex justify-end gap-2 mt-4">
+      <button id="confirmArchive" class="bg-red-600 text-white px-4 py-2 rounded">Yes</button>
+      <button onclick="closeModal('archiveModal')" class="bg-gray-200 px-3 py-2 rounded">No</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="closedPeriodModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+  <div class="bg-white w-11/12 max-w-md rounded shadow p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold">Period Closed</h2>
+      <button onclick="closeModal('closedPeriodModal')" class="text-gray-500">&times;</button>
+    </div>
+    <p>The accounting period is currently closed. You can only view journal entries. Please wait until the period is reopened to add or modify entries.</p>
+    <div class="flex justify-end gap-2 mt-4">
+      <button onclick="closeModal('closedPeriodModal')" class="bg-gray-200 px-3 py-2 rounded">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let accountsCache = null;
+  let currentJournalID = null; 
+  let isEditing = false;
+  let periodStatus = 'Open';
+
+  async function fetchAccounts() {
+    if (accountsCache) return accountsCache;
+    try {
+      const res = await fetch('../../crud/legder/accounts.php');
+      accountsCache = await res.json();
+      return accountsCache;
+    } catch (e) {
+      showErrorModal('Failed to fetch accounts: ' + e.message);
+      return [];
+    }
+  }
+
+  async function checkPeriodStatus() {
+    try {
+      const res = await fetch('../../crud/legder/period_status.php');
+      const data = await res.json();
+      periodStatus = data.status;
+
+
+      const btnNew = document.getElementById('btnNew');
+      if (periodStatus !== 'Open') {
+        btnNew.classList.add('hidden');
+      } else {
+        btnNew.classList.remove('hidden');
+      }
+    } catch (e) {
+      console.error('Error checking period status:', e);
+    }
+  }
+
+  function formatDate(date) {
+    return date ? new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+  }
+
+  function formatDateTime(datetime) {
+    if (!datetime) return null;
+    const d = new Date(datetime);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
+           d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+
+  function escape(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+async function loadJournals() {
+  try {
+    const res = await fetch('../../crud/legder/details.php');
+    const data = await res.json();
+    const tbody = document.getElementById('journalList');
+    tbody.innerHTML = '';
+    data.forEach(j => {
+      const tr = document.createElement('tr');
+      const isOpen = j.periodStatus === 'Open';
+      tr.innerHTML = `
+        <td class="p-2 ${isOpen ? '' : 'cursor-pointer view-detail'}" data-journal-id="${j.journalID}">${formatDateTime(j.date)}</td>
+        <td class="p-2 ${isOpen ? '' : 'cursor-pointer view-detail'}" data-journal-id="${j.journalID}">${j.description}</td>
+        <td class="p-2 ${isOpen ? '' : 'cursor-pointer view-detail'}" data-journal-id="${j.journalID}">${j.createdBy}</td>
+        <td class="p-2 ${isOpen ? '' : 'cursor-pointer view-detail'}" data-journal-id="${j.journalID}">
+          ${j.status === 'Posted' 
+            ? '<span class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">Posted</span>' 
+            : j.status === 'Draft' 
+            ? '<span class="bg-yellow-100 text-yellow-800 text-sm font-semibold px-3 py-1 rounded-full">Draft</span>'
+            : `<span class="bg-gray-100 text-gray-800 text-sm font-semibold px-3 py-1 rounded-full">${j.status || 'N/A'}</span>`
+          }
+        </td>
+        <td class="p-2">
+            ${isOpen ? `
+              <button class="class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-blue-600 hover:border-blue-600 hover:bg-blue-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-0 group" onclick="openEdit('${j.journalID}')">
+             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 20l-4 1 1-4 9.586-9.586z" />
+                                        </svg>
+                                        <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">Update</span>
+                                            </button>
+                ${j.status === 'Draft' ? `
+          <button class="class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-yellow-600 hover:border-yellow-600 hover:bg-blue-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:ring-offset-0 group"" onclick="showPostModal('${j.journalID}')">
+           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">Post</span>
+          </button>
+           ` : ''}
+
+
+
+              <button relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white 
+              border border-gray-200 shadow-sm text-gray-600 hover:border-gray-600 hover:bg-gray-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-0 group" onclick="showArchiveModal('${j.journalID}', '${j.Archive === 'YES' ? 'unarchive' : 'archive'}')">
+               
+                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7H4m16 0a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2m16 0V5a2 2 0 00-2-2H6a2 2 0 00-2 2v2m6 8h4" />
+                                        </svg>
+                                        <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100"> ${j.Archive === 'YES' ? 'Unarchive' : 'Archive'}</span>
+              </button>
+            ` : `<span class="text-gray-400 italic">The period is closed, wait to reopen</span>`}
+          </td>
+      `;
+      tbody.appendChild(tr);
+    });
+    // Add event delegation for view-only clicks only when period is closed
+    if (periodStatus !== 'Open') {
+      tbody.addEventListener('click', (e) => {
+        const viewDetail = e.target.closest('.view-detail');
+        if (viewDetail) {
+          const journalID = viewDetail.getAttribute('data-journal-id');
+          openEdit(journalID, true);
+        }
+      });
+    }
+  } catch (e) {
+    showErrorModal('Failed to load journals: ' + e.message);
+  }
+}
+
+  document.getElementById('btnNew').addEventListener('click', () => openNew());
+
+  function openNew() {
+    if (periodStatus !== 'Open') {
+      document.getElementById('closedPeriodModal').classList.remove('hidden');
+      return;
+    }
+    isEditing = false;
+    currentJournalID = null;
+    openJournalModal();
+    document.getElementById('jDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('jRef').value = '';
+    document.getElementById('jDesc').value = '';
+    document.getElementById('detailsBody').innerHTML = '';
+    addDetailRow();
+  }
+
+  function openJournalModal() {
+    document.getElementById('journalModal').classList.remove('hidden');
+    document.getElementById('modalTitle').innerText = isEditing ? 'Edit Journal' : 'New Journal';
+  }
+
+  function closeJournalModal() {
+    document.getElementById('journalModal').classList.add('hidden');
+  }
+
+  async function openEdit(journalID, viewOnly = false) {
+    isEditing = !viewOnly; // Set to false for view-only mode
+    currentJournalID = journalID;
+    try {
+      const res = await fetch(`../../crud/legder/details.php?journalID=${journalID}`);
+      const payload = await res.json();
+      if (payload.error) {
+        showErrorModal(payload.error);
+        return;
+      }
+      document.getElementById('jDate').value = payload.header.date || '';
+      document.getElementById('jRef').value = payload.header.referenceType || '';
+      document.getElementById('jDesc').value = payload.header.description || '';
+      document.getElementById('detailsBody').innerHTML = '';
+      for (const d of payload.details) {
+        addDetailRow(d, viewOnly);
+      }
+      openJournalModal();
+
+      if (viewOnly || periodStatus !== 'Open') {
+        document.getElementById('jDate').setAttribute('readonly', true);
+        document.getElementById('jRef').setAttribute('readonly', true);
+        document.getElementById('jDesc').setAttribute('readonly', true);
+        document.getElementById('addLine').style.display = 'none';
+        document.getElementById('btnSave').style.display = 'none';
+        document.querySelectorAll('#detailsBody input').forEach(input => input.setAttribute('readonly', true));
+        document.querySelectorAll('#detailsBody button').forEach(button => button.style.display = 'none');
+        document.getElementById('modalTitle').innerText = 'View Journal';
+      } else {
+        document.getElementById('jDate').removeAttribute('readonly');
+        document.getElementById('jRef').removeAttribute('readonly');
+        document.getElementById('jDesc').removeAttribute('readonly');
+        document.getElementById('addLine').style.display = '';
+        document.getElementById('btnSave').style.display = '';
+        document.querySelectorAll('#detailsBody input').forEach(input => input.removeAttribute('readonly'));
+        document.querySelectorAll('#detailsBody button').forEach(button => button.style.display = '');
+        document.getElementById('modalTitle').innerText = 'Edit Journal';
+      }
+    } catch (e) {
+      showErrorModal('Failed to load journal details: ' + e.message);
+    }
+  }
+
+  document.getElementById('addLine').addEventListener('click', async () => {
+    addDetailRow();
+  });
+
+  async function addDetailRow(data = {}, viewOnly = false) {
+    const accounts = await fetchAccounts();
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="p-2 form-group">
+        <select class="w-full border p-1 accountSelect" ${viewOnly ? 'disabled' : ''}>
+          ${accounts.map(a => `<option value="${a.accountID}" ${data.accountID == a.accountID ? 'selected' : ''}>${a.accountName}</option>`).join('')}
+        </select>
+      </td>
+      <td class="p-2 form-group text-green-700"><input type="number" value="${data.debit || ''}" class="w-full border p-1 debit" step="0.01" ${viewOnly ? 'readonly' : ''}/></td>
+      <td class="p-2 form-group text-red-800"><input type="number" value="${data.credit || ''}" class="w-full border p-1 credit" step="0.01" ${viewOnly ? 'readonly' : ''}/></td>
+      <td class="p-2"><button class="text-red-600" onclick="this.closest('tr').remove()" ${viewOnly ? 'style="display: none;"' : ''}>Remove</button></td>
+    `;
+    document.getElementById('detailsBody').appendChild(row);
+  }
+
+  document.getElementById('btnSave').addEventListener('click', async () => {
+    if (periodStatus !== 'Open') {
+      document.getElementById('closedPeriodModal').classList.remove('hidden');
+      return;
+    }
+    const date = document.getElementById('jDate').value;
+    const referenceType = document.getElementById('jRef').value;
+    const description = document.getElementById('jDesc').value;
+    const details = Array.from(document.querySelectorAll('#detailsBody tr')).map(tr => {
+      return {
+        accountID: tr.querySelector('.accountSelect').value,
+        debit: parseFloat(tr.querySelector('.debit').value) || 0,
+        credit: parseFloat(tr.querySelector('.credit').value) || 0
+      };
+    });
+
+    if (!Array.isArray(details) || details.length < 1) {
+      showErrorModal('Please add at least one detail row.');
+      return;
+    }
+
+    const td = details.reduce((s, r) => s + Number(r.debit || 0), 0);
+    const tc = details.reduce((s, r) => s + Number(r.credit || 0), 0);
+    if (Math.abs(td - tc) > 0.001) {
+      showErrorModal('Journal not balanced');
+      return;
+    }
+
+    const payload = {
+      date,
+      description,
+      referenceType,
+      details,
+      journalID: currentJournalID,
+      action: 'add'
+    };
+
+    const method = isEditing ? 'PUT' : 'POST';
+    const url = `../../crud/legder/details.php`;
+
+    try {
+      const res = await fetch(url, {
+        method: method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      if (result.success) {
+        showSuccessModal(result.message || 'Journal entry saved successfully.');
+        closeJournalModal();
+        loadJournals();
+      } else {
+        showErrorModal(result.error || 'Error saving journal.');
+      }
+    } catch (e) {
+      showErrorModal('Failed to process request: ' + e.message);
+    }
+  });
+
+  function showPostModal(journalID) {
+    if (periodStatus !== 'Open') {
+      document.getElementById('closedPeriodModal').classList.remove('hidden');
+      return;
+    }
+    currentJournalID = journalID;
+    document.getElementById('postModal').classList.remove('hidden');
+  }
+
+  async function confirmPost() {
+    if (periodStatus !== 'Open') {
+      document.getElementById('closedPeriodModal').classList.remove('hidden');
+      return;
+    }
+    try {
+      const res = await fetch('../../crud/legder/details.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `journalID=${currentJournalID}&action=post`
+      });
+      const result = await res.json();
+      if (result.success) {
+        showSuccessModal(result.message || 'Journal entry posted successfully.');
+        closeModal('postModal');
+        loadJournals();
+      } else {
+        showErrorModal(result.error || 'Error posting journal.');
+      }
+    } catch (e) {
+      showErrorModal('Failed to post: ' + e.message);
+    }
+  }
+
+  function showArchiveModal(journalID, action) {
+    if (periodStatus !== 'Open') {
+      document.getElementById('closedPeriodModal').classList.remove('hidden');
+      return;
+    }
+    currentJournalID = journalID;
+    document.getElementById('archiveMessage').innerText = `Are you sure you want to ${action} this journal?`;
+    document.getElementById('archiveModal').classList.remove('hidden');
+    document.getElementById('confirmArchive').onclick = () => confirmArchive(action);
+  }
+
+  async function confirmArchive(action) {
+    if (periodStatus !== 'Open') {
+      document.getElementById('closedPeriodModal').classList.remove('hidden');
+      return;
+    }
+    try {
+      const res = await fetch('../../crud/legder/details.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `journalID=${currentJournalID}&actionType=${action}&action=archive`
+      });
+      const result = await res.json();
+      if (result.success) {
+        showSuccessModal(result.message || (action === 'archive' ? 'Journal entry archived successfully.' : 'Journal entry unarchived successfully.'));
+        closeModal('archiveModal');
+        loadJournals();
+      } else {
+        showErrorModal(result.error || 'Error archiving journal.');
+      }
+    } catch (e) {
+      showErrorModal('Failed to archive: ' + e.message);
+    }
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+  }
+
+  function showSuccessModal(message) {
+    const messageDiv = document.getElementById('message');
+    messageDiv.innerHTML = `
+      <p>${escape(message)}</p>
+      <button onclick="document.getElementById('message').style.display='none';" class="hover:text-green-800">&times;</button>
+    `;
+    messageDiv.className = 'flex success';
+    messageDiv.style.display = 'flex';
+    setTimeout(() => messageDiv.style.display = 'none', 5000);
+  }
+
+  function showErrorModal(message) {
+    const messageDiv = document.getElementById('message');
+    messageDiv.innerHTML = `
+      <p class="text-red-800">${escape(message)}</p>
+      <button onclick="document.getElementById('message').style.display='none';" class="hover:text-red-800 text-red-800">&times;</button>
+    `;
+    messageDiv.className = 'flex error';
+    messageDiv.style.display = 'flex';
+    setTimeout(() => messageDiv.style.display = 'none', 5000);
+  }
+
+
+  checkPeriodStatus().then(() => loadJournals());
+</script>
+</div>

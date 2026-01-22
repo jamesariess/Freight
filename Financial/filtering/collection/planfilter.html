@@ -1,0 +1,79 @@
+<div class=" rounded-xl shadow-sm p-6 mb-6 card">
+    <h3 class="text-lg font-semibold  mb-4">Filter Plans</h3>
+
+    <form method="GET" class="space-y-5">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 form-group">
+            <div>
+                <label class="block text-sm font-medium  mb-1">Plan Name</label>
+                <input type="text" name="plan_name" placeholder="Search plan..."
+                       value="<?= htmlspecialchars($_GET['plan_name'] ?? '') ?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium  mb-1">Plan Type</label>
+                <select name="plan_type" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">-- All Types --</option>
+                    <option value="Daily"   <?= ($_GET['plan_type'] ?? '') === 'Daily' ? 'selected' : '' ?>>Daily</option>
+                    <option value="Weekly"  <?= ($_GET['plan_type'] ?? '') === 'Weekly' ? 'selected' : '' ?>>Weekly</option>
+                    <option value="Monthly" <?= ($_GET['plan_type'] ?? '') === 'Monthly' ? 'selected' : '' ?>>Monthly</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium  mb-1">Status</label>
+                <select name="status" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">-- All Statuses --</option>
+                    <option value="Active"   <?= ($_GET['status'] ?? '') === 'Active' ? 'selected' : '' ?>>Active</option>
+                    <option value="Inactive" <?= ($_GET['status'] ?? '') === 'Inactive' ? 'selected' : '' ?>>Inactive</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 form-group">
+            <div>
+                <label class="block text-sm font-medium  mb-1">Created From</label>
+                <input type="date" name="created_from" value="<?= htmlspecialchars($_GET['created_from'] ?? '') ?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium  mb-1">Created To</label>
+                <input type="date" name="created_to" value="<?= htmlspecialchars($_GET['created_to'] ?? '') ?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <div class="flex gap-2">
+                <button type="button" onclick="window.location.href='?'" class="px-4 py-2 bg-gray-200 rounded">Clear All</button>
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded">Apply Filters</button>
+                
+            </div>
+
+            <!-- Applied Tags -->
+            <div class="flex flex-wrap gap-2 mt-2">
+                <?php
+                $tags = [];
+                if (!empty($_GET['plan_name'])) $tags[] = ['label' => 'Plan: ' . htmlspecialchars($_GET['plan_name']), 'name' => 'plan_name'];
+                if (!empty($_GET['plan_type'])) $tags[] = ['label' => 'Type: ' . htmlspecialchars($_GET['plan_type']), 'name' => 'plan_type'];
+                if (!empty($_GET['status']))    $tags[] = ['label' => 'Status: ' . htmlspecialchars($_GET['status']), 'name' => 'status'];
+                if (!empty($_GET['created_from'])) $tags[] = ['label' => 'From: ' . htmlspecialchars($_GET['created_from']), 'name' => 'created_from'];
+                if (!empty($_GET['created_to']))   $tags[] = ['label' => 'To: ' . htmlspecialchars($_GET['created_to']), 'name' => 'created_to'];
+
+                foreach ($tags as $tag):
+                    $url = http_build_query(array_diff_key($_GET, [$tag['name'] => '']));
+                    $url = $url ? "?$url" : '?';
+                ?>
+                    <a href="<?= $url ?>" class="inline-flex items-center px-3 py-1 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-full">
+                        <?= $tag['label'] ?>
+                        <svg class="w-4 h-4 ml-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </form>
+</div>
+ <button id="toggleFormBtn" class="btn btn-add">+ Add New</button>

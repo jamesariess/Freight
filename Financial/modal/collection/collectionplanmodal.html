@@ -1,0 +1,231 @@
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="form-collection" id="collectionform">
+    <legend>Collection Planning</legend>
+    <form method="post">
+      <input type="hidden" id="RequestId">
+
+      <div class="form-group">
+        <label for="requestTitle"><i class="fas fa-pen"></i> Plan title</label>
+        <input type="text" id="requestTitle" name="requestTitle" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dam"><i class="fas fa-clock"></i> Remaining Days</label>
+        <input type="number" id="dam" name="remaining">
+      </div>
+
+      <div class="form-group">
+        <label for="paymentMethod"><i class="fas fa-cog"></i> Plan Type</label>
+        <select id="paymentMethod" name="planType">
+          <option value="">Select Plan Type</option>
+          <option value="Automated">Automated</option>
+          <option value="Manual">Manual</option>
+          <option value="Mixed / Hybrid">Mixed / Hybrid</option>
+        </select>
+      </div>
+     <div class="form-group">
+        <label for="emailSubject"><i class="fas fa-heading"></i> Email Subject</label>
+        <input type="text" id="emailSubject" name="emailSubject" placeholder="e.g. Payment Reminder for Invoice #1234">
+      </div>
+
+ 
+      <div class="form-group">
+        <label><i class="fas fa-envelope"></i> Email Template</label>
+
+
+        <div class="placeholder-bar">
+          <span class="placeholder-tag" data-value="{customerName}">
+            <i class="fas fa-user"></i> Customer Name </i>
+          </span>
+          <span class="placeholder-tag" data-value="{dueDate}">
+            <i class="fas fa-calendar"></i> Due Date </i>
+          </span>
+          <span class="placeholder-tag" data-value="{amount}">
+            <i class="fas fa-coins"></i> Amount </i>
+          </span>
+          <span class="placeholder-tag" data-value="{invoiceNo}">
+            <i class="fas fa-file-invoice"></i> Invoice No </i>
+          </span>
+          <span class="placeholder-tag" data-value="{companyName}">
+            <i class="fas fa-building"></i> Company Name </i>
+          </span>
+        </div>
+
+   
+        <textarea id="emailBody" name="emailBody" rows="5"
+          placeholder="Click placeholders above to insert into your message..."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+        <button type="submit" name="plans" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toggle Script -->
+<script>
+   const toggleFormBtn = document.getElementById('toggleFormBtn');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const placeholderTags = document.querySelectorAll('.placeholder-tag');
+  const emailBody = document.getElementById('emailBody');
+
+  toggleFormBtn.addEventListener('click', () => {
+    modalOverlay.style.display = 'flex';
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    modalOverlay.style.display = 'none';
+  });
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) modalOverlay.style.display = 'none';
+  });
+
+  // 🧠 Insert placeholder on click
+  placeholderTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      const value = tag.getAttribute('data-value');
+      const cursorPos = emailBody.selectionStart;
+      const textBefore = emailBody.value.substring(0, cursorPos);
+      const textAfter = emailBody.value.substring(cursorPos);
+      emailBody.value = textBefore + value + textAfter;
+      emailBody.focus();
+    });
+  });
+</script>
+
+<style>
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .form-collection {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    width: 480px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.2s ease-in-out;
+  }
+
+  legend {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  .placeholder-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .placeholder-tag {
+    background: #f1f3f5;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .placeholder-tag:hover {
+    background: #e9ecef;
+  }
+
+  .placeholder-tag i {
+    margin-right: 5px;
+  }
+
+  .placeholder-tag .remove {
+    margin-left: 8px;
+    color: #888;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  .placeholder-tag.active {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+
+  .placeholder-tag.active .remove {
+    color: #fff;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .btn-primary {
+    background: #007bff;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #0069d9;
+  }
+
+  .btn-secondary {
+    background: #ccc;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

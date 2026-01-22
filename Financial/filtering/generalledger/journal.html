@@ -1,0 +1,75 @@
+
+
+  <div class="card">
+ 
+    <div class="card-header">
+      <h2>Filters ⚙️</h2>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="search-box">
+          <input type="text" placeholder="🔍 Search..." id="myInput" onkeyup="applyFilters()">
+        </div>
+      <button class="btn btn-sort" id="sortBtn" type="button" onclick="toggleSort()">⇅ Sort Asc</button>
+
+        <button class="btn btn-filter">⬇ Download</button>
+        
+       
+       
+      </div>
+    </div>
+
+  
+    <div class="filters">
+
+   
+
+  <div class="form-group">
+    <label>Date Range</label>
+    <div class="date-range">
+      <input type="date" id="startDate" onchange="applyFilters() ">
+      <span>–</span>
+      <input type="date" id="endDate" onchange="applyFilters() ">
+    </div>
+    <div style="margin-top:15px;">
+      <button class="btn-reset" onclick="resetFilters()">⟳ Reset Filters</button>
+    
+</div>
+</div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function applyFilters() {
+    const searchInput = document.getElementById("myInput").value.toUpperCase();
+    const minDate = new Date(document.getElementById("startDate").value);
+    const maxDate = new Date(document.getElementById("endDate").value);
+
+    const table = document.getElementById("employeesTable");
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+
+ 
+        const dateCell = new Date(cells[2].textContent);
+
+        const searchMatch = cells.some(td =>
+            (td.textContent || td.innerText || "").toUpperCase().includes(searchInput)
+        );
+
+  
+
+        const dateMatch = (
+            (isNaN(minDate) || dateCell >= minDate) &&
+            (isNaN(maxDate) || dateCell <= maxDate)
+        );
+
+        // ✅ only show row if ALL conditions match
+        const show = searchMatch  && dateMatch;
+        row.style.display = show ? "" : "none";
+    });
+}
+
+  </script>

@@ -1,0 +1,79 @@
+<div class="rounded-xl shadow-sm p-6 mb-6 card">
+    <h3 class="text-lg font-semibold mb-4">Filter Reminders</h3>
+    <form method="GET" class="space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 form-group">
+            <div>
+                <label class="block text-sm font-medium mb-1">Search (Invoice / Plan / Customer)</label>
+                <input type="text" name="search" placeholder="e.g. INV-001 or ABC Corp"
+                       value="<?=htmlspecialchars($_GET['search'] ?? '')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Payment Status</label>
+                <select name="payment_status" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">-- All --</option>
+                    <option value="paid" <?=($_GET['payment_status']??'')==='paid'?'selected':''?>>Paid</option>
+                    <option value="not paid" <?=($_GET['payment_status']??'')==='not paid'?'selected':''?>>Not Paid</option>
+                    <option value="partially paid" <?=($_GET['payment_status']??'')==='partially paid'?'selected':''?>>Partially Paid</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Remarks Status</label>
+                <select name="remarks_status" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">-- All --</option>
+                    <option value="reminder sent" <?=($_GET['remarks_status']??'')==='reminder sent'?'selected':''?>>Reminder Sent</option>
+                    <option value="failed to sent" <?=($_GET['remarks_status']??'')==='failed to sent'?'selected':''?>>Failed to Send</option>
+                    <option value="email not working" <?=($_GET['remarks_status']??'')==='email not working'?'selected':''?>>Email Not Working</option>
+                    <option value="to be sent" <?=($_GET['remarks_status']??'')==='to be sent'?'selected':''?>>To Be Sent</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 form-group">
+            <div>
+                <label class="block text-sm font-medium mb-1">Follow-Up Date From</label>
+                <input type="date" name="date_from" value="<?=htmlspecialchars($_GET['date_from']??'')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Follow-Up Date To</label>
+                <input type="date" name="date_to" value="<?=htmlspecialchars($_GET['date_to']??'')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <div class="flex gap-2">
+                <button type="button" onclick="window.location.href='?'"
+                        class="px-4 py-2 bg-gray-200 rounded">Clear All</button>
+                <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded">Apply Filters</button>
+            </div>
+
+            <!-- Filter Tags -->
+            <div class="flex flex-wrap gap-2 mt-2">
+                <?php
+                $tags = [];
+                if (!empty($_GET['search']))           $tags[] = ['label'=>'Search: '.htmlspecialchars($_GET['search']),           'name'=>'search'];
+                if (!empty($_GET['payment_status']))   $tags[] = ['label'=>'Payment: '.htmlspecialchars($_GET['payment_status']),   'name'=>'payment_status'];
+                if (!empty($_GET['remarks_status']))   $tags[] = ['label'=>'Remarks: '.htmlspecialchars($_GET['remarks_status']),   'name'=>'remarks_status'];
+                if (!empty($_GET['date_from']))        $tags[] = ['label'=>'From: '.htmlspecialchars($_GET['date_from']),        'name'=>'date_from'];
+                if (!empty($_GET['date_to']))          $tags[] = ['label'=>'To: '.htmlspecialchars($_GET['date_to']),            'name'=>'date_to'];
+
+                foreach ($tags as $t):
+                    $url = http_build_query(array_diff_key($_GET, [$t['name']=>'']));
+                    $url = $url ? "?$url" : '?';
+                ?>
+                    <a href="<?= $url ?>" class="inline-flex items-center px-3 py-1 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-full">
+                        <?= $t['label'] ?>
+                        <svg class="w-4 h-4 ml-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </form>
+</div>

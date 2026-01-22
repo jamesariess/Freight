@@ -1,0 +1,112 @@
+<!-- 
+
+  <div class="card">
+ 
+    <div class="card-header">
+      <h2>Filters ⚙️</h2>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="search-box">
+          <input type="text" placeholder="🔍 Search..." id="myInput" onkeyup="applyFilters()">
+        </div>
+      <button class="btn btn-sort" id="sortBtn" type="button" onclick="toggleSort()">⇅ Sort Asc</button>
+
+        <button class="btn btn-filter">⬇ Download</button>
+        
+        
+       
+      </div>
+    </div>
+
+  
+    <div class="filters">
+
+   
+    <div class="form-group">
+    <label>Debit Range</label>
+    <div class="date-range">
+      <input type="number" id="crminAmount" placeholder="Min" onkeyup="applyFilters()">
+      <span>–</span>
+      <input type="number" id="crmaxAmount" placeholder="Max" onkeyup="applyFilters()">
+    </div>
+  </div>
+
+      <div class="form-group">
+    <label>Credit Range</label>
+    <div class="date-range">
+      <input type="number" id="minAmount" placeholder="Min" onkeyup="applyFilters()">
+      <span>–</span>
+      <input type="number" id="maxAmount" placeholder="Max" onkeyup="applyFilters()">
+    </div>
+  </div>
+  </div>
+  <!-- 📅 Date Range -->
+  <div class="form-group">
+    <label>Date Range</label>
+    <div class="date-range">
+      <input type="date" id="startDate" onchange="applyFilters() ">
+      <span>–</span>
+      <input type="date" id="endDate" onchange="applyFilters() ">
+    </div>
+
+</div><div style="margin-top:15px;">
+      <button class="btn-reset" onclick="resetFilters()">⟳ Reset Filters</button>
+</div>
+  
+
+    <!-- Reset -->
+    
+    </div>
+  
+
+<script>
+function applyFilters() {
+    // ✅ Safe get value
+    const searchInput = (document.getElementById("myInput")?.value || "").toUpperCase();
+
+    const min = parseFloat(document.getElementById("minAmount")?.value) || 0;
+    const max = parseFloat(document.getElementById("maxAmount")?.value) || Infinity;
+
+    const cmin = parseFloat(document.getElementById("crminAmount")?.value) || 0;
+    const cmax = parseFloat(document.getElementById("crmaxAmount")?.value) || Infinity;
+
+    const minDateVal = document.getElementById("startDate")?.value;
+    const maxDateVal = document.getElementById("endDate")?.value;
+    const minDate = minDateVal ? new Date(minDateVal) : null;
+    const maxDate = maxDateVal ? new Date(maxDateVal) : null;
+
+    const table = document.getElementById("employeesTable");
+    if (!table) return; // ✅ safe exit
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+
+        const creditVal = parseFloat(cells[3]?.textContent.replace(/[^0-9.-]+/g, "")) || 0;
+        const debitVal  = parseFloat(cells[4]?.textContent.replace(/[^0-9.-]+/g, "")) || 0;
+        const dateCell  = new Date(cells[5]?.textContent);
+
+        // 🔍 search
+        const searchMatch = cells.some(td =>
+            (td.textContent || "").toUpperCase().includes(searchInput)
+        );
+
+        // 💰 amount filters
+        const debitMatch  = (debitVal  >= min  && debitVal  <= max);
+        const creditMatch = (creditVal >= cmin && creditVal <= cmax);
+
+        // 📅 date filter
+        const dateMatch = (
+            (!minDate || dateCell >= minDate) &&
+            (!maxDate || dateCell <= maxDate)
+        );
+
+        // ✅ only show row if all conditions match
+        const show = searchMatch && debitMatch && creditMatch && dateMatch;
+        row.style.display = show ? "" : "none";
+    });
+}
+
+
+</script>
+ -->

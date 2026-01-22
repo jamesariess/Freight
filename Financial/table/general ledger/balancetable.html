@@ -1,0 +1,302 @@
+<style>
+.table-container { max-height: 420px; overflow-y: auto; }
+.sticky-header th { position: sticky; top: 0; background: white; z-index: 10; }
+.balance-positive { color: #16a34a; font-weight: 600; }
+.balance-negative { color: #dc2626; font-weight: 600; }
+.tab-btn-active { @apply bg-indigo-600 text-white; } 
+</style>
+<div>
+
+  <!-- Tabs -->
+  <div class="bg-white rounded-2xl shadow p-4 mb-6 card">
+    <div class="flex gap-2 border-b pb-3">
+      <button class="tab-btn px-3 py-2 rounded-md text-sm bg-indigo-600 text-white" data-tab="ledger">Ledger</button>
+    
+      <button class="tab-btn px-3 py-2 rounded-md text-sm" data-tab="income">Income Statement</button>
+      <button class="tab-btn px-3 py-2 rounded-md text-sm" data-tab="balance">Balance Sheet</button>
+    </div>
+<div class=" form-group ">
+    <div class="mt-4 ">
+   
+      <div id="tab-ledger" class="tab-content ">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
+      
+          <div >
+            <div class="flex items-center justify-between mb-4 card ">
+              <h3 class="font-semibold text-lg">Account Ledger</h3>
+              <form method="post" class="flex items-center gap-2">
+                <!-- keep period_id in post -->
+                <input type="hidden" name="period_id" value="<?php echo safe($selectedPeriodId); ?>">
+                <label class="text-sm text-gray-600">Account</label>
+                <select name="accountName" onchange="this.form.submit()" class="p-2 border border-gray-200 rounded-lg bg-white text-sm">
+                  <option value="all" <?php echo $selectedAccountName === 'all' ? 'selected' : ''; ?>>All Accounts</option>
+                  <?php foreach ($accountNames as $a): ?>
+                    <option value="<?php echo safe($a); ?>" <?php echo ($selectedAccountName === $a) ? 'selected' : ''; ?>><?php echo safe($a); ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </form>
+            </div>
+
+            <div class="table-section" id="invoiceTableSection">
+              <table id="employeesTable">
+                <thead >
+                  <tr>
+                    <th >Date</th>
+                    <th >Account</th>
+                    <th >Debit</th>
+                    <th >Credit</th>
+                    <th >Running</th>
+                  </tr>
+                </thead>
+                <tbody id="employeesTableBody">
+                  <?php if (!empty($journalDetails)): 
+                      $prevAccountId = null;
+                      $running = 0;
+                      foreach ($journalDetails as $idx => $row):
+                          $acctType = strtolower(trim($row['accountType']));
+                          // determine change (assume amounts stored as floats)
+                          $change = in_array($acctType, ['assets','asset','expenses','expense']) ? ((float)$row['debit'] - (float)$row['credit']) : ((float)$row['credit'] - (float)$row['debit']);
+                          // reset running when account changes
+                          if ($prevAccountId !== $row['accountName']) { $running = 0; $prevAccountId = $row['accountName']; }
+                          $running += $change;
+                  ?>
+                    <tr >
+                      <td ><?php echo safe(date('M d, Y', strtotime($row['date']))); ?></td>
+                      <td ><?php echo safe($row['accountName']); ?></td>
+                      <td class=" <?php echo (float)$row['debit']>0 ? 'balance-positive' : ''; ?>"><?php echo (float)$row['debit']? number_format((float)$row['debit'],2): ''; ?></td>
+                      <td class=" <?php echo (float)$row['credit']>0 ? 'balance-negative' : ''; ?>"><?php echo (float)$row['credit']? number_format((float)$row['credit'],2): ''; ?></td>
+                      <td class=" font-mono"><?php echo number_format($running,2); ?></td>
+                    </tr>
+                  <?php endforeach; else: ?>
+                    <tr><td colspan="5" class="py-8 text-center text-gray-500">No Records Found</td></tr>
+                  <?php endif; ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Trial Balance -->
+          <div >
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-semibold text-lg">Trial Balance</h3>
+              <div class="text-sm text-gray-500">As of <?php echo safe($selectedPeriodLabel); ?></div>
+            </div>
+
+            <div class="table-section" id="invoiceTableSection">
+              <table >
+                <thead >
+                  <tr>
+                    <th class="px-4 py-3">Account</th>
+                    <th class="px-4 py-3 text-right">Debit</th>
+                    <th class="px-4 py-3 text-right">Credit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    $totD = 0; $totC = 0;
+                    foreach ($tbRows as $r):
+                      $acctType = strtolower(trim($r['accounType']));
+                      $debit = (float)$r['total_debit'];
+                      $credit = (float)$r['total_credit'];
+                      // determine presentation: for trial balance we show totals separated
+                      // but many systems normalize sign — show debit or credit column depending on net
+                      if (in_array($acctType, ['assets','asset','expenses','expense'])) {
+                          $net = $debit - $credit;
+                          $d = $net > 0 ? $net : 0;
+                          $c = $net < 0 ? abs($net) : 0;
+                      } else {
+                          $net = $credit - $debit;
+                          $c = $net > 0 ? $net : 0;
+                          $d = $net < 0 ? abs($net) : 0;
+                      }
+                      $totD += $d; $totC += $c;
+                  ?>
+                    <tr class="border-b hover:bg-white">
+                      <td class="px-4 py-3"><?php echo safe($r['accountName']); ?></td>
+                      <td class="px-4 py-3 text-right font-mono"><?php echo $d? number_format($d,2): ''; ?></td>
+                      <td class="px-4 py-3 text-right font-mono"><?php echo $c? number_format($c,2): ''; ?></td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                  <tr class="font-semibold border-t">
+                    <td class="px-4 py-3">Totals</td>
+                    <td class="px-4 py-3 text-right"><?php echo number_format($totD,2); ?></td>
+                    <td class="px-4 py-3 text-right"><?php echo number_format($totC,2); ?></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Income Statement -->
+      <div id="tab-income" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class=" rounded-xl p-4">
+            <h3 class="font-semibold mb-3">Income Statement — <?php echo safe($selectedPeriodLabel); ?></h3>
+            <div class="table-container">
+              <table class="table-section" id="invoiceTableSection">
+                <thead >
+                  <tr><th class="px-4 py-3">Account</th><th class="px-4 py-3 text-right">Amount</th></tr>
+                </thead>
+                <tbody>
+                  <?php
+                    // list revenues first, then expenses
+                    foreach ($isRows as $r):
+                      $atype = strtolower($r['acctype']);
+                      $debit = (float)$r['total_debit']; $credit=(float)$r['total_credit'];
+                      if (strpos($atype,'rev')!==false || strpos($atype,'inc')!==false) {
+                          $amt = $credit - $debit; // revenue positive
+                  ?>
+                    <tr class="border-b"><td class="px-4 py-3"><?php echo safe($r['accountName']); ?></td><td class="px-4 py-3 text-right font-mono"><?php echo number_format($amt,2); ?></td></tr>
+                  <?php } endforeach; ?>
+
+                  <tr class=" font-semibold">
+                    <td class="px-4 py-3">Total Revenue</td>
+                    <td class="px-4 py-3 text-right"><?php echo number_format($totalRevenue,2); ?></td>
+                  </tr>
+
+                  <?php foreach ($isRows as $r):
+                      $atype = strtolower($r['acctype']);
+                      if (strpos($atype,'exp')!==false) {
+                          $debit = (float)$r['total_debit']; $credit=(float)$r['total_credit'];
+                          $amt = $debit - $credit;
+                  ?>
+                    <tr class="border-b"><td class="px-4 py-3"><?php echo safe($r['accountName']); ?></td><td class="px-4 py-3 text-right font-mono"><?php echo number_format($amt,2); ?></td></tr>
+                  <?php } endforeach; ?>
+
+                  <tr class=" font-semibold">
+                    <td class="px-4 py-3">Total Expenses</td>
+                    <td class="px-4 py-3 text-right"><?php echo number_format($totalExpenses,2); ?></td>
+                  </tr>
+
+                  <tr class="font-bold">
+                    <td class="px-4 py-3">Net Income</td>
+                    <td class="px-4 py-3 text-right"><?php echo number_format($netIncome,2); ?></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class=" rounded-xl p-4 ">
+            <h3 class="font-semibold mb-3">Summary</h3>
+            <div class="space-y-3">
+              <div class="p-3  rounded-lg">
+                <div class="text-sm text-gray-500">Total Revenue</div>
+                <div class="text-xl font-semibold"><?php echo fmtMoney($totalRevenue); ?></div>
+              </div>
+              <div class="p-3  rounded-lg">
+                <div class="text-sm text-gray-500">Total Expenses</div>
+                <div class="text-xl font-semibold"><?php echo fmtMoney($totalExpenses); ?></div>
+              </div>
+              <div class="p-3 rounded-lg <?php echo $netIncome>=0 ? 'bg-emerald-50' : 'bg-red-50'; ?>">
+                <div class="text-sm text-gray-500">Net Income</div>
+                <div class="text-xl font-semibold"><?php echo fmtMoney($netIncome); ?></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Balance Sheet -->
+      <div id="tab-balance" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class=" rounded-xl p-4">
+            <h3 class="font-semibold mb-3">Balance Sheet — <?php echo safe($selectedPeriodLabel); ?></h3>
+            <div class="table-container">
+              <table class="table-section" id="invoiceTableSection">
+                <thead >
+                  <tr><th class="px-4 py-3">Account</th><th class="px-4 py-3 text-right">Amount</th></tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($bsRows as $r):
+                      $atype = strtolower($r['acctype']);
+                      $debit = (float)$r['total_debit']; $credit=(float)$r['total_credit'];
+                      if (strpos($atype,'asset')!==false) {
+                          $amt = $debit - $credit;
+                  ?>
+                    <tr class="border-b"><td class="px-4 py-3"><?php echo safe($r['accountName']); ?></td><td class="px-4 py-3 text-right font-mono"><?php echo number_format($amt,2); ?></td></tr>
+                  <?php } endforeach; ?>
+                  <tr class="font-semibold "><td class="px-4 py-3">Total Assets</td><td class="px-4 py-3 text-right"><?php echo number_format($bsAssets,2); ?></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class=" rounded-xl p-4">
+            <h3 class="font-semibold mb-3">Liabilities & Equity</h3>
+            <div class="table-container">
+              <table class="table-section" id="invoiceTableSection">
+                <thead class="">
+                  <tr><th class="px-4 py-3">Account</th><th class="px-4 py-3 text-right">Amount</th></tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($bsRows as $r):
+                      $atype = strtolower($r['acctype']);
+                      $debit = (float)$r['total_debit']; $credit=(float)$r['total_credit'];
+                      if (strpos($atype,'liabil')!==false) {
+                          $amt = $credit - $debit;
+                  ?>
+                    <tr class="border-b"><td class="px-4 py-3"><?php echo safe($r['accountName']); ?></td><td class="px-4 py-3 text-right font-mono"><?php echo number_format($amt,2); ?></td></tr>
+                  <?php } endforeach; ?>
+
+                  <tr class="font-semibold "><td class="px-4 py-3">Total Liabilities</td><td class="px-4 py-3 text-right"><?php echo number_format($bsLiabilities,2); ?></td></tr>
+
+                  <?php foreach ($bsRows as $r):
+                      $atype = strtolower($r['acctype']);
+                      if (!strpos($atype,'asset') && !strpos($atype,'liabil')) {
+                          $debit = (float)$r['total_debit']; $credit=(float)$r['total_credit'];
+                          $amt = $credit - $debit;
+                  ?>
+                    <tr class="border-b"><td class="px-4 py-3"><?php echo safe($r['accountName']); ?></td><td class="px-4 py-3 text-right font-mono"><?php echo number_format($amt,2); ?></td></tr>
+                  <?php } endforeach; ?>
+
+                  <tr class="font-semibold "><td class="px-4 py-3">Total Equity (incl. Net Income)</td><td class="px-4 py-3 text-right"><?php echo number_format($bsEquity,2); ?></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 text-sm text-gray-600">Assets should equal Liabilities + Equity: <?php echo number_format($bsAssets,2) . ' == ' . number_format($bsLiabilities + $bsEquity,2); ?></div>
+      </div>
+
+    </div>
+  </div>
+
+ </div>
+</div>
+
+<script>
+  // Tab behavior
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = {
+    ledger: document.getElementById('tab-ledger'),
+    trial: document.getElementById('tab-ledger'), // trial is inside ledger tab section view
+    income: document.getElementById('tab-income'),
+    balance: document.getElementById('tab-balance')
+  };
+
+  function activateTab(name, btn) {
+    // hide all
+    document.querySelectorAll('[id^=\"tab-\"]').forEach(el => el.classList.add('hidden'));
+    // show requested
+    const id = 'tab-' + name;
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('hidden');
+
+    // style buttons
+    tabs.forEach(t => t.classList.remove('bg-indigo-600','text-white'));
+    if (btn) btn.classList.add('bg-indigo-600','text-white');
+  }
+
+  tabs.forEach(t => {
+    t.addEventListener('click', () => activateTab(t.dataset.tab, t));
+  });
+
+ 
+  activateTab('ledger', document.querySelector('.tab-btn[data-tab=\"ledger\"]'));
+</script>

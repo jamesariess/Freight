@@ -1,0 +1,121 @@
+<div class="p-2">
+  <h1 class="text-2xl font-semibold mb-6 ">Archived Records</h1>
+
+
+  <div class="flex flex-col md:flex-row gap-4 mb-6 items-center form-group">
+    <select id="tableFilter" class="border rounded-lg px-3 py-2 w-full md:w-1/3 focus:ring focus:ring-blue-300 ">
+      <option value="all">All Tables</option>
+    </select>
+    <input id="searchInput" type="text" placeholder="Search records..." 
+      class="border rounded-lg px-3 py-2 w-full md:w-1/3 focus:ring focus:ring-blue-300 ">
+    <button onclick="loadArchives()" 
+      class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+      Apply Filter
+    </button>
+  </div>
+
+  <div id="content" class="text-center text-gray-500 py-8 text-lg">Loading archives...</div>
+</div>
+
+<script>
+async function loadArchives() {
+  const container = document.getElementById('content');
+  const tableFilter = document.getElementById('tableFilter').value;
+  const search = document.getElementById('searchInput').value.trim();
+  container.innerHTML = '<div class="text-center text-gray-500 py-8 text-lg">Loading archives...</div>';
+
+  try {
+    const res = await fetch(`../../crud/system/archive.php?table=${tableFilter}&search=${encodeURIComponent(search)}`);
+    const json = await res.json();
+    if (json.status !== 'success') throw new Error(json.message);
+
+    let html = '';
+    const data = json.data;
+
+    if (Object.keys(data).length === 0) {
+      container.innerHTML = '<p class="">No archived data found.</p>';
+      return;
+    }
+
+    for (const [table, rows] of Object.entries(data)) {
+      if (!rows.length) continue;
+
+      const columns = Object.keys(rows[0]).filter(col => col.toLowerCase() !== 'archive');
+
+      html += `
+      <div class=" shadow rounded-xl mb-8 p-5">
+        <h2 class="text-xl font-semibold mb-3 ">${table}</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-left  rounded-lg">
+            <thead class="bg-gray-800 text-white">
+              <tr>${columns
+                .map(col => `<th class="px-4 py-2 font-medium">${col}</th>`)
+                .join('')}
+                <th class="px-4 py-2 font-medium">Action</th></tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+      `;
+
+      rows.forEach(row => {
+        const keyName = Object.keys(row).find(k => k.toLowerCase().includes('id') || k.toLowerCase().includes('no'));
+        html += `<tr>`;
+        // Only include values for non-'archive' columns
+        for (const col of columns) {
+          html += `<td class="px-4 py-2 text-gray-700">${row[col]}</td>`;
+        }
+        html += `<td class="px-4 py-2">
+                  <button class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 text-xs transition" 
+                    onclick="restoreRecord('${table}', '${row[keyName]}')">
+                    Restore
+                  </button>
+                </td></tr>`;
+      });
+
+      html += `</tbody></table></div></div>`;
+    }
+
+    container.innerHTML = html;
+  } catch (err) {
+    container.innerHTML = `<p class="text-red-600 font-medium">Error: ${err.message}</p>`;
+  }
+}
+
+async function restoreRecord(table, key) {
+  if (!confirm('Restore this record?')) return;
+
+  try {
+    const res = await fetch('../../crud/system/archive.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ table, key_value: key })
+    });
+    const json = await res.json();
+
+    if (json.status === 'success') {
+      alert('✅ ' + json.message);
+      loadArchives();
+    } else {
+      alert('❌ ' + json.message);
+    }
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+}
+
+async function loadTableFilter() {
+  const res = await fetch('../../crud/system/archive.php?listTables=true');
+  const json = await res.json();
+  const select = document.getElementById('tableFilter');
+  if (json.status === 'success') {
+    json.tables.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = t;
+      select.appendChild(opt);
+    });
+  }
+}
+
+loadTableFilter();
+loadArchives();
+</script>

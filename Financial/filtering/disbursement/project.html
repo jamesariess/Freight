@@ -1,0 +1,58 @@
+<!-- <div class="card">
+    <div class="card-header">
+        <h2>Filters ⚙️</h2>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <div class="search-box">
+                <input type="text" placeholder="🔍 Search Project..." id="myInput" onkeyup="applyFilters()">
+            </div>
+            <button class="btn btn-sort" id="sortBtn" type="button" onclick="toggleSort()">⇅ Sort Asc</button>
+            <button class="btn btn-filter">⬇ Download</button>
+            <button id="toggleFormBtn" class="btn btn-add">+ Add New</button>
+        </div>
+    </div>
+    
+    <div class="filters">
+        <div class="form-group">
+            <label>Department</label>
+            <select id="departmentFilter" onchange="applyFilters()">
+                <option>All</option>
+                </select>
+        </div>
+    </div>
+    
+    <div style="margin-top:15px;">
+        <button class="btn-reset" onclick="resetFilters()">⟳ Reset Filters</button>
+    </div>
+</div>
+
+<script>
+    function applyFilters() {
+        const searchInput = document.getElementById("myInput").value.toUpperCase();
+        const departmentFilter = document.getElementById("departmentFilter").value.toUpperCase();
+
+        const table = document.getElementById("employeesTable"); // Assuming this is your table ID
+        const tbody = table.tBodies[0];
+        const rows = Array.from(tbody.rows);
+
+        rows.forEach(row => {
+            const cells = Array.from(row.cells);
+            
+            // Adjust this cell index based on your table structure
+            const departmentCell = cells[3].textContent.toUpperCase(); // Assuming department is in the 4th column
+
+            const searchMatch = cells.some(td =>
+                (td.textContent || td.innerText || "").toUpperCase().includes(searchInput)
+            );
+            const departmentMatch = departmentFilter === "ALL" || departmentCell === departmentFilter;
+            
+            const show = searchMatch && departmentMatch;
+            row.style.display = show ? "" : "none";
+        });
+    }
+
+    function resetFilters() {
+        document.getElementById("myInput").value = "";
+        document.getElementById("departmentFilter").value = "All";
+        applyFilters();
+    }
+</script> -->

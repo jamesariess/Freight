@@ -1,0 +1,5462 @@
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761085938
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761085940
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761085940
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761085948
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761085948
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761085950
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086175
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086203
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086203
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086255
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086277
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086277
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086338
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+        )
+
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+        )
+
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+        )
+
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+        )
+
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+        )
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+is_admin check for user_id 4: true
+
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086953
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086958
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761086958
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087007
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087007
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087014
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087014
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087341
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087341
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087677
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087677
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087719
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087719
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087775
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087777
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087839
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087839
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087881
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087881
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087931
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761087931
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088775
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088775
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088816
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088816
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088832
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088832
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088945
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088945
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088979
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088979
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088994
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761088994
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089007
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089007
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089021
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089021
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089048
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089048
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089069
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089069
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089098
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089098
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089111
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089111
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089113
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089113
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089116
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089116
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089116
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089116
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089116
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089138
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089139
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089139
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089142
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089143
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089143
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089144
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089159
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089160
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089161
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089235
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089235
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089274
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089274
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089284
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089286
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089299
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089299
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089318
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089318
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089331
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089331
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089358
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089358
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089455
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089455
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089459
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089460
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089471
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089472
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089472
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089512
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089512
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089513
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089513
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089520
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089520
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089520
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089521
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089523
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089523
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089523
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089523
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089523
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089524
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089524
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089524
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089525
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089532
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089533
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089533
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089541
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089541
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089558
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089559
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089569
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761084547
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761089569
+    [csrf_token] => be7cc1afe80203f627b04dc3fbc92c5ad5f6169c65c3ae42707519205df045da
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761130768
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761140535
+    [rate] => Array
+        (
+            [::1] => Array
+                (
+                    [count] => 2
+                    [time] => 1761138193
+                )
+
+        )
+
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761130768
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761140536
+    [rate] => Array
+        (
+            [::1] => Array
+                (
+                    [count] => 2
+                    [time] => 1761138193
+                )
+
+        )
+
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761325338
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761325707
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761325338
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761325707
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761400922
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761400922
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401085
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401085
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401177
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401177
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401207
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401207
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401225
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401225
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401235
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401235
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401488
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401488
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401593
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761401593
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761402233
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1761398680
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1761402233
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1762953365
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1762953578
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1762953365
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1762953578
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765153482
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765153667
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765153482
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765153667
+)
+
+is_admin check for user_id 4: true
+
+
+
+
+
+
+
+
+
+
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790278
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790278
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790292
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790292
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790297
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790297
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790299
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790299
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790336
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790336
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790346
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790346
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790362
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790362
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790367
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790367
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790394
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790394
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790409
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790409
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790414
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790414
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790418
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790418
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790419
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790419
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790450
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790450
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790479
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790479
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790481
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790481
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790481
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790481
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790481
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790481
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790482
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790483
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790483
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790483
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790483
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790483
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790483
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790483
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790483
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790489
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790489
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790506
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790506
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790509
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790509
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790523
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790523
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790526
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790526
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790540
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790541
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790592
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790592
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790613
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790613
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790739
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790739
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790754
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790754
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790758
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790758
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790761
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790761
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790780
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790780
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790823
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790823
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790825
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790825
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790826
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790826
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790826
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790826
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790826
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790826
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790826
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790826
+)
+
+is_admin check for user_id 4: true
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790842
+)
+
+Array
+(
+    [otp_requests] => Array
+        (
+            [jamesconcepcion122@gmail.com] => Array
+                (
+                    [0] => 1765789835
+                )
+
+        )
+
+    [lockout_level] => Array
+        (
+            [4] => 0
+        )
+
+    [user_id] => 4
+    [email] => jamesconcepcion122@gmail.com
+    [last_activity] => 1765790842
+)
+
+is_admin check for user_id 4: true

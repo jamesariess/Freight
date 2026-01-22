@@ -1,0 +1,54 @@
+
+
+  <div class="card">
+ 
+    <div class="card-header">
+      <h2>Filters ⚙️</h2>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="search-box">
+          <input type="text" placeholder="🔍 Search..." id="myInput" onkeyup="applyFilters()">
+        </div>
+      <button class="btn btn-sort" id="sortBtn" type="button" onclick="toggleSort()">⇅ Sort Asc</button>
+
+        <button class="btn btn-filter" onclick="openDownloadModal()">⬇ Download</button>
+        
+        <button id="toggleFormBtn" class="btn btn-add">+ Add New</button>
+       
+      </div>
+    </div>
+
+  
+
+
+  
+
+  </div>
+
+  <script>
+    function applyFilters() {
+    const searchInput = document.getElementById("myInput").value.toUpperCase();
+
+
+    const table = document.getElementById("employeesTable");
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+
+ 
+        const dateCell = new Date(cells[2].textContent);
+
+        const searchMatch = cells.some(td =>
+            (td.textContent || td.innerText || "").toUpperCase().includes(searchInput)
+        );
+
+  
+
+        // ✅ only show row if ALL conditions match
+        const show = searchMatch ;
+        row.style.display = show ? "" : "none";
+    });
+}
+
+  </script>

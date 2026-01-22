@@ -1,0 +1,312 @@
+<div class="rounded-xl shadow-sm p-6 mb-6 card">
+    <h3 class="text-lg font-semibold mb-4">Filter Disputes</h3>
+    <form method="GET" class="space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 form-group">
+            <div>
+                <label class="block text-sm font-medium mb-1">Search (Invoice / Customer / Issue)</label>
+                <input type="text" name="search" placeholder="e.g. INV-001 or John"
+                       value="<?=htmlspecialchars($_GET['search'] ?? '')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-1">Status</label>
+                <select name="status" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">-- All Statuses --</option>
+                    <option value="Open"     <?=($_GET['status']??'')==='Open'?'selected':''?>>Open</option>
+                    <option value="Resolved" <?=($_GET['status']??'')==='Resolved'?'selected':''?>>Resolved</option>
+                    <option value="Escalated"<?=($_GET['status']??'')==='Escalated'?'selected':''?>>Escalated</option>
+                     <option value="Under Review"<?=($_GET['status']??'')==='Under Review'?'selected':''?>>Under Review</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 form-group">
+            <div>
+                <label class="block text-sm font-medium mb-1">Dispute Date From</label>
+                <input type="date" name="date_from" value="<?=htmlspecialchars($_GET['date_from']??'')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Dispute Date To</label>
+                <input type="date" name="date_to" value="<?=htmlspecialchars($_GET['date_to']??'')?>"
+                       class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <div class="flex gap-2">
+                <button type="button" onclick="window.location.href='?'"
+                        class="px-4 py-2 bg-gray-200 rounded">Clear All</button>
+                <button type="submit"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded">Apply Filters</button>
+            </div>
+
+            <!-- Filter Tags -->
+            <div class="flex flex-wrap gap-2 mt-2 form-group">
+                <?php
+                $tags = [];
+                if (!empty($_GET['search']))     $tags[] = ['label'=>'Search: '.htmlspecialchars($_GET['search']),     'name'=>'search'];
+                if (!empty($_GET['status']))     $tags[] = ['label'=>'Status: '.htmlspecialchars($_GET['status']),    'name'=>'status'];
+                if (!empty($_GET['date_from']))  $tags[] = ['label'=>'From: '.htmlspecialchars($_GET['date_from']),  'name'=>'date_from'];
+                if (!empty($_GET['date_to']))    $tags[] = ['label'=>'To: '.htmlspecialchars($_GET['date_to']),      'name'=>'date_to'];
+
+                foreach ($tags as $t):
+                    $url = http_build_query(array_diff_key($_GET, [$t['name']=>'']));
+                    $url = $url ? "?$url" : '?';
+                ?>
+                    <a href="<?= $url ?>" class="inline-flex items-center px-3 py-1 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-full">
+                        <?= $t['label'] ?>
+                        <svg class="w-4 h-4 ml-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!----------------------------- TABLE SECTION ----------------------------->
+<div class="table-section" id="invoiceTableSection">
+    <h3 class="text-xl font-semibold mb-4">Dispute Report</h3>
+
+    <!-- Rows per page + counter -->
+    <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center space-x-2 form-group">
+            <label for="rowsPerPage" class="text-sm">Rows per page:</label>
+            <select id="rowsPerPage"
+                    onchange="window.location.href='?<?=http_build_query(array_merge($_GET,['limit'=>'']))?>'+this.value"
+                    class="border p-1 rounded text-sm">
+                <option value="5"  <?= $limit==5  ?'selected':'' ?>>5</option>
+                <option value="10" <?= $limit==10 ?'selected':'' ?>>10</option>
+                <option value="25" <?= $limit==25 ?'selected':'' ?>>25</option>
+                <option value="50" <?= $limit==50 ?'selected':'' ?>>50</option>
+            </select>
+        </div>
+        <div class="text-sm">
+            Showing <?= $offset+1 ?> to <?= min($offset+$limit, $totalRows) ?> of <?= $totalRows ?> entries
+        </div>
+    </div>
+
+    <table id="employeesTable" class="min-w-full border-collapse ">
+        <thead class="bg-gray-50">
+            <tr>
+                <th>Dispute ID</th>
+                <th>Invoice</th>
+                <th>Raised By</th>
+                <th>Dispute Date</th>
+                <th>Issue</th>
+                <th>Resolution</th>
+                <th>Documents</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="employeesTableBody">
+            <?php if (!empty($disputes)): foreach ($disputes as $row): ?>
+                <tr class="hover:bg-gray-50">
+                    <td ><?=htmlspecialchars($row['Dispute_ID'])?></td>
+                    <td ><?=htmlspecialchars($row['reference_no'])?></td>
+                    <td ><?=htmlspecialchars($row['name'])?></td>
+                    <td ><?=htmlspecialchars($row['formatted_date'])?></td>
+                    <td class="border border-gray-300 px-3 py-2 max-w-xs truncate" title="<?=htmlspecialchars($row['Issue'])?>">
+                        <?=htmlspecialchars(strlen($row['Issue']) > 50 ? substr($row['Issue'], 0, 50).'...' : $row['Issue'])?>
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 max-w-xs truncate" title="<?=htmlspecialchars($row['Resolution'])?>">
+                        <?=htmlspecialchars(strlen($row['Resolution']) > 50 ? substr($row['Resolution'], 0, 50).'...' : $row['Resolution'])?>
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 text-center">
+                        <?php if (!empty($row['doc'])): 
+                            $filename = basename($row['doc']);
+                            $filepath = "/financial/uploads/dispute/" . $filename;
+                        ?>
+                            <a href="<?=htmlspecialchars($filepath)?>" target="_blank">
+                                <img src="<?=htmlspecialchars($filepath)?>" alt="Doc" width="60" height="60" class="rounded shadow object-cover">
+                            </a>
+                        <?php else: ?>
+                            No File
+                        <?php endif; ?>
+                    </td>
+                    <td >
+                        <span class="px-2 py-1 text-xs font-medium rounded-full
+                            <?= $row['Status'] === 'Open' ? 'bg-yellow-100 text-yellow-800' : '' ?>
+                            <?= $row['Status'] === 'Resolved' ? 'bg-green-100 text-green-800' : '' ?>
+                            <?= $row['Status'] === 'Escalated' ? 'bg-red-100 text-red-800' : '' ?>">
+                            <?=htmlspecialchars($row['Status'])?>
+                        </span>
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 text-center">
+                        <div class="flex justify-center space-x-2">
+
+                            <!-- VIEW / UPDATE -->
+                            <button class="flex items-center px-3 h-9 rounded-md bg-white border border-gray-200 text-green-700 hover:border-green-700 hover:bg-green-50 group"
+                                    onclick="openViewModal(
+                                        '<?= $row['Dispute_ID'] ?>',
+                                        '<?= htmlspecialchars(addslashes($row['reference_no']), ENT_QUOTES) ?>',
+                                        '<?= htmlspecialchars(addslashes($row['name']), ENT_QUOTES) ?>',
+                                        '<?= htmlspecialchars(addslashes($row['formatted_date']), ENT_QUOTES) ?>',
+                                        '<?= htmlspecialchars(addslashes($row['Issue']), ENT_QUOTES) ?>',
+                                        '<?= htmlspecialchars(addslashes($row['Resolution']), ENT_QUOTES) ?>',
+                                        '<?= htmlspecialchars(addslashes($row['Status']), ENT_QUOTES) ?>'
+                                    )">
+                                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 20l-4 1 1-4 9.586-9.586z"/>
+                                </svg>
+                               
+                            </button>
+
+                            <!-- ARCHIVE -->
+                            <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-gray-600 hover:border-gray-600 hover:bg-gray-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-0 group"
+                                    onclick="openArchiveModal('<?= $row['Dispute_ID'] ?>')">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M20 7H4m16 0a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2m16 0V5a2 2 0 00-2-2H6a2 2 0 00-2 2v2m6 8h4"/>
+                                </svg>
+                   
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; else: ?>
+                <tr><td colspan="9" class="text-center py-4 text-gray-500">No disputes found.</td></tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+
+    <!----------------------------- PAGINATION ----------------------------->
+    <div class="flex justify-between items-center mt-4">
+        <div class="text-sm">Page <?= $page ?> of <?= $totalPages ?></div>
+        <div class="flex space-x-1">
+            <?php if ($page > 1): ?>
+                <a href="<?= buildPaginatedUrl($page-1) ?>" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">Previous</a>
+            <?php else: ?>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">Previous</span>
+            <?php endif; ?>
+
+            <?php
+            $start = max(1, $page-2);
+            $end   = min($totalPages, $start+4);
+            for ($i=$start; $i<=$end; $i++):
+                if ($i == $page): ?>
+                    <span class="px-3 py-1 bg-blue-500 text-white rounded text-sm"><?= $i ?></span>
+                <?php else: ?>
+                    <a href="<?= buildPaginatedUrl($i) ?>" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"><?= $i ?></a>
+                <?php endif;
+            endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <a href="<?= buildPaginatedUrl($page+1) ?>" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">Next</a>
+            <?php else: ?>
+                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded text-sm cursor-not-allowed">Next</span>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<div id="viewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'viewModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">✍️ View / Update Dispute</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('viewModal')">&times;</button>
+    </div>
+
+    <form method="post" id="updateResolutionForm" class="space-y-4">
+      <input type="hidden" name="Dispute_ID" id="viewDisputeID">
+
+      <div>
+        <label class="block text-sm mb-1">Invoice:</label>
+        <input type="text" id="viewInvoice" class="w-full border border-gray-300 p-2 rounded-lg bg-gray-50" readonly>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm mb-1">Raised By:</label>
+          <input type="text" id="viewRaisedBy" class="w-full border border-gray-300 p-2 rounded-lg bg-gray-50" readonly>
+        </div>
+        <div>
+          <label class="block text-sm mb-1">Dispute Date:</label>
+          <input type="text" id="viewDate" class="w-full border border-gray-300 p-2 rounded-lg bg-gray-50" readonly>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">Issue:</label>
+        <textarea id="viewIssue" class="w-full border border-gray-300 p-2 rounded-lg bg-gray-50" rows="3" readonly></textarea>
+      </div>
+
+      <div class="border-t pt-4">
+        <label for="Resolution" class="block text-sm mb-1">Resolution:</label>
+        <textarea name="Resolution" id="viewResolution" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500" rows="3" required></textarea>
+      </div>
+
+      <div>
+        <label for="Status" class="block text-sm mb-1">Status:</label>
+        <select name="Status" id="viewStatus" class="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="Closed">Closed</option>
+          <option value="Resolved">Resolved</option>
+            <option value="Under Review">Under Review</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+
+      <div class="flex justify-end space-x-3 pt-4">
+        <button type="button" onclick="closeModal('viewModal')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+        <button type="submit" name="updateDispute" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="archiveModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'archiveModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">🗃️ Archive Dispute</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('archiveModal')">&times;</button>
+    </div>
+
+    <div class="text-center mb-6">
+      <svg class="mx-auto mb-4 text-red-500 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      </svg>
+      <p class="text-lg text-gray-700">Are you sure you want to archive this dispute record?</p>
+      <p class="text-red-600 font-semibold mt-1">This action cannot be undone.</p>
+    </div>
+
+    <form method="post">
+      <input type="hidden" name="archive_DisputeID" id="archiveDisputeID">
+      <div class="flex justify-end space-x-3 pt-4">
+        <button type="button" onclick="closeModal('archiveModal')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700" name="archive">Yes, Archive</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function openViewModal(id, invoice, name, date, issue, resolution, status) {
+  document.getElementById('viewDisputeID').value = id;
+  document.getElementById('viewInvoice').value = invoice;
+  document.getElementById('viewRaisedBy').value = name;
+  document.getElementById('viewDate').value = date;
+  document.getElementById('viewIssue').value = issue;
+  document.getElementById('viewResolution').value = resolution;
+  document.getElementById('viewStatus').value = status;
+  document.getElementById('viewModal').classList.remove('hidden');
+}
+
+function openArchiveModal(id) {
+  document.getElementById('archiveDisputeID').value = id;
+  document.getElementById('archiveModal').classList.remove('hidden');
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.add('hidden');
+}
+
+function outsideClick(event, modalId) {
+  if (event.target.id === modalId) {
+    closeModal(modalId);
+  }
+}
+</script>

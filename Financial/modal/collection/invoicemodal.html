@@ -1,0 +1,81 @@
+<button id="toggleFormBtn" class="btn toggle-form-btn">Add Invoice</button>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="form-collection" id="collectionform">
+    <legend>Invoice</legend>
+    <form>
+      <input type="hidden" id="RequestId">
+      <fieldset>
+        <div class="form-group">
+          <label for="requestTitle">Request Title</label>
+          <input type="text" id="requestTitle" name="requestTitle" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dam">Customer name</label>
+          <input type="text" id="dam">
+        </div>
+
+          <div class="form-group">
+          <label for="dam">Issue Date</label>
+          <input type="date" id="dam">
+        </div>
+
+          <div class="form-group">
+          <label for="dam">Due Date</label>
+          <input type="date" id="dam">
+        </div>
+
+                  <div class="form-group">
+          <label for="dam">Amount</label>
+          <input type="number" id="dam">
+        </div>
+                  <div class="form-group">
+          <label for="dam">Balance Due</label>
+          <input type="number" id="dam">
+        </div>
+                  <div class="form-group">
+          <label for="dam">Reference Number</label>
+          <input type="number" id="dam">
+        </div>
+
+        <div class="form-group">
+          <label for="paymentMethod">Status</label>
+          <select id="paymentMethod">
+            <option value="">Select Payment Status</option>
+            <option value="">Paid</option>
+            <option value="">Unpaids</option>
+
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Request</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<script>
+  const toggleFormBtn = document.getElementById('toggleFormBtn');
+const modalOverlay = document.getElementById('modalOverlay');
+const cancelBtn = document.getElementById('cancelBtn');
+
+toggleFormBtn.addEventListener('click', () => {
+  modalOverlay.style.display = 'flex';
+});
+
+cancelBtn.addEventListener('click', () => {
+  modalOverlay.style.display = 'none';
+});
+
+// Optional: Close modal when clicking outside
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) {
+    modalOverlay.style.display = 'none';
+  }
+});
+
+</script>

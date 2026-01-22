@@ -1,0 +1,439 @@
+<style>
+    .status-badge {
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: inline-block;
+    }
+    .status-paid { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
+    .status-approved { background-color: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+    .status-reject { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .status-verified { background-color: #ffedd5; color: #9a3412; border: 1px solid #fdba74; }
+    .status-default { background-color: #e5e7eb; color: #374151; border: 1px solid #d1d5db; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<div class="container ">
+
+
+
+  <div class="table-section  rounded-lg shadow overflow-hidden">
+    <h3 class="text-xl font-bold p-4 border-b">Approval Report</h3>
+    <table id="employeesTable" class="w-full">
+      <thead class="bg-gray-50">
+        <tr>
+ 
+          <th class="px-4 py-3 text-left">Title</th>
+          <th class="px-4 py-3 text-left">Request Type</th>
+          <th class="px-4 py-3 text-left">Amount</th>
+          <th class="px-4 py-3 text-left">Approve Amount</th>
+          <th class="px-4 py-3 text-left">Request By</th>
+          <th class="px-4 py-3 text-left">Due Date</th>
+          <th class="px-4 py-3 text-left">Purpose</th>
+          <th class="px-4 py-3 text-left">Status</th>
+          <th class="px-4 py-3 text-left">Date</th>
+          <th class="px-4 py-3 text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody id="employeesTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="viewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'viewModal')">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative transition-all transform hover:scale-[1.01]" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">👀 View Request</h2>
+      <button class="text-gray-400 hover:text-gray-600 text-2xl font-bold" onclick="closeModal('viewModal')">&times;</button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-base text-gray-700">
+      <p class="font-semibold text-gray-600">Request ID:</p><p><span id="viewRequestId"></span></p>
+      <p class="font-semibold text-gray-600">Request Type:</p><p><span id="viewModules"></span></p>
+      <p class="font-semibold text-gray-600">Amount:</p><p><span id="viewAmount"></span></p>
+      <p class="font-semibold text-gray-600">Requested By:</p><p><span id="viewRequestedBy"></span></p>
+      <p class="font-semibold text-gray-600">Due Date:</p><p><span id="viewDue"></span></p>
+      <p class="font-semibold text-gray-600">Status:</p><p><span id="viewStatus"></span></p>
+
+      <p class="font-semibold text-gray-600 col-span-2 mt-2">Title:</p>
+      <p class="col-span-2 pl-4 break-words"><span id="viewTitle"></span></p>
+      
+      <p class="font-semibold text-gray-600 col-span-2 mt-2">Purpose:</p>
+      <p class="col-span-2 pl-4 break-words"><span id="viewPurpuse"></span></p>
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700" onclick="closeModal('viewModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
+     onclick="outsideClick(event, 'updateModal')">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-black"
+            onclick="closeModal('updateModal')">x</button>
+    <h2 class="text-lg font-bold mb-4">Update Request</h2>
+
+    <form id="updateForm">
+      <input type="hidden" id="updateRequestId">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-gray-700">Approve Amount:</label>
+          <input type="number" id="updateAmount"
+                 class="w-full p-2 border rounded" required step="0.01" min="0">
+        </div>
+      </div>
+      <div class="flex justify-end space-x-3 mt-4">
+        <button type="button"
+                class="px-4 py-2 bg-red-500 text-white rounded"
+                onclick="closeModal('updateModal')">Cancel</button>
+        <button type="submit"
+                class="px-4 py-2 bg-blue-600 text-white rounded">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'updateModal')">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-black" onclick="closeModal('updateModal')">x</button>
+    <h2 class="text-lg font-bold mb-4">Update Request</h2>
+    <form id="updateForm">
+      <input type="hidden" id="updateRequestId">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-gray-700">Approve Amount:</label>
+          <input type="number" id="updateAmount" class="w-full p-2 border rounded" required step="0.01" min="0">
+        </div>
+      </div>
+      <div class="flex justify-end space-x-3 mt-4">
+        <button type="button" class="px-4 py-2 bg-red-500 text-white rounded" onclick="closeModal('updateModal')">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'rejectModal')">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-black" onclick="closeModal('rejectModal')">&times;</button>
+    <h2 class="text-lg font-bold mb-4">Reject Request</h2>
+    <form id="rejectForm">
+      <input type="hidden" id="rejectRequestId">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-gray-700">Remarks (optional):</label>
+          <textarea id="rejectRemarks" rows="3" class="w-full p-2 border rounded"></textarea>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-3 mt-4">
+        <button type="button" class="px-4 py-2 bg-blue-500 text-white rounded" onclick="closeModal('rejectModal')">Cancel</button>
+        <button type="button" id="rejectBtn" class="px-4 py-2 bg-red-600 text-white rounded">Reject</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="detailsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onclick="outsideClick(event, 'detailsModal')">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between mb-6 border-b pb-3">
+      <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+        <i class="fas fa-info-circle text-blue-600"></i> Budget Request Details
+      </h2>
+      <button class="text-gray-500 hover:text-gray-700 text-2xl" onclick="closeModals()">&times;</button>
+    </div>
+    <div id="modalContent" class="grid grid-cols-2 gap-x-6 gap-y-3 text-gray-700 text-sm"></div>
+    <div id="modalButtons" class="mt-6 flex justify-end"></div>
+  </div>
+</div>
+<!-- Approve Confirmation Modal -->
+<div id="approveModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50" onclick="outsideClick(event, 'approveModal')">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-black" onclick="closeModal('approveModal')">x</button>
+    <h2 class="text-lg font-bold mb-4">Confirm Approval</h2>
+    <p class="mb-4">Approve request for <strong><span id="confirmAmount"></span></strong>?</p>
+    <input type="hidden" id="approveRequestId">
+    <div class="flex justify-end space-x-3 mt-4">
+      <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded" onclick="closeModal('approveModal')">Cancel</button>
+      <button type="button" id="approveConfirmBtn" class="px-4 py-2 bg-green-600 text-white rounded">Confirm Approve</button>
+    </div>
+  </div>
+</div>
+<script>
+const API = '../../crud/budget/planning.php';
+let requests = [], disbursementReports = [];
+
+
+async function fetchRequests() {
+  const res = await fetch(`${API}?json=1`);
+  requests = await res.json().catch(() => []);
+  buildCards();
+}
+
+async function fetchReports() {
+  const res = await fetch(`${API}?json_reports=1`);
+  disbursementReports = await res.json().catch(() => []);
+  buildTable();
+}
+
+fetchRequests();
+fetchReports();
+setInterval(() => { fetchRequests(); fetchReports(); }, 5000);
+
+
+function buildCards() {
+  const container = document.getElementById("approvalCards");
+  container.innerHTML = requests.length === 0
+    ? `<div class="col-span-full text-center py-10"><p class="text-gray-500">All caught up!</p></div>`
+    : requests.map(req => {
+        let cardColor = "from-gray-50 to-white border-gray-200 text-gray-600";
+        let icon = "fa-file-alt";
+        switch (req.Name.toLowerCase()) {
+          case "hr": cardColor = "from-purple-50 to-white border-purple-200 text-purple-600"; icon = "fa-users"; break;
+          case "maintenance": case "operations": cardColor = "from-green-50 to-white border-green-200 text-green-600"; icon = "fa-truck"; break;
+          case "finance": cardColor = "from-blue-50 to-white border-blue-200 text-blue-600"; icon = "fa-briefcase"; break;
+          case "general services": cardColor = "from-red-50 to-white border-red-200 text-red-600"; icon = "fa-gas-pump"; break;
+          default: cardColor = "from-indigo-50 to-white border-indigo-200 text-indigo-600"; icon = "fa-layer-group";
+        }
+
+        const balanceDisplay = `<p><span class="font-medium">Available Balance:</span> ₱${Number(req.balance).toLocaleString()}</p>`;
+        const inputMax = req.balance > 0 ? req.balance : 0;
+        const inputDisabled = req.balance <= 0 ? 'disabled' : '';
+        const approveDisabled = req.balance <= 0 ? 'disabled' : '';
+
+        const buttonHTML = req.status === "Pending" ? `
+          <div class="mt-4 space-y-3">
+            <label class="block text-sm">Change Amount</label>
+            <input id="approvedAmount-${req.requestID}" type="number" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" value="${req.Amount}" max="${inputMax}" step="0.01" min="0" ${inputDisabled}>
+            ${balanceDisplay}
+            <div class="flex gap-2">
+              <button class="flex-1 bg-indigo-500 text-white text-sm py-2 rounded ${approveDisabled}" onclick="initiateApprove(${req.requestID})" ${inputDisabled ? 'disabled' : ''}>Approve</button>
+              <button class="flex-1 bg-red-500 text-white text-sm py-2 rounded" onclick="reject(${req.requestID})">Reject</button>
+            </div>
+          </div>` : '';
+
+        return `
+          <div class="${cardColor} rounded-xl shadow-lg p-6 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border">
+            <div class="flex items-center justify-between mb-4">
+              <i class="fas ${icon} text-3xl ${cardColor.split(' ')[2].replace('border-', 'text-')}"></i>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${req.status === 'Approved' ? 'bg-green-200 text-green-800' : 'bg-yellow-200 text-yellow-800'}">
+                ${req.status}
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2 capitalize">${req.Name} Department</h3>
+            <h4 class="text-lg font-semibold text-gray-800 mb-4 capitalize">${req.Title}</h4>
+            <div class="text-sm text-gray-600 space-y-2">
+              <p><span class="font-medium text-gray-700">ID:</span> REQ-${req.requestID}</p>
+              <p><span class="font-medium text-gray-700">Title:</span> ${req.requestTiTle}</p>
+              <p><span class="font-medium">Requested Amount:</span> ₱${Number(req.Amount).toLocaleString()}</p>
+              <p><span class="font-medium">Requested By:</span> ${req.Requested_by}</p>
+            </div>
+            <div class="mt-4">
+              ${buttonHTML}
+              <button class="text-indigo-600 text-sm mt-2 hover:underline" onclick="viewDetails(${req.requestID})">View Details</button>
+            </div>
+          </div>`;
+      }).join('');
+}
+
+// === BUILD TABLE ===
+function buildTable() {
+  const tbody = document.getElementById('employeesTableBody');
+  tbody.innerHTML = disbursementReports.length === 0
+    ? `<tr><td colspan="11" class="text-center p-4">NO Records Found.</td></tr>`
+    : disbursementReports.map(row => {
+        const status = row.status.toLowerCase().trim();
+        let statusClass = "status-default";
+        switch (status) {
+          case "paid": statusClass = "status-paid"; break;
+          case "approved": statusClass = "status-approved"; break;
+          case "reject": case "rejected": statusClass = "status-reject"; break;
+          case "pending": statusClass = "status-verified"; break;
+        }
+
+        const amount = row.Amount ? Number(row.Amount).toLocaleString('en-PH', {minimumFractionDigits: 0, maximumFractionDigits: 0}) : '0';
+        const approvedAmount = row.ApprovedAmount ? Number(row.ApprovedAmount).toLocaleString('en-PH', {minimumFractionDigits: 0, maximumFractionDigits: 0}) : '0';
+        const dueDate = row.Due ? new Date(row.Due).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}) : '-';
+        const requestDate = row.date ? new Date(row.date).toLocaleString('en-US', {month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true}) : '-';
+
+        const canUpdate = !['paid', 'released', 'rejected'].includes(status);
+        
+        
+        const updateButtonHtml = canUpdate ? `
+          <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-green-700 hover:border-green-700 hover:bg-green-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-0 group"
+            onclick="openUpdateModal('${row.requestID}', '${row.ApprovedAmount}')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 20l-4 1 1-4 9.586-9.586z" />
+            </svg>
+            <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">Update</span>
+          </button>
+        ` : '';
+
+        return `
+          <tr>
+           
+            <td>${row.requestTiTle}</td>
+            <td>${row.Title}</td>
+            <td>₱ ${amount}</td>
+            <td>₱ ${approvedAmount}</td>
+            <td>${row.Requested_by}</td>
+            <td>${dueDate}</td>
+            <td>${row.Purpuse || ''}</td>
+            <td><span class="status-badge ${statusClass}">${row.status}</span></td>
+            <td>${requestDate}</td>
+            <td class="px-4 py-3 text-center">
+                <div class="flex justify-center space-x-2">
+                    <button class="relative flex items-center justify-center w-9 h-9 p-0 rounded-md transition-all duration-200 cursor-pointer bg-white border border-gray-200 shadow-sm text-blue-600 hover:border-blue-600 hover:bg-blue-50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-0 group"
+                        onclick="openViewModal('${row.requestID}', '${row.requestTiTle.replace(/'/g, "\\'")}', '${row.Title.replace(/'/g, "\\'")}', '${row.Amount}', '${row.Requested_by.replace(/'/g, "\\'")}', '${row.Due}', '${row.status}', '${(row.Purpuse || '').replace(/'/g, "\\'")}')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs font-normal rounded py-1 px-2 opacity-0 whitespace-nowrap transition-opacity duration-200 pointer-events-none group-hover:opacity-100">View</span>
+                    </button>
+                    ${updateButtonHtml}
+                </div>
+            </td>
+          </tr>`;
+      }).join('');
+}
+
+
+function openViewModal(id, title, modules, amount, by, due, status, purpuse) {
+  document.getElementById('viewRequestId').innerText = id;
+  document.getElementById('viewTitle').innerText = title;
+  document.getElementById('viewModules').innerText = modules;
+  document.getElementById('viewAmount').innerText = "₱ " + parseFloat(amount).toLocaleString();
+  document.getElementById('viewRequestedBy').innerText = by;
+  document.getElementById('viewDue').innerText = due;
+  document.getElementById('viewStatus').innerText = status;
+  document.getElementById('viewPurpuse').innerText = purpuse;
+  document.getElementById('viewModal').classList.remove('hidden');
+}
+
+function openUpdateModal(id, amount) {
+  document.getElementById('updateRequestId').value = id;
+  document.getElementById('updateAmount').value = amount;
+  document.getElementById('updateModal').classList.remove('hidden');
+}
+document.getElementById('updateForm').addEventListener('submit', async function (e) {
+  e.preventDefault();                     // stop normal submit
+
+  const requestID = document.getElementById('updateRequestId').value;
+  const newAmount = parseFloat(document.getElementById('updateAmount').value);
+
+  if (!requestID || isNaN(newAmount) || newAmount <= 0) {
+    showMsg('Please enter a valid amount.', false);
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('update', '1');
+  formData.append('update_request_id', requestID);
+  formData.append('update_amount', newAmount);
+
+  try {
+    const res = await fetch(API, {       
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+
+    showMsg(data.message, data.success);
+    closeModal('updateModal');
+
+    if (data.success) {
+      fetchRequests();   // refresh cards
+      fetchReports();    // refresh table
+    }
+  } catch (err) {
+    showMsg('Network error – try again.', false);
+  }
+});
+
+function initiateApprove(id) {
+  const input = document.getElementById(`approvedAmount-${id}`);
+  const amount = parseFloat(input.value);
+  if (isNaN(amount) || amount <= 0) return showMsg('Invalid amount', false);
+  const req = requests.find(r => r.requestID == id);
+  if (req && amount > req.balance) return showMsg('Exceeds balance', false);
+  document.getElementById('approveRequestId').value = id;
+  document.getElementById('confirmAmount').innerText = '₱' + amount.toLocaleString();
+  document.getElementById('approveModal').classList.remove('hidden');
+}
+
+function reject(id) {
+  document.getElementById('rejectRequestId').value = id;
+  document.getElementById('rejectModal').classList.remove('hidden');
+}
+
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+function outsideClick(e, id) { if (e.target.id === id) closeModal(id); }
+
+// === APPROVE / REJECT API CALLS ===
+document.getElementById('approveConfirmBtn').onclick = async () => {
+  const id = document.getElementById('approveRequestId').value;
+  const amt = parseFloat(document.getElementById(`approvedAmount-${id}`).value);
+  const res = await fetch(API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ requestID: id, status: 'Approved', approvedAmount: amt })
+  }).then(r => r.json());
+  showMsg(res.message, res.success);
+  closeModal('approveModal');
+};
+
+document.getElementById('rejectBtn').onclick = async () => {
+  const id = document.getElementById('rejectRequestId').value;
+  const remarks = document.getElementById('rejectRemarks').value;
+  const res = await fetch(API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ requestID: id, status: 'Rejected', remarks })
+  }).then(r => r.json());
+  showMsg(res.message, res.success);
+  closeModal('rejectModal');
+};
+
+function showMsg(msg, success) {
+  const el = document.getElementById('msg');
+  el.innerHTML = `<div class="${success ? 'mt-4 w-full bg-green-100 border-l-4 border-green-500 p-4 rounded-md shadow-md flex justify-between items-center mb-4' : 'mt-4 w-full bg-red-100 border-l-4 border-red-500 p-4 rounded-md shadow-md flex justify-between items-center mb-4'} ">${msg}</div>`;
+  setTimeout(() => el.innerHTML = '', 4000);
+  fetchRequests(); fetchReports();
+}
+
+
+function viewDetails(id) {
+  const req = requests.find(r => r.requestID == id);
+  if (!req) return;
+
+  const docs = req.documents && req.documents.length > 0
+    ? req.documents.map(doc => {
+        const file = doc.split('/').pop();
+        const ext = file.split('.').pop().toLowerCase();
+        if (['jpg','jpeg','png','gif'].includes(ext)) return `<img src="${doc}" class="w-full h-48 object-cover rounded border">`;
+        if (ext === 'pdf') return `<iframe src="${doc}" class="w-full h-80 border rounded"></iframe><a href="${doc}" target="_blank" class="text-blue-600 text-xs">Open PDF</a>`;
+        return `<a href="${doc}" target="_blank" class="text-blue-600 underline text-sm">${file}</a>`;
+      }).join('')
+    : `<p class="text-gray-500 italic text-sm">No documents</p>`;
+
+  document.getElementById('modalContent').innerHTML = `
+    <p><span class="block text-gray-500 text-xs uppercase font-semibold">Request ID</span><span class="text-gray-800 font-medium">REQ-${req.requestID}</span></p>
+    <p><span class="block text-gray-500 text-xs uppercase font-semibold">Title</span><span class="text-gray-800 font-medium">${req.requestTiTle}</span></p>
+    <p><span class="block text-gray-500 text-xs uppercase font-semibold">Account Name</span><span class="text-gray-800 font-medium">${req.Title}</span></p>
+    <p><span class="block text-gray-500 text-xs uppercase font-semibold">Department</span><span class="text-gray-800 font-medium">${req.Name}</span></p>
+    <p><span class="block text-gray-500 text-xs uppercase font-semibold">Requested Amount</span><span class="text-gray-800 font-medium">₱${Number(req.Amount).toLocaleString()}</span></p>
+    <p><span class="block text-gray-500 text-xs uppercase font-semibold">Requested By</span><span class="text-gray-800 font-medium">${req.Requested_by}</span></p>
+    <p><span class="block text-gray-500 text-xs uppercase font-semibold">Due Date</span><span class="text-gray-800 font-medium">${new Date(req.Due).toLocaleDateString()}</span></p>
+    <p><span class="block text-gray-500 text-xs uppercase font-semibold">Purpose</span><span class="text-gray-800 font-medium">${req.Purpuse}</span></p>
+    <div class="col-span-2 mt-5 border-t pt-4"><h3 class="text-sm font-semibold mb-2">Attached Documents</h3>${docs}</div>
+  `;
+  document.getElementById('modalButtons').innerHTML = `<button onclick="closeModals()" class="px-4 py-2 bg-gray-300 rounded">Close</button>`;
+  document.getElementById('detailsModal').classList.remove('hidden');
+}
+
+function closeModals() { document.getElementById('detailsModal').classList.add('hidden'); }
+</script>

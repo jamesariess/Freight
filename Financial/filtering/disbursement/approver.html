@@ -1,0 +1,46 @@
+<!-- <div class="card">
+    <div class="card-header">
+        <h2>Filters ⚙️</h2>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <div class="search-box">
+                <input type="text" placeholder="🔍 Search Approver..." id="myInput" onkeyup="applyFilters()">
+            </div>
+            <button class="btn btn-sort" id="sortBtn" type="button" onclick="toggleSort()">⇅ Sort Asc</button>
+            <button class="btn btn-filter">⬇ Download</button>
+            <button id="toggleFormBtn" class="btn btn-add">+ Add New</button>
+        </div>
+    </div>
+    
+    <div class="filters">
+        </div>
+    
+    <div style="margin-top:15px;">
+        <button class="btn-reset" onclick="resetFilters()">⟳ Reset Filters</button>
+    </div>
+</div>
+
+<script>
+    function applyFilters() {
+        const searchInput = document.getElementById("myInput").value.toUpperCase();
+
+        const table = document.getElementById("employeesTable"); // Assuming this is your table ID
+        const tbody = table.tBodies[0];
+        const rows = Array.from(tbody.rows);
+
+        rows.forEach(row => {
+            const cells = Array.from(row.cells);
+            
+            const searchMatch = cells.some(td =>
+                (td.textContent || td.innerText || "").toUpperCase().includes(searchInput)
+            );
+            
+            const show = searchMatch;
+            row.style.display = show ? "" : "none";
+        });
+    }
+
+    function resetFilters() {
+        document.getElementById("myInput").value = "";
+        applyFilters();
+    }
+</script> -->

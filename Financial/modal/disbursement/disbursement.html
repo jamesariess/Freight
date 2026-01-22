@@ -1,0 +1,155 @@
+<div id="downloadModal" 
+     class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-2xl shadow-xl w-80 p-6 animate-scaleIn">
+    <h2 class="text-lg font-bold text-gray-800 text-center mb-4 flex items-center justify-center gap-2">
+      📄 Select Download Format
+    </h2>
+    <div class="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
+      <label class="flex items-center gap-2 cursor-pointer text-gray-700">
+        <input type="radio" name="downloadType" value="csv" checked
+               class="text-indigo-600 focus:ring-indigo-500">
+        <span>CSV (Excel Compatible)</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer text-gray-700">
+        <input type="radio" name="downloadType" value="pdf"
+               class="text-indigo-600 focus:ring-indigo-500">
+        <span>PDF (Printable Report)</span>
+      </label>
+    </div>
+
+    <div class="flex justify-end gap-3">
+      <button onclick="closeDownloadModal()" 
+              class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">
+        Cancel
+      </button>
+      <button onclick="confirmDownload()" 
+              class="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700">
+        Download
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-scaleIn {
+  animation: scaleIn 0.2s ease-out;
+}
+
+</style>
+<script>
+function openDownloadModal() {
+    document.getElementById("downloadModal").style.display = "flex";
+}
+
+function closeDownloadModal() {
+    document.getElementById("downloadModal").style.display = "none";
+}
+
+function confirmDownload() {
+    const format = document.querySelector('input[name="downloadType"]:checked').value;
+    if (format === "csv") {
+        downloadCSV();
+    } else {
+        downloadPDF();
+    }
+    closeDownloadModal();
+}
+
+function downloadCSV() {
+    const table = document.getElementById("employeesTable");
+    const headers = Array.from(table.querySelectorAll("thead th"))
+        .slice(0, -1)
+        .map(th => `"${th.innerText}"`);
+    let csvContent = headers.join(",") + "\n";
+
+    const rows = Array.from(table.querySelectorAll("tbody tr"));
+    rows.forEach(row => {
+        if (row.style.display !== "none") { 
+            const cols = Array.from(row.cells)
+                .slice(0, -1)
+                .map((td, i) => {
+                    let text = td.innerText;
+                  
+                    if(i === 3){
+                        let num = text.replace(/[₱,]/g, '');
+                        if(!isNaN(num)) text = '₱ ' + Number(num).toLocaleString();
+                    }
+                    return `"${text}"`;
+                });
+            csvContent += cols.join(",") + "\n";
+        }
+    });
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute("download", "disbursement_report.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF("l", "pt", "a4"); 
+    const pageWidth = doc.internal.pageSize.getWidth() - 40;
+
+    const table = document.getElementById("employeesTable");
+    const headers = Array.from(table.querySelectorAll("thead th"))
+        .slice(0, -1)
+        .map(th => th.innerText);
+
+    const body = [];
+    let maxAmountWidth = 0;
+
+    Array.from(table.querySelectorAll("tbody tr")).forEach(row => {
+        if (row.style.display !== "none") { 
+            const rowData = Array.from(row.cells)
+                .slice(0, -1)
+                .map((td, i) => {
+                    let text = td.innerText;
+                    if (i === 3) {
+                        let num = text.replace(/[₱,]/g, '');
+                        if (!isNaN(num)) text = '₱ ' + Number(num).toLocaleString();
+                        const width = doc.getTextWidth(text) + 5;
+                        if (width > maxAmountWidth) maxAmountWidth = width;
+                    }
+                    return text;
+                });
+            body.push(rowData);
+        }
+    });
+
+    const headerAmountWidth = doc.getTextWidth(headers[3]) + 5; 
+    if (headerAmountWidth > maxAmountWidth) maxAmountWidth = headerAmountWidth;
+
+    doc.setFontSize(16);
+    doc.text("Reports", 20, 30);
+
+    const columnStyles = {};
+    headers.forEach((_, i) => {
+        if (i === 3) columnStyles[i] = { cellWidth: Math.max(maxAmountWidth, 60), halign: 'left', cellPadding: 2 };
+        else columnStyles[i] = { cellWidth: 'wrap' };
+    });
+
+    doc.autoTable({
+        head: [headers],
+        body: body,
+        startY: 50,
+        theme: "grid",
+        styles: { fontSize: 10, cellPadding: 5, overflow: 'linebreak' },
+        headStyles: { fillColor: [52, 73, 94], textColor: 255, fontSize: 11 },
+        alternateRowStyles: { fillColor: [245, 245, 245] },
+        columnStyles: columnStyles,
+        tableWidth: 'auto'
+    });
+
+    doc.save("reports.pdf");
+}
+
+
+</script>
